@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
-import 'package:traguard/utils/extensions.dart';
 
 part 'routes.g.dart';
 
@@ -19,7 +18,6 @@ class SplashRoute extends GoRouteData {
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
-    await Future<void>.delayed(400.ms);
     return const BluetoothListRoute().location;
   }
 
