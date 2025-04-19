@@ -1,9 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor_state.dart';
 import 'package:traguard/features/bluetooth_connection/domain/brief_data.dart';
 import 'package:traguard/features/bluetooth_connection/domain/gps_data.dart';
 import 'package:traguard/utils/constants.dart';
+
+part 'bluetooth_actor.g.dart';
 
 /// An enum that represents the different Bluetooth services.
 enum BluetoothCommands {
@@ -36,49 +41,40 @@ enum BluetoothCommands {
   };
 }
 
-/// A class that represents a Bluetooth reader.
-/// It contains a list of Bluetooth services that can be used to
-/// communicate with Bluetooth devices.
-class BluetoothReader {
-  /// Creates a new instance of [BluetoothReader].
-  BluetoothReader({
-    required this.connectedDevice,
-    required this.service,
-    required this.notifyCaracteristic,
-    required this.writeCaracteristic,
-  });
+/// A Riverpod provider for the [BluetoothActorState] class.
+/// It provides a way to manage the state of the Bluetooth reader
+/// and allows for easy access to the Bluetooth device and its services.
+@riverpod
+class BluetoothActor extends _$BluetoothActor {
+  @override
+  BluetoothActorState build({required String deviceId}) =>
+      const BluetoothActorState.empty();
 
-  /// The Bluetooth device that is connected.
-  final BluetoothDevice connectedDevice;
-
-  /// A list of Bluetooth services.
-  final BluetoothService service;
-
-  /// The characteristic used for reading notifications.
-  final BluetoothCharacteristic notifyCaracteristic;
-
-  /// The characteristic used for writing data.
-  /// This is used to send commands to the Bluetooth device.
-  final BluetoothCharacteristic writeCaracteristic;
-
-  /// The battery level of the Bluetooth device.
-  double batteryLevel = 0;
-
-  /// The GPS state of the Bluetooth device.
-  bool gpsActive = false;
-
-  /// The device file list
-  List<BriefData> fileList = [];
-
-  /// The GPS data received from the Bluetooth device.
-  List<double> processWidth = List.filled(16, 0);
-
-  /// The GPS data received from the Bluetooth device.
-  List<GpsData> gpsData = [];
+  /// Sets up the Bluetooth reader with the given parameters.
+  void setupActor({
+    required BluetoothDevice connectedDevice,
+    required BluetoothService service,
+    required BluetoothCharacteristic notifyCaracteristic,
+    required BluetoothCharacteristic writeCaracteristic,
+  }) {
+    state = BluetoothActorState.start(
+      connectedDevice: connectedDevice,
+      service: service,
+      notifyCaracteristic: notifyCaracteristic,
+      writeCaracteristic: writeCaracteristic,
+    );
+  }
 
   /// Listens for notifications from the Bluetooth device.
   Future<void> listenNotifications() async {
-    final subscription = notifyCaracteristic.onValueReceived.listen((value) {
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    final started = state as BluetoothActorStateStart;
+
+    final sub = started.notifyCaracteristic.onValueReceived.listen((value) {
       if (value.isEmpty) {
         logger.e('Received empty notification');
         return;
@@ -86,32 +82,53 @@ class BluetoothReader {
       _handleNotification(value);
     });
 
-    connectedDevice.cancelWhenDisconnected(subscription);
-    await notifyCaracteristic.setNotifyValue(true);
+    started.connectedDevice.cancelWhenDisconnected(sub);
+    await started.notifyCaracteristic.setNotifyValue(true);
   }
 
   /// Requests the battery level and GPS state from the Bluetooth device.
   Future<void> requestBatteryAndGps() async {
-    await writeCaracteristic.write(BluetoothCommands.batteryAndGps.getBytes());
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+    final started = state as BluetoothActorStateStart;
+    await started.writeCaracteristic.write(
+      BluetoothCommands.batteryAndGps.getBytes(),
+    );
   }
 
   /// Requests the brief from the Bluetooth device.
   Future<void> requestBrief() async {
-    if (fileList.isNotEmpty) {
-      fileList.clear();
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
     }
-    await writeCaracteristic.write(BluetoothCommands.checkBrief.getBytes());
+
+    final started = state as BluetoothActorStateStart;
+
+    if (started.fileList.isNotEmpty) {
+      started.fileList.clear();
+    }
+    await started.writeCaracteristic.write(
+      BluetoothCommands.checkBrief.getBytes(),
+    );
   }
 
   /// Requests the GPS data for each brief in the file list.
   Future<void> requestGpsDatas() async {
-    if (fileList.isEmpty) {
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+    final started = state as BluetoothActorStateStart;
+    if (started.fileList.isEmpty) {
       logger.e('No brief found');
       return;
     }
     // TODO(dariowskii): rendere dinamico per ogni brief
-    final brief = fileList[0];
-    await writeCaracteristic.write(
+    final brief = started.fileList[0];
+    await started.writeCaracteristic.write(
       BluetoothCommands.getGpsData.getBytes(briefId: brief.id),
     );
   }
@@ -144,21 +161,38 @@ class BluetoothReader {
   }
 
   void _analyzeBatteryAndGpsData(List<int> data) {
-    batteryLevel = (data[2] | (data[3] << 8)) / 100;
-    gpsActive = data[4] & 0x01 == 1;
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    final started = state as BluetoothActorStateStart;
+
+    var batteryLevel = (data[2] | (data[3] << 8)) / 100;
+    final gpsActive = data[4] & 0x01 == 1;
 
     const batteryMax = 4.10;
     const batteryMin = 3.6;
 
     batteryLevel =
-        (batteryLevel - batteryMin) / (batteryMax - batteryMin) * 100;
+        (started.batteryLevel - batteryMin) / (batteryMax - batteryMin) * 100;
 
     logger
       ..d('Battery level: ${batteryLevel.toStringAsFixed(0)} %')
       ..d('GPS state: $gpsActive');
+
+    state = started.copyWith(batteryLevel: batteryLevel, gpsActive: gpsActive);
   }
 
   void _analyzeBrief(List<int> data) {
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    final started = state as BluetoothActorStateStart;
+    final fileList = [...started.fileList];
+
     var index = 1;
     final year = DateTime.now().year % 100;
 
@@ -217,18 +251,27 @@ class BluetoothReader {
     }
 
     logger.d(fileList);
+
+    state = started.copyWith(fileList: fileList);
   }
 
   void _analyzeGpsData(List<int> data) {
-    final widths = List<double>.from(processWidth);
-    var p = (data[1] + 1 + data[2] * 256) * 14 / fileList[0].length;
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    final started = state as BluetoothActorStateStart;
+
+    // TODO(dariowskii): rendere dinamico per ogni brief
+    var p = (data[1] + 1 + data[2] * 256) * 14 / started.fileList[0].length;
     if (p > 1) p = 1;
 
-    widths[0] = p * 100;
+    final downloadProgress = p * 100;
 
     var gps = <GpsData>[];
     if (data[1] != 0) {
-      gps = List.from(gpsData);
+      gps = List.from(started.fileList[0].gpsData);
     }
 
     var n = 3;
@@ -264,15 +307,23 @@ class BluetoothReader {
       n += 12;
     }
 
-    processWidth = widths;
-    gpsData = [
-      ...{...gps},
-    ];
+    final newBrief = started.fileList[0].copyWith(
+      gpsData: [
+        ...{...gps},
+      ],
+    );
+    final [first, ...otherBirefs] = started.fileList;
+
+    state = started.copyWith(fileList: [newBrief, ...otherBirefs]);
+
+    // gpsData = [
+    //   ...{...gps},
+    // ];
 
     logger
       ..d('GPS data: ${jsonEncode(gps.map((e) => e.toJson()).toList())}')
       ..d('GPS data length: ${gps.length}')
-      ..d('Process percentage: ${processWidth[0].toStringAsFixed(0)} %');
+      ..d('Process percentage: ${downloadProgress.toStringAsFixed(0)} %');
   }
 
   DateTime? _decodeDate({required int date, required int time}) {
