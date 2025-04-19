@@ -97,3 +97,47 @@ extension DurationExtensions on num {
   /// Converts the number to a `Duration` in days.
   Duration get days => (this * 1000 * 1000 * 60 * 60 * 24).microseconds;
 }
+
+/// Extension to provide utility methods for creating `EdgeInsets`
+extension PaddingExtensionNum on num {
+  /// Converts the number to a `EdgeInsets` object with the same value
+  /// for all sides.
+  EdgeInsets get paddingAll => EdgeInsets.all(toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the same value
+  /// for vertical sides (top and bottom).
+  EdgeInsets get paddingVertical => EdgeInsets.symmetric(vertical: toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the same value
+  /// for horizontal sides (left and right).
+  EdgeInsets get paddingHorizontal =>
+      EdgeInsets.symmetric(horizontal: toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the top value
+  /// set to the number and the other sides set to 0.
+  EdgeInsets get paddingTop => EdgeInsets.only(top: toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the bottom value
+  /// set to the number and the other sides set to 0.
+  EdgeInsets get paddingBottom => EdgeInsets.only(bottom: toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the left value
+  /// set to the number and the other sides set to 0.
+  EdgeInsets get paddingLeft => EdgeInsets.only(left: toDouble());
+
+  /// Converts the number to a `EdgeInsets` object with the right value
+  /// set to the number and the other sides set to 0.
+  EdgeInsets get paddingRight => EdgeInsets.only(right: toDouble());
+}
+
+/// Extension to provide utility methods for creating `SizedBox`
+extension SizedBoxExtensionNum on num {
+  /// Creates a `SizedBox` with the specified width and height.
+  SizedBox get sizedBox => SizedBox(width: toDouble(), height: toDouble());
+
+  /// Creates a `SizedBox` with the specified width.
+  SizedBox get sizedBoxWidth => SizedBox(width: toDouble());
+
+  /// Creates a `SizedBox` with the specified height.
+  SizedBox get sizedBoxHeight => SizedBox(height: toDouble());
+}
