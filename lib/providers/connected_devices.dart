@@ -8,9 +8,7 @@ part 'connected_devices.g.dart';
 @riverpod
 class ConnectedDevices extends _$ConnectedDevices {
   @override
-  ConnectedDevicesState build() {
-    return ConnectedDevicesState(devices: FlutterBluePlus.connectedDevices);
-  }
+  ConnectedDevicesState build() => const ConnectedDevicesState();
 
   /// Adds a device to the list of connected devices.
   void addDevice(BluetoothDevice device) {
