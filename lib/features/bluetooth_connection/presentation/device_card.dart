@@ -5,6 +5,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_reader.dart';
 import 'package:traguard/features/bluetooth_connection/data/device_connection_provider.dart';
+import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -138,6 +139,12 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: ConnectionStateIndicator(
+                      deviceId: _bluetoothDevice.remoteId.str,
+                    ),
+                  ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
