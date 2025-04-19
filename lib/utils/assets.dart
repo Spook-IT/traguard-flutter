@@ -13,7 +13,7 @@ enum LottieAssets {
 /// This enum defines the asset paths for image assets.
 enum ImageAssets {
   /// The path for the tracker device image.
-  trackerDevice('assets/images/tracker_device.png');
+  trackerDevice('assets/img/tracer.png');
 
   /// Creates a new instance of [ImageAssets] with the given [path].
   const ImageAssets(this.path);
