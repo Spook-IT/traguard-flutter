@@ -107,7 +107,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
     FlutterBluePlus.cancelWhenScanComplete(_scanResultsSubscription);
 
     await FlutterBluePlus.startScan(
-      removeIfGone: 1.seconds,
+      removeIfGone: 5.seconds,
       continuousUpdates: true,
       withKeywords: [r'$ACT'],
     );
