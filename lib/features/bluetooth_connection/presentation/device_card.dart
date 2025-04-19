@@ -42,10 +42,6 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
       bluetoothActorProvider(deviceId: _bluetoothDevice.remoteId.str),
       (_, _) {},
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // TODO(dariowskii): Implement request battery and gps data call
-    });
   }
 
   Future<void> _connectToDevice() async {
@@ -118,12 +114,6 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
             orElse: () => throw Exception('No write characteristic found'),
           ),
         );
-
-    unawaited(
-      ref
-          .read(bluetoothActorProvider(deviceId: device.remoteId.str).notifier)
-          .listenNotifications(),
-    );
   }
 
   @override
