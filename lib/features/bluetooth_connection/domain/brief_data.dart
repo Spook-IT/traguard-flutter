@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:traguard/features/bluetooth_connection/domain/gps_data.dart';
 
 part 'brief_data.freezed.dart';
 
@@ -34,5 +35,6 @@ abstract class BriefData with _$BriefData {
     required Duration duration,
     DateTime? startDateTime,
     DateTime? endDateTime,
+    @Default([]) List<GpsData> gpsData,
   }) = _BriefData;
 }
