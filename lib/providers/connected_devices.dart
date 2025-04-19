@@ -5,7 +5,7 @@ import 'package:traguard/models/connected_devices_state.dart';
 part 'connected_devices.g.dart';
 
 /// A Riverpod provider that manages the state of connected devices.
-@Riverpod(keepAlive: true)
+@riverpod
 class ConnectedDevices extends _$ConnectedDevices {
   @override
   ConnectedDevicesState build() {
