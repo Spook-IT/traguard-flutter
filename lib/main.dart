@@ -12,7 +12,6 @@ class TraguarApp extends ConsumerWidget {
   /// Creates a new instance of [TraguarApp].
   const TraguarApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
