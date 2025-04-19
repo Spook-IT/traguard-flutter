@@ -5,7 +5,6 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
-import 'package:traguard/providers/connected_devices.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -31,10 +30,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
   void initState() {
     super.initState();
 
-    ref.listenManual(
-      bluetoothActorProvider(deviceId: widget.device.remoteId.str),
-      (_, _) {},
-    );
+    ref.read(bluetoothActorProvider(deviceId: widget.device.remoteId.str));
   }
 
   Future<void> _connectToDevice() async {
@@ -46,52 +42,26 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
       _isConnecting = true;
     });
 
-    final subscription = widget.device.connectionState.listen((
-      BluetoothConnectionState state,
-    ) async {
-      if (!mounted) return;
-
-      setState(() {
-        _isConnecting = false;
-      });
-
-      if (state == BluetoothConnectionState.disconnected) {
-        ref.read(connectedDevicesProvider.notifier).removeDevice(widget.device);
-      } else if (state == BluetoothConnectionState.connected) {
-        ref.read(connectedDevicesProvider.notifier).addDevice(widget.device);
-        await _discoverServices();
+    try {
+      await ref
+          .read(
+            bluetoothActorProvider(
+              deviceId: widget.device.remoteId.str,
+            ).notifier,
+          )
+          .setDeviceAndConnect(connectedDevice: widget.device);
+    } on Exception catch (e) {
+      logger.e(
+        'Error connecting to device ${widget.device.remoteId.str}: $e',
+        error: e,
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isConnecting = false;
+        });
       }
-    });
-
-    widget.device.cancelWhenDisconnected(subscription, next: true);
-    await widget.device.connect();
-  }
-
-  Future<void> _discoverServices() async {
-    final services = await widget.device.discoverServices();
-    final discoveredService = services.firstOrNull;
-
-    if (discoveredService == null) {
-      logger.e('No services found');
-      return;
     }
-
-    ref
-        .read(
-          bluetoothActorProvider(deviceId: widget.device.remoteId.str).notifier,
-        )
-        .setupActor(
-          connectedDevice: widget.device,
-          service: discoveredService,
-          notifyCaracteristic: discoveredService.characteristics.firstWhere(
-            (element) => element.properties.notify == true,
-            orElse: () => throw Exception('No notify characteristic found'),
-          ),
-          writeCaracteristic: discoveredService.characteristics.firstWhere(
-            (element) => element.properties.write == true,
-            orElse: () => throw Exception('No write characteristic found'),
-          ),
-        );
   }
 
   @override

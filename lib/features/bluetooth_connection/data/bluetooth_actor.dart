@@ -46,7 +46,7 @@ enum BluetoothCommands {
 /// A Riverpod provider for the [BluetoothActorState] class.
 /// It provides a way to manage the state of the Bluetooth reader
 /// and allows for easy access to the Bluetooth device and its services.
-@riverpod
+@Riverpod(keepAlive: true)
 class BluetoothActor extends _$BluetoothActor {
   StreamSubscription<List<int>>? _notificationSubscription;
   int _requestedBriefId = -1;
@@ -64,23 +64,26 @@ class BluetoothActor extends _$BluetoothActor {
   }
 
   /// Set the connected Bluetooth device.
-  Future<void> setDevice({required BluetoothDevice connectedDevice}) async {
-    state = BluetoothActorState.device(connectedDevice: connectedDevice);
-  }
-
-  /// Sets up the Bluetooth reader with the given parameters.
-  void setupActor({
+  Future<void> setDeviceAndConnect({
     required BluetoothDevice connectedDevice,
-    required BluetoothService service,
-    required BluetoothCharacteristic notifyCaracteristic,
-    required BluetoothCharacteristic writeCaracteristic,
-  }) {
-    state = BluetoothActorState.start(
-      connectedDevice: connectedDevice,
-      service: service,
-      notifyCaracteristic: notifyCaracteristic,
-      writeCaracteristic: writeCaracteristic,
-    );
+  }) async {
+    state = BluetoothActorState.device(connectedDevice: connectedDevice);
+
+    final subscription = connectedDevice.connectionState.listen((
+      BluetoothConnectionState connectionState,
+    ) async {
+      if (connectionState == BluetoothConnectionState.disconnected) {
+        ref
+            .read(connectedDevicesProvider.notifier)
+            .removeDevice(connectedDevice);
+      } else if (connectionState == BluetoothConnectionState.connected) {
+        ref.read(connectedDevicesProvider.notifier).addDevice(connectedDevice);
+        await _discoverServices();
+      }
+    });
+
+    connectedDevice.cancelWhenDisconnected(subscription, next: true);
+    await connectedDevice.connect();
   }
 
   /// Listens for notifications from the Bluetooth device.
@@ -186,6 +189,42 @@ class BluetoothActor extends _$BluetoothActor {
   * PRIVATE METHODS
   * ----------------
   */
+
+  Future<void> _discoverServices() async {
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    if (state is BluetoothActorStateStart) {
+      logger.e('BluetoothActorState is already started');
+      return;
+    }
+
+    final onlyDevice = state as BluetoothActorStateOnlyDevice;
+    final connectedDevice = onlyDevice.connectedDevice;
+
+    final services = await connectedDevice.discoverServices();
+    final discoveredService = services.firstOrNull;
+
+    if (discoveredService == null) {
+      logger.e('No services found');
+      return;
+    }
+
+    state = BluetoothActorState.start(
+      connectedDevice: connectedDevice,
+      service: discoveredService,
+      notifyCaracteristic: discoveredService.characteristics.firstWhere(
+        (element) => element.properties.notify == true,
+        orElse: () => throw Exception('No notify characteristic found'),
+      ),
+      writeCaracteristic: discoveredService.characteristics.firstWhere(
+        (element) => element.properties.write == true,
+        orElse: () => throw Exception('No write characteristic found'),
+      ),
+    );
+  }
 
   void _listenDeviceConnection() {
     ref.listen(
