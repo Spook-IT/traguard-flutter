@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_card.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/searching_animation.dart';
 import 'package:traguard/providers/connected_devices.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/utils/extensions.dart' hide DurationExtensions;
 import 'package:traguard/utils/sizes.dart';
 
 /// A stateless widget that displays a list of Bluetooth devices.
@@ -43,7 +44,15 @@ class DeviceList extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (_, index) {
-                return DeviceCard(device: notConnectedDevices[index]);
+                return DeviceCard(device: notConnectedDevices[index])
+                    .animate()
+                    .fadeIn(duration: 300.ms, delay: (index * 100).ms)
+                    .slideY(
+                      begin: 0.1,
+                      end: 0,
+                      duration: 300.ms,
+                      delay: (index * 100).ms,
+                    );
               },
             ),
           ],
@@ -59,7 +68,15 @@ class DeviceList extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (_, index) {
-                return DeviceCard(device: connectedDevices.devices[index]);
+                return DeviceCard(device: connectedDevices.devices[index])
+                    .animate()
+                    .fadeIn(duration: 300.ms, delay: (index * 100).ms)
+                    .slideY(
+                      begin: 0.1,
+                      end: 0,
+                      duration: 300.ms,
+                      delay: (index * 100).ms,
+                    );
               },
             ),
           ],
