@@ -269,7 +269,7 @@ class BluetoothActor extends _$BluetoothActor {
     );
 
     listenSelf((prev, next) async {
-      if (prev is BluetoothActorStateEmpty &&
+      if (prev is BluetoothActorStateOnlyDevice &&
           next is BluetoothActorStateStart) {
         await listenNotifications();
         await requestBatteryAndGps();
