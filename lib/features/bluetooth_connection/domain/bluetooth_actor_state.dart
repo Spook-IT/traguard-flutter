@@ -14,6 +14,13 @@ sealed class BluetoothActorState with _$BluetoothActorState {
   const factory BluetoothActorState.empty() = BluetoothActorStateEmpty;
 
   /// Creates a new instance of [BluetoothActorState].
+  /// This is used when the Bluetooth device is connected.
+  const factory BluetoothActorState.device({
+    /// The Bluetooth device that is connected.
+    required BluetoothDevice connectedDevice,
+  }) = BluetoothActorStateOnlyDevice;
+
+  /// Creates a new instance of [BluetoothActorState].
   /// This is used when the Bluetooth reader is initialized.
   const factory BluetoothActorState.start({
     /// The Bluetooth device that is connected.
