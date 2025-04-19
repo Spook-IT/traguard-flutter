@@ -109,7 +109,7 @@ class BluetoothReader {
       logger.e('No brief found');
       return;
     }
-    // TODO: rendere dinamico per ogni brief
+    // TODO(dariowskii): rendere dinamico per ogni brief
     final brief = fileList[0];
     await writeCaracteristic.write(
       BluetoothCommands.getGpsData.getBytes(briefId: brief.id),
