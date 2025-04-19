@@ -116,12 +116,10 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
   @override
   Widget build(BuildContext context) {
     final child = switch (_bluetoothScreenState) {
-      BluetoothScreenState.initial => const Center(
-        child: Text('Bluetooth is initializing...'),
-      ),
       BluetoothScreenState.bluetoothOff => const Center(
         child: Text('Bluetooth is off. Please turn it on.'),
       ),
+      BluetoothScreenState.initial ||
       BluetoothScreenState.searching => DeviceList(devices: _scanResults),
       BluetoothScreenState.error => const Center(
         child: Text('An error occurred.'),
