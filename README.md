@@ -1,16 +1,41 @@
-# traguard
+# Traguard
 
-A new Flutter project.
+The application of activity tracking and geolocation for the Traguard project.
 
-## Getting Started
+Made with Flutter and ❤️ by [Dario Varriale](https://www.linkedin.com/in/dario-varriale/)
 
-This project is a starting point for a Flutter application.
+## Installation & Setup
 
-A few resources to get you started if this is your first Flutter project:
+This application uses `FVM` to manage Flutter versions. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Install `FVM` globally using `pub`:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+dart pub global activate fvm
+```
+
+2. Install the Flutter SDK using `FVM`:
+
+```bash
+fvm install
+```
+
+This will create a `.fvm` directory in the root of your project, which contains the correct Flutter SDK.
+
+3. Get the dependencies:
+
+```bash
+fvm flutter pub get
+```
+
+4. Generate source code files using `build_runner`:
+
+```bash
+fvm dart run build_runner build --delete-conflicting-outputs
+```
+
+5. Run the application:
+
+```bash
+fvm flutter run
+```
