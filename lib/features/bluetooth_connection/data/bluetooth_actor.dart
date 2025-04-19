@@ -48,9 +48,18 @@ enum BluetoothCommands {
 /// and allows for easy access to the Bluetooth device and its services.
 @riverpod
 class BluetoothActor extends _$BluetoothActor {
+  StreamSubscription<List<int>>? _notificationSubscription;
+  int _requestedBriefId = -1;
+
   @override
   BluetoothActorState build({required String deviceId}) {
     _listenDeviceConnection();
+
+    ref.onDispose(() {
+      _notificationSubscription?.cancel();
+      _notificationSubscription = null;
+    });
+
     return const BluetoothActorState.empty();
   }
 
@@ -77,8 +86,8 @@ class BluetoothActor extends _$BluetoothActor {
     }
 
     final started = state as BluetoothActorStateStart;
-
-    final sub = started.notifyCaracteristic.onValueReceived.listen((value) {
+    final valueStream = started.notifyCaracteristic.onValueReceived;
+    _notificationSubscription = valueStream.listen((value) {
       if (value.isEmpty) {
         logger.e('Received empty notification');
         return;
@@ -86,8 +95,20 @@ class BluetoothActor extends _$BluetoothActor {
       _handleNotification(value);
     });
 
-    started.connectedDevice.cancelWhenDisconnected(sub);
-    await started.notifyCaracteristic.setNotifyValue(true);
+    if (_notificationSubscription == null) {
+      logger.e('Notification subscription is null');
+      return;
+    }
+
+    try {
+      started.connectedDevice.cancelWhenDisconnected(
+        _notificationSubscription!,
+      );
+      await started.notifyCaracteristic.setNotifyValue(true);
+    } on Exception catch (e) {
+      logger.e('Error setting notification: $e');
+      await _notificationSubscription?.cancel();
+    }
   }
 
   /// Requests the battery level and GPS state from the Bluetooth device.
@@ -97,13 +118,18 @@ class BluetoothActor extends _$BluetoothActor {
       return;
     }
     final started = state as BluetoothActorStateStart;
-    await started.writeCaracteristic.write(
-      BluetoothCommands.batteryAndGps.getBytes(),
-    );
+
+    try {
+      await started.writeCaracteristic.write(
+        BluetoothCommands.batteryAndGps.getBytes(),
+      );
+    } on Exception catch (e) {
+      logger.e('Error writing to characteristic: $e');
+    }
   }
 
-  /// Requests the brief from the Bluetooth device.
-  Future<void> requestBrief() async {
+  /// Requests the briefs from the Bluetooth device.
+  Future<void> requestBriefs() async {
     if (state is BluetoothActorStateEmpty) {
       logger.e('BluetoothActorState is empty');
       return;
@@ -112,15 +138,20 @@ class BluetoothActor extends _$BluetoothActor {
     final started = state as BluetoothActorStateStart;
 
     if (started.fileList.isNotEmpty) {
-      started.fileList.clear();
+      state = started.copyWith(fileList: []);
     }
-    await started.writeCaracteristic.write(
-      BluetoothCommands.checkBrief.getBytes(),
-    );
+
+    try {
+      await started.writeCaracteristic.write(
+        BluetoothCommands.checkBrief.getBytes(),
+      );
+    } on Exception catch (e) {
+      logger.e('Error writing to characteristic: $e');
+    }
   }
 
   /// Requests the GPS data for each brief in the file list.
-  Future<void> requestGpsDatas() async {
+  Future<void> requestGpsDatas({required int briefId}) async {
     if (state is BluetoothActorStateEmpty) {
       logger.e('BluetoothActorState is empty');
       return;
@@ -130,11 +161,19 @@ class BluetoothActor extends _$BluetoothActor {
       logger.e('No brief found');
       return;
     }
-    // TODO(dariowskii): rendere dinamico per ogni brief
-    final brief = started.fileList[0];
-    await started.writeCaracteristic.write(
-      BluetoothCommands.getGpsData.getBytes(briefId: brief.id),
-    );
+
+    try {
+      final brief = started.fileList.firstWhere(
+        (element) => element.id == briefId,
+      );
+      _requestedBriefId = briefId;
+      await started.writeCaracteristic.write(
+        BluetoothCommands.getGpsData.getBytes(briefId: brief.id),
+      );
+    } on Exception catch (e) {
+      logger.e('Error writing to characteristic: $e');
+      _requestedBriefId = -1;
+    }
   }
 
   /*
@@ -283,15 +322,22 @@ class BluetoothActor extends _$BluetoothActor {
 
     final started = state as BluetoothActorStateStart;
 
-    // TODO(dariowskii): rendere dinamico per ogni brief
-    var p = (data[1] + 1 + data[2] * 256) * 14 / started.fileList[0].length;
+    if (_requestedBriefId == -1) {
+      logger.e('No brief requested');
+      return;
+    }
+
+    final brief = started.fileList.firstWhere(
+      (element) => element.id == _requestedBriefId,
+    );
+    var p = (data[1] + 1 + data[2] * 256) * 14 / brief.length;
     if (p > 1) p = 1;
 
     final downloadProgress = p * 100;
 
     var gps = <GpsData>[];
     if (data[1] != 0) {
-      gps = List.from(started.fileList[0].gpsData);
+      gps = List.from(brief.gpsData);
     }
 
     var n = 3;
@@ -327,14 +373,17 @@ class BluetoothActor extends _$BluetoothActor {
       n += 12;
     }
 
-    final newBrief = started.fileList[0].copyWith(
+    final newBrief = brief.copyWith(
       gpsData: [
         ...{...gps},
       ],
     );
-    final [first, ...otherBirefs] = started.fileList;
+    final newBriefList =
+        [
+          ...started.fileList,
+        ].map((e) => e.id == newBrief.id ? newBrief : e).toList();
 
-    state = started.copyWith(fileList: [newBrief, ...otherBirefs]);
+    state = started.copyWith(fileList: newBriefList);
 
     logger
       ..d('GPS data: ${jsonEncode(gps.map((e) => e.toJson()).toList())}')
