@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_reader.dart';
+import 'package:traguard/features/bluetooth_connection/data/device_connection_provider.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -10,7 +12,7 @@ import 'package:traguard/utils/sizes.dart';
 
 /// This widget represents a card that displays
 /// information about a Bluetooth device.
-class DeviceCard extends StatefulWidget {
+class DeviceCard extends ConsumerStatefulWidget {
   /// Creates a new instance of [DeviceCard].
   const DeviceCard({required this.device, super.key});
 
@@ -18,16 +20,21 @@ class DeviceCard extends StatefulWidget {
   final ScanResult device;
 
   @override
-  State<DeviceCard> createState() => _DeviceCardState();
+  ConsumerState<DeviceCard> createState() => _DeviceCardState();
 }
 
-class _DeviceCardState extends State<DeviceCard> {
+class _DeviceCardState extends ConsumerState<DeviceCard> {
   late final BluetoothDevice _bluetoothDevice = widget.device.device;
   BluetoothReader? _bluetoothReader;
 
   @override
   void initState() {
     super.initState();
+
+    ref.listenManual(
+      deviceConnectionProvider(deviceId: _bluetoothDevice.remoteId.str),
+      (_, _) {},
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // TODO(dariowskii): Implement request battery and gps data call
@@ -39,9 +46,21 @@ class _DeviceCardState extends State<DeviceCard> {
       BluetoothConnectionState state,
     ) async {
       if (state == BluetoothConnectionState.disconnected) {
-        logger.t('${_bluetoothDevice.disconnectReason?.description}');
+        ref
+            .read(
+              deviceConnectionProvider(
+                deviceId: _bluetoothDevice.remoteId.str,
+              ).notifier,
+            )
+            .setState(state);
       } else if (state == BluetoothConnectionState.connected) {
-        logger.t('Connected to ${_bluetoothDevice.advName}');
+        ref
+            .read(
+              deviceConnectionProvider(
+                deviceId: _bluetoothDevice.remoteId.str,
+              ).notifier,
+            )
+            .setState(state);
         await _discoverServices(_bluetoothDevice);
       }
     });
