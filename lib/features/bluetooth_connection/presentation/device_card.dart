@@ -27,6 +27,8 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
   late final BluetoothDevice _bluetoothDevice = widget.device.device;
   BluetoothReader? _bluetoothReader;
 
+  bool _isConnecting = false;
+
   @override
   void initState() {
     super.initState();
@@ -42,9 +44,23 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
   }
 
   Future<void> _connectToDevice() async {
+    if (_isConnecting) {
+      return;
+    }
+
+    setState(() {
+      _isConnecting = true;
+    });
+
     final subscription = _bluetoothDevice.connectionState.listen((
       BluetoothConnectionState state,
     ) async {
+      if (!mounted) return;
+
+      setState(() {
+        _isConnecting = false;
+      });
+
       if (state == BluetoothConnectionState.disconnected) {
         ref
             .read(
@@ -64,6 +80,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
         await _discoverServices(_bluetoothDevice);
       }
     });
+
     _bluetoothDevice.cancelWhenDisconnected(
       subscription,
       delayed: true,
@@ -139,7 +156,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: FilledButton(
-                      onPressed: _connectToDevice,
+                      onPressed: _isConnecting ? null : _connectToDevice,
                       child: const Text('Connect'),
                     ),
                   ),
