@@ -28,6 +28,9 @@ extension BuildContextUtilsExtension on BuildContext {
   /// Retrieves the screen height of the current device.
   double get screenHeight => MediaQuery.sizeOf(this).height;
 
+  /// Retrieves the device's shortest side (width or height).
+  double get shortestSide => MediaQuery.sizeOf(this).shortestSide;
+
   /// Retrieves the device's pixel ratio (scale factor).
   double get scaleFactor => mediaQuery.devicePixelRatio;
 
