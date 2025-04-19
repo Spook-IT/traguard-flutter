@@ -131,7 +131,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Bluetooth List')),
-      body: child,
+      body: SafeArea(child: child),
     );
   }
 }
