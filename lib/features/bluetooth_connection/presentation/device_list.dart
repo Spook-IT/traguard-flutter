@@ -31,56 +31,59 @@ class DeviceList extends ConsumerWidget {
             .where((device) => !connectedDevices.devices.contains(device))
             .toList();
 
-    return SingleChildScrollView(
-      padding: Paddings.mediumAll,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (notConnectedDevices.isNotEmpty) ...[
-            Text('Available devices', style: context.textTheme.labelLarge),
-            Spaces.medium.sizedBoxHeight,
-            ListView.builder(
-              itemCount: notConnectedDevices.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (_, index) {
-                return DeviceCard(device: notConnectedDevices[index])
-                    .animate()
-                    .fadeIn(duration: 300.ms, delay: (index * 100).ms)
-                    .slideY(
-                      begin: 0.1,
-                      end: 0,
-                      duration: 300.ms,
-                      delay: (index * 100).ms,
-                    );
-              },
-            ),
+    return SizedBox.expand(
+      child: SingleChildScrollView(
+        padding: Paddings.mediumAll,
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (notConnectedDevices.isNotEmpty) ...[
+              Text('Available devices', style: context.textTheme.labelLarge),
+              Spaces.medium.sizedBoxHeight,
+              ListView.builder(
+                itemCount: notConnectedDevices.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (_, index) {
+                  return DeviceCard(device: notConnectedDevices[index])
+                      .animate()
+                      .fadeIn(duration: 300.ms, delay: (index * 100).ms)
+                      .slideY(
+                        begin: 0.1,
+                        end: 0,
+                        duration: 300.ms,
+                        delay: (index * 100).ms,
+                      );
+                },
+              ),
+            ],
+            if (connectedDevices.devices.isNotEmpty &&
+                notConnectedDevices.isNotEmpty) ...[
+              Spaces.medium.sizedBoxHeight,
+            ],
+            if (connectedDevices.devices.isNotEmpty) ...[
+              Text('Connected devices', style: context.textTheme.labelLarge),
+              Spaces.medium.sizedBoxHeight,
+              ListView.builder(
+                itemCount: connectedDevices.devices.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (_, index) {
+                  return DeviceCard(device: connectedDevices.devices[index])
+                      .animate()
+                      .fadeIn(duration: 300.ms, delay: (index * 100).ms)
+                      .slideY(
+                        begin: 0.1,
+                        end: 0,
+                        duration: 300.ms,
+                        delay: (index * 100).ms,
+                      );
+                },
+              ),
+            ],
           ],
-          if (connectedDevices.devices.isNotEmpty &&
-              notConnectedDevices.isNotEmpty) ...[
-            Spaces.medium.sizedBoxHeight,
-          ],
-          if (connectedDevices.devices.isNotEmpty) ...[
-            Text('Connected devices', style: context.textTheme.labelLarge),
-            Spaces.medium.sizedBoxHeight,
-            ListView.builder(
-              itemCount: connectedDevices.devices.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (_, index) {
-                return DeviceCard(device: connectedDevices.devices[index])
-                    .animate()
-                    .fadeIn(duration: 300.ms, delay: (index * 100).ms)
-                    .slideY(
-                      begin: 0.1,
-                      end: 0,
-                      duration: 300.ms,
-                      delay: (index * 100).ms,
-                    );
-              },
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }
