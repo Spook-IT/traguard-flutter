@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:traguard/features/bluetooth_connection/data/bluetooth_reader.dart';
+import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
 import 'package:traguard/features/bluetooth_connection/data/device_connection_provider.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
 import 'package:traguard/utils/assets.dart';
@@ -26,7 +26,6 @@ class DeviceCard extends ConsumerStatefulWidget {
 
 class _DeviceCardState extends ConsumerState<DeviceCard> {
   late final BluetoothDevice _bluetoothDevice = widget.device.device;
-  BluetoothReader? _bluetoothReader;
 
   bool _isConnecting = false;
 
@@ -36,6 +35,11 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
 
     ref.listenManual(
       deviceConnectionProvider(deviceId: _bluetoothDevice.remoteId.str),
+      (_, _) {},
+    );
+
+    ref.listenManual(
+      bluetoothActorProvider(deviceId: _bluetoothDevice.remoteId.str),
       (_, _) {},
     );
 
@@ -100,20 +104,26 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
       return;
     }
 
-    _bluetoothReader = BluetoothReader(
-      connectedDevice: device,
-      service: discoveredService,
-      notifyCaracteristic: discoveredService.characteristics.firstWhere(
-        (element) => element.properties.notify == true,
-        orElse: () => throw Exception('No notify characteristic found'),
-      ),
-      writeCaracteristic: discoveredService.characteristics.firstWhere(
-        (element) => element.properties.write == true,
-        orElse: () => throw Exception('No write characteristic found'),
-      ),
-    );
+    ref
+        .read(bluetoothActorProvider(deviceId: device.remoteId.str).notifier)
+        .setupActor(
+          connectedDevice: device,
+          service: discoveredService,
+          notifyCaracteristic: discoveredService.characteristics.firstWhere(
+            (element) => element.properties.notify == true,
+            orElse: () => throw Exception('No notify characteristic found'),
+          ),
+          writeCaracteristic: discoveredService.characteristics.firstWhere(
+            (element) => element.properties.write == true,
+            orElse: () => throw Exception('No write characteristic found'),
+          ),
+        );
 
-    unawaited(_bluetoothReader?.listenNotifications());
+    unawaited(
+      ref
+          .read(bluetoothActorProvider(deviceId: device.remoteId.str).notifier)
+          .listenNotifications(),
+    );
   }
 
   @override
