@@ -98,11 +98,10 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
 
   Future<void> _startScan() async {
     _scanResultsSubscription = FlutterBluePlus.onScanResults.listen((results) {
-      if (results.isNotEmpty) {
-        setState(() {
-          _scanResults = results;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _scanResults = results;
+      });
     });
 
     FlutterBluePlus.cancelWhenScanComplete(_scanResultsSubscription);
