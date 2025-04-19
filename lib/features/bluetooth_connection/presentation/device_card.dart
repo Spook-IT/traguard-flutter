@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
+import 'package:traguard/features/bluetooth_connection/presentation/connect_button.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
@@ -25,12 +26,13 @@ class DeviceCard extends ConsumerStatefulWidget {
 
 class _DeviceCardState extends ConsumerState<DeviceCard> {
   bool _isConnecting = false;
+  late final String _deviceId = widget.device.remoteId.str;
 
   @override
   void initState() {
     super.initState();
 
-    ref.read(bluetoothActorProvider(deviceId: widget.device.remoteId.str));
+    ref.read(bluetoothActorProvider(deviceId: _deviceId));
   }
 
   Future<void> _connectToDevice() async {
@@ -44,17 +46,10 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
 
     try {
       await ref
-          .read(
-            bluetoothActorProvider(
-              deviceId: widget.device.remoteId.str,
-            ).notifier,
-          )
+          .read(bluetoothActorProvider(deviceId: _deviceId).notifier)
           .setDeviceAndConnect(connectedDevice: widget.device);
     } on Exception catch (e) {
-      logger.e(
-        'Error connecting to device ${widget.device.remoteId.str}: $e',
-        error: e,
-      );
+      logger.e('Error connecting to device $_deviceId: $e', error: e);
     } finally {
       if (mounted) {
         setState(() {
@@ -89,9 +84,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                 children: [
                   Align(
                     alignment: Alignment.topRight,
-                    child: ConnectionStateIndicator(
-                      deviceId: widget.device.remoteId.str,
-                    ),
+                    child: ConnectionStateIndicator(deviceId: _deviceId),
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -101,18 +94,24 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                         widget.device.advName,
                         style: context.textTheme.labelLarge,
                       ),
-                      Text(
-                        widget.device.remoteId.str,
-                        style: context.textTheme.labelSmall,
-                      ),
+                      Text(_deviceId, style: context.textTheme.labelSmall),
                     ],
                   ),
                   Spaces.medium.sizedBoxHeight,
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: FilledButton(
-                      onPressed: _isConnecting ? null : _connectToDevice,
-                      child: const Text('Connect'),
+                    child: ConnectDeviceButton(
+                      onConnect: _isConnecting ? null : _connectToDevice,
+                      onDisconnect: () async {
+                        await ref
+                            .read(
+                              bluetoothActorProvider(
+                                deviceId: _deviceId,
+                              ).notifier,
+                            )
+                            .disconnect();
+                      },
+                      deviceId: _deviceId,
                     ),
                   ),
                 ],
