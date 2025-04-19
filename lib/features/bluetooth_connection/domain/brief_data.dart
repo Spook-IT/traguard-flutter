@@ -25,12 +25,12 @@ enum BriefState {
 abstract class BriefData with _$BriefData {
   /// Creates a new instance of [BriefData].
   const factory BriefData({
+    required int id,
     required int startDate,
     required int endDate,
     required int startTime,
     required int endTime,
     required int length,
-    required int id,
     required BriefState state,
     required Duration duration,
     DateTime? startDateTime,
