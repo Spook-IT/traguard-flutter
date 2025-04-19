@@ -78,7 +78,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
               ).notifier,
             )
             .setState(state);
-        await _discoverServices(_bluetoothDevice);
+        await _discoverServices();
       }
     });
 
@@ -91,8 +91,8 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
     await _bluetoothDevice.connect();
   }
 
-  Future<void> _discoverServices(BluetoothDevice device) async {
-    final services = await device.discoverServices();
+  Future<void> _discoverServices() async {
+    final services = await _bluetoothDevice.discoverServices();
     final discoveredService = services.firstOrNull;
 
     if (discoveredService == null) {
@@ -101,9 +101,13 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
     }
 
     ref
-        .read(bluetoothActorProvider(deviceId: device.remoteId.str).notifier)
+        .read(
+          bluetoothActorProvider(
+            deviceId: _bluetoothDevice.remoteId.str,
+          ).notifier,
+        )
         .setupActor(
-          connectedDevice: device,
+          connectedDevice: _bluetoothDevice,
           service: discoveredService,
           notifyCaracteristic: discoveredService.characteristics.firstWhere(
             (element) => element.properties.notify == true,
