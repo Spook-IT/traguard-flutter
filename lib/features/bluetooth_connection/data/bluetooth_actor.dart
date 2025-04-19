@@ -82,8 +82,34 @@ class BluetoothActor extends _$BluetoothActor {
       }
     });
 
-    connectedDevice.cancelWhenDisconnected(subscription, next: true);
+    connectedDevice.cancelWhenDisconnected(
+      subscription,
+      next: true,
+      delayed: true,
+    );
     await connectedDevice.connect();
+  }
+
+  /// Disconnects the Bluetooth device.
+  Future<void> disconnect() async {
+    if (state is BluetoothActorStateEmpty) {
+      logger.e('BluetoothActorState is empty');
+      return;
+    }
+
+    if (state is BluetoothActorStateOnlyDevice) {
+      logger.e('BluetoothActorState is only device');
+      return;
+    }
+
+    final started = state as BluetoothActorStateStart;
+
+    try {
+      await started.connectedDevice.disconnect();
+      state = const BluetoothActorState.empty();
+    } on Exception catch (e) {
+      logger.e('Error disconnecting: $e');
+    }
   }
 
   /// Listens for notifications from the Bluetooth device.
