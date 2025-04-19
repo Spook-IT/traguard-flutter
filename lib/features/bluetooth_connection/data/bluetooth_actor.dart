@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:traguard/features/bluetooth_connection/data/device_connection_provider.dart';
 import 'package:traguard/features/bluetooth_connection/domain/bluetooth_actor_state.dart';
 import 'package:traguard/features/bluetooth_connection/domain/brief_data.dart';
 import 'package:traguard/features/bluetooth_connection/domain/gps_data.dart';
+import 'package:traguard/providers/connected_devices.dart';
 import 'package:traguard/utils/constants.dart';
 
 part 'bluetooth_actor.g.dart';
@@ -61,6 +61,11 @@ class BluetoothActor extends _$BluetoothActor {
     });
 
     return const BluetoothActorState.empty();
+  }
+
+  /// Set the connected Bluetooth device.
+  Future<void> setDevice({required BluetoothDevice connectedDevice}) async {
+    state = BluetoothActorState.device(connectedDevice: connectedDevice);
   }
 
   /// Sets up the Bluetooth reader with the given parameters.
@@ -183,11 +188,20 @@ class BluetoothActor extends _$BluetoothActor {
   */
 
   void _listenDeviceConnection() {
-    ref.listen(deviceConnectionProvider(deviceId: deviceId), (_, next) {
-      if (next == BluetoothConnectionState.disconnected) {
-        state = const BluetoothActorState.empty();
-      }
-    });
+    ref.listen(
+      connectedDevicesProvider.select(
+        (value) =>
+            value.devices
+                .where((device) => device.remoteId.str == deviceId)
+                .firstOrNull,
+      ),
+      (_, next) {
+        final isConnected = next?.isConnected ?? false;
+        if (!isConnected) {
+          state = const BluetoothActorState.empty();
+        }
+      },
+    );
 
     listenSelf((prev, next) async {
       if (prev is BluetoothActorStateEmpty &&
