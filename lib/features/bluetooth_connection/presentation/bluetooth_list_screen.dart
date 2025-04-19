@@ -38,7 +38,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
   late StreamSubscription<BluetoothAdapterState> _bluetoothStateSubscription;
   late StreamSubscription<List<ScanResult>> _scanResultsSubscription;
 
-  late List<ScanResult> _scanResults = [];
+  late List<BluetoothDevice> _scanResults = [];
 
   /// The current state of the Bluetooth screen.
   BluetoothScreenState _bluetoothScreenState = BluetoothScreenState.initial;
@@ -100,7 +100,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
     _scanResultsSubscription = FlutterBluePlus.onScanResults.listen((results) {
       if (!mounted) return;
       setState(() {
-        _scanResults = results;
+        _scanResults = results.map((e) => e.device).toList();
       });
     });
 

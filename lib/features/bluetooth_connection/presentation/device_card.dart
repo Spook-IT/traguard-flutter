@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
-import 'package:traguard/features/bluetooth_connection/data/device_connection_provider.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
+import 'package:traguard/providers/connected_devices.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -17,16 +17,14 @@ class DeviceCard extends ConsumerStatefulWidget {
   /// Creates a new instance of [DeviceCard].
   const DeviceCard({required this.device, super.key});
 
-  /// The [ScanResult] object representing the Bluetooth device.
-  final ScanResult device;
+  /// The [BluetoothDevice] object representing the Bluetooth device.
+  final BluetoothDevice device;
 
   @override
   ConsumerState<DeviceCard> createState() => _DeviceCardState();
 }
 
 class _DeviceCardState extends ConsumerState<DeviceCard> {
-  late final BluetoothDevice _bluetoothDevice = widget.device.device;
-
   bool _isConnecting = false;
 
   @override
@@ -34,12 +32,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
     super.initState();
 
     ref.listenManual(
-      deviceConnectionProvider(deviceId: _bluetoothDevice.remoteId.str),
-      (_, _) {},
-    );
-
-    ref.listenManual(
-      bluetoothActorProvider(deviceId: _bluetoothDevice.remoteId.str),
+      bluetoothActorProvider(deviceId: widget.device.remoteId.str),
       (_, _) {},
     );
   }
@@ -53,7 +46,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
       _isConnecting = true;
     });
 
-    final subscription = _bluetoothDevice.connectionState.listen((
+    final subscription = widget.device.connectionState.listen((
       BluetoothConnectionState state,
     ) async {
       if (!mounted) return;
@@ -63,36 +56,19 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
       });
 
       if (state == BluetoothConnectionState.disconnected) {
-        ref
-            .read(
-              deviceConnectionProvider(
-                deviceId: _bluetoothDevice.remoteId.str,
-              ).notifier,
-            )
-            .setState(state);
+        ref.read(connectedDevicesProvider.notifier).removeDevice(widget.device);
       } else if (state == BluetoothConnectionState.connected) {
-        ref
-            .read(
-              deviceConnectionProvider(
-                deviceId: _bluetoothDevice.remoteId.str,
-              ).notifier,
-            )
-            .setState(state);
+        ref.read(connectedDevicesProvider.notifier).addDevice(widget.device);
         await _discoverServices();
       }
     });
 
-    _bluetoothDevice.cancelWhenDisconnected(
-      subscription,
-      delayed: true,
-      next: true,
-    );
-
-    await _bluetoothDevice.connect();
+    widget.device.cancelWhenDisconnected(subscription, next: true);
+    await widget.device.connect();
   }
 
   Future<void> _discoverServices() async {
-    final services = await _bluetoothDevice.discoverServices();
+    final services = await widget.device.discoverServices();
     final discoveredService = services.firstOrNull;
 
     if (discoveredService == null) {
@@ -102,12 +78,10 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
 
     ref
         .read(
-          bluetoothActorProvider(
-            deviceId: _bluetoothDevice.remoteId.str,
-          ).notifier,
+          bluetoothActorProvider(deviceId: widget.device.remoteId.str).notifier,
         )
         .setupActor(
-          connectedDevice: _bluetoothDevice,
+          connectedDevice: widget.device,
           service: discoveredService,
           notifyCaracteristic: discoveredService.characteristics.firstWhere(
             (element) => element.properties.notify == true,
@@ -146,7 +120,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                   Align(
                     alignment: Alignment.topRight,
                     child: ConnectionStateIndicator(
-                      deviceId: _bluetoothDevice.remoteId.str,
+                      deviceId: widget.device.remoteId.str,
                     ),
                   ),
                   Column(
@@ -154,11 +128,11 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.device.advertisementData.advName,
+                        widget.device.advName,
                         style: context.textTheme.labelLarge,
                       ),
                       Text(
-                        _bluetoothDevice.remoteId.str,
+                        widget.device.remoteId.str,
                         style: context.textTheme.labelSmall,
                       ),
                     ],
