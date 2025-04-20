@@ -4,7 +4,10 @@ enum LottieAssets {
   bluetoothSearch('assets/lottie/bluetooth_search.json'),
 
   /// The path for switch on/off animation.
-  switchOnOff('assets/lottie/switch_on_off.json');
+  switchOnOff('assets/lottie/switch_on_off.json'),
+
+  /// The path for the error animation.
+  error('assets/lottie/error.json');
 
   /// Creates a new instance of [LottieAssets] with the given [path].
   const LottieAssets(this.path);
