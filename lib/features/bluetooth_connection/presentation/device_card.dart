@@ -7,6 +7,7 @@ import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart
 import 'package:traguard/features/bluetooth_connection/presentation/battery_icon.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connect_button.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
+import 'package:traguard/features/bluetooth_connection/presentation/gps_icon.dart';
 import 'package:traguard/utils/assets.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -89,6 +90,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                     children: [
                       ConnectionStateIndicator(deviceId: _deviceId),
                       BatteryIcon(deviceId: _deviceId),
+                      GpsIcon(deviceId: _deviceId),
                     ],
                   ),
                   Column(
