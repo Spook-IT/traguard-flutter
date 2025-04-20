@@ -19,13 +19,10 @@ class BatteryIcon extends ConsumerWidget {
       bluetoothActorProvider(deviceId: deviceId).select(
         (value) => switch (value) {
           BluetoothActorStateStart(:final batteryLevel) => batteryLevel,
-          _ => null,
+          _ => -1,
         },
       ),
     );
-    if (batteryLevel == null || batteryLevel < 0) {
-      return const SizedBox.shrink();
-    }
 
     final iconData = switch (batteryLevel) {
       > 100 => Icons.battery_full,
@@ -45,27 +42,41 @@ class BatteryIcon extends ConsumerWidget {
       _ => Colors.red,
     };
 
-    return Container(
-      padding: Paddings.tinyAll,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(iconData, color: Colors.white, size: 16),
-          Text(
-            '${batteryLevel.toStringAsFixed(0)}%',
-            style: context.textTheme.labelSmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+    return AnimatedCrossFade(
+      alignment: Alignment.center,
+      firstCurve: Curves.easeIn,
+      firstChild: const SizedBox.shrink(),
+      secondChild: Container(
+        padding: Paddings.tinyAll,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4,
+              offset: Offset(0, 2),
             ),
-          ),
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(iconData, color: Colors.white, size: 16),
+            Text(
+              '${batteryLevel.toStringAsFixed(0)}%',
+              style: context.textTheme.labelSmall?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
+      crossFadeState:
+          batteryLevel < 0
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
+      duration: 300.ms,
     );
   }
 }
