@@ -10,14 +10,11 @@ class SearchingAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.shortestSide,
-      child: Center(
-        child: Lottie.asset(
-          LottieAssets.bluetoothSearch.path,
-          alignment: Alignment.center,
-          repeat: true,
-        ),
+    return Center(
+      child: Lottie.asset(
+        LottieAssets.bluetoothSearch.path,
+        frameRate: FrameRate.max,
+        width: context.shortestSide,
       ),
     );
   }

@@ -12,35 +12,37 @@ class BluetoothOff extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: Spaces.xLarge,
-        children: [
-          const Icon(Icons.bluetooth_disabled, size: 100, color: Colors.grey),
-          Lottie.asset(
-            LottieAssets.switchOnOff.path,
-            height: 50,
-            frameRate: FrameRate.max,
-            fit: BoxFit.cover,
-          ),
-          Column(
-            spacing: Spaces.tiny,
-            children: [
-              Text(
-                context.l10n.bluetoothOff,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: Paddings.largeAll,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: Spaces.xLarge,
+          children: [
+            const Icon(Icons.bluetooth_disabled, size: 100, color: Colors.grey),
+            Lottie.asset(
+              LottieAssets.switchOnOff.path,
+              height: 40,
+              frameRate: FrameRate.max,
+            ),
+            Column(
+              spacing: Spaces.tiny,
+              children: [
+                Text(
+                  context.l10n.bluetoothOff,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                context.l10n.pleaseTurnOnBluetooth,
-                style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ],
+                Text(
+                  context.l10n.pleaseTurnOnBluetooth,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
