@@ -351,6 +351,8 @@ class BluetoothActor extends _$BluetoothActor {
     batteryLevel =
         (batteryLevel - batteryMin) / (batteryMax - batteryMin) * 100;
 
+    batteryLevel = batteryLevel.clamp(0, 100);
+
     logger
       ..d('Battery level: ${batteryLevel.toStringAsFixed(0)} %')
       ..d('GPS state: $gpsActive');
