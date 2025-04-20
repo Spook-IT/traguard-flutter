@@ -9,6 +9,7 @@ import 'package:traguard/features/bluetooth_connection/domain/brief_data.dart';
 import 'package:traguard/features/bluetooth_connection/domain/gps_data.dart';
 import 'package:traguard/providers/connected_devices.dart';
 import 'package:traguard/utils/constants.dart';
+import 'package:traguard/utils/extensions.dart';
 
 part 'bluetooth_actor.g.dart';
 
@@ -51,6 +52,8 @@ class BluetoothActor extends _$BluetoothActor {
   StreamSubscription<List<int>>? _notificationSubscription;
   int _requestedBriefId = -1;
 
+  Timer? _timerRequestBatteryAndGps;
+
   @override
   BluetoothActorState build({required String deviceId}) {
     _listenDeviceConnection();
@@ -58,6 +61,11 @@ class BluetoothActor extends _$BluetoothActor {
     ref.onDispose(() {
       _notificationSubscription?.cancel();
       _notificationSubscription = null;
+    });
+
+    ref.onDispose(() {
+      _timerRequestBatteryAndGps?.cancel();
+      _timerRequestBatteryAndGps = null;
     });
 
     return const BluetoothActorState.empty();
@@ -216,6 +224,33 @@ class BluetoothActor extends _$BluetoothActor {
   * ----------------
   */
 
+  void _setupTimerRequestBatteryAndGps({
+    Duration timerDuration = const Duration(seconds: 5),
+  }) {
+    _timerRequestBatteryAndGps?.cancel();
+    _timerRequestBatteryAndGps = Timer.periodic(timerDuration, (timer) async {
+      if (state is BluetoothActorStateEmpty ||
+          state is BluetoothActorStateOnlyDevice) {
+        logger.e('BluetoothActorState is empty or only device');
+        timer.cancel();
+        return;
+      }
+
+      final started = state as BluetoothActorStateStart;
+      if (started.gpsActive && timerDuration.inSeconds < 10) {
+        _setupTimerRequestBatteryAndGps(timerDuration: 10.seconds);
+        return;
+      }
+
+      if (!started.gpsActive && timerDuration.inSeconds > 5) {
+        _setupTimerRequestBatteryAndGps();
+        return;
+      }
+
+      unawaited(requestBatteryAndGps());
+    });
+  }
+
   Future<void> _discoverServices() async {
     if (state is BluetoothActorStateEmpty) {
       logger.e('BluetoothActorState is empty');
@@ -273,6 +308,7 @@ class BluetoothActor extends _$BluetoothActor {
           next is BluetoothActorStateStart) {
         await listenNotifications();
         await requestBatteryAndGps();
+        _setupTimerRequestBatteryAndGps();
       }
     });
   }
