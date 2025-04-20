@@ -39,12 +39,17 @@ class BluetoothFinder extends _$BluetoothFinder {
 
     ref.onDispose(FlutterBluePlus.stopScan);
 
+    _turnOnAndScan();
     return const BluetoothFinderState();
   }
 
-  /// Turns on Bluetooth if it is supported by the device.
-  /// If Bluetooth is already on, it starts scanning for devices.
-  Future<void> turnOnBluetooth() async {
+  /*
+  * ----------------
+  * PRIVATE METHODS
+  * ----------------
+  */
+
+  Future<void> _turnOnAndScan() async {
     if (await FlutterBluePlus.isSupported == false) {
       logger.e('Bluetooth not supported by this device');
       state = state.copyWith(screenState: BluetoothScreenState.notSupported);
@@ -69,12 +74,6 @@ class BluetoothFinder extends _$BluetoothFinder {
       await FlutterBluePlus.turnOn();
     }
   }
-
-  /*
-  * ----------------
-  * PRIVATE METHODS
-  * ----------------
-  */
 
   Future<void> _startScan() async {
     _scanResultsSubscription = FlutterBluePlus.onScanResults.listen((results) {
