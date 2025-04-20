@@ -1,7 +1,10 @@
 /// This enum defines the asset paths for Lottie animations.
 enum LottieAssets {
   /// The path for the searching animation.
-  bluetoothSearch('assets/lottie/bluetooth_search.json');
+  bluetoothSearch('assets/lottie/bluetooth_search.json'),
+
+  /// The path for switch on/off animation.
+  switchOnOff('assets/lottie/switch_on_off.json');
 
   /// Creates a new instance of [LottieAssets] with the given [path].
   const LottieAssets(this.path);
