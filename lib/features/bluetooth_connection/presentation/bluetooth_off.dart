@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:traguard/utils/assets.dart';
+import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
 /// A widget that displays a message indicating that Bluetooth is turned off.
@@ -22,16 +23,19 @@ class BluetoothOff extends StatelessWidget {
             frameRate: FrameRate.max,
             fit: BoxFit.cover,
           ),
-          const Column(
+          Column(
             spacing: Spaces.tiny,
             children: [
               Text(
-                'Bluetooth is turned off.',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                context.l10n.bluetoothOff,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
-                'Please turn on Bluetooth to connect to devices.',
-                style: TextStyle(fontSize: 16),
+                context.l10n.pleaseTurnOnBluetooth,
+                style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
             ],

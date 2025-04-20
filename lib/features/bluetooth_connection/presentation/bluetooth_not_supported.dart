@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:traguard/utils/assets.dart';
+import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
 /// A widget that displays a message indicating that Bluetooth is not supported.
@@ -22,9 +23,9 @@ class BluetoothNotSupported extends StatelessWidget {
               frameRate: FrameRate.max,
               height: 100,
             ),
-            const Text(
-              'Bluetooth is not supported on this device.',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              context.l10n.bluetoothNotSupportedOnDevice,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ],

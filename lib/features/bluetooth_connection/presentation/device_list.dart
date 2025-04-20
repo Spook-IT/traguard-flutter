@@ -39,7 +39,10 @@ class DeviceList extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (notConnectedDevices.isNotEmpty) ...[
-              Text('Available devices', style: context.textTheme.labelLarge),
+              Text(
+                context.l10n.availableDevices,
+                style: context.textTheme.labelLarge,
+              ),
               Spaces.medium.sizedBoxHeight,
               ListView.builder(
                 itemCount: notConnectedDevices.length,
@@ -63,7 +66,10 @@ class DeviceList extends ConsumerWidget {
               Spaces.medium.sizedBoxHeight,
             ],
             if (connectedDevices.devices.isNotEmpty) ...[
-              Text('Connected devices', style: context.textTheme.labelLarge),
+              Text(
+                context.l10n.connectedDevices,
+                style: context.textTheme.labelLarge,
+              ),
               Spaces.medium.sizedBoxHeight,
               ListView.builder(
                 itemCount: connectedDevices.devices.length,

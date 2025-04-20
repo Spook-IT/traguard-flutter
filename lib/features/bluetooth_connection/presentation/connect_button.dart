@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/providers/connected_devices.dart';
+import 'package:traguard/utils/extensions.dart';
 
 /// This widget represents a button that allows
 /// the user to connect to a Bluetooth device.
@@ -37,7 +38,7 @@ class ConnectDeviceButton extends ConsumerWidget {
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       ),
-      child: Text(connected ? 'Disconnect' : 'Connect'),
+      child: Text(connected ? context.l10n.disconnect : context.l10n.connect),
     );
   }
 }
