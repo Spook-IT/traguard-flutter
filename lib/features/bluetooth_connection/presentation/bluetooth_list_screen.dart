@@ -8,27 +8,12 @@ import 'package:traguard/features/bluetooth_connection/presentation/device_list.
 import 'package:traguard/utils/extensions.dart';
 
 /// A screen that displays a list of Bluetooth devices.
-class BluetoothListScreen extends ConsumerStatefulWidget {
+class BluetoothListScreen extends ConsumerWidget {
   /// Creates a new instance of [BluetoothListScreen].
   const BluetoothListScreen({super.key});
 
   @override
-  ConsumerState<BluetoothListScreen> createState() =>
-      _BluetoothListScreenState();
-}
-
-class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(bluetoothFinderProvider.notifier).turnOnBluetooth();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final bluetoothFinderState = ref.watch(bluetoothFinderProvider).screenState;
     final child = switch (bluetoothFinderState) {
       BluetoothScreenState.bluetoothOff => const BluetoothOff(),
