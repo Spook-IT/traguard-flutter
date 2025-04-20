@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_off.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_list.dart';
 import 'package:traguard/utils/constants.dart';
 import 'package:traguard/utils/extensions.dart';
@@ -116,9 +117,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
   @override
   Widget build(BuildContext context) {
     final child = switch (_bluetoothScreenState) {
-      BluetoothScreenState.bluetoothOff => const Center(
-        child: Text('Bluetooth is off. Please turn it on.'),
-      ),
+      BluetoothScreenState.bluetoothOff => const BluetoothOff(),
       BluetoothScreenState.initial ||
       BluetoothScreenState.searching => DeviceList(devices: _scanResults),
       BluetoothScreenState.error => const Center(
