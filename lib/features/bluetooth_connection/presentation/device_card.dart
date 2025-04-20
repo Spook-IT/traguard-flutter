@@ -85,6 +85,7 @@ class _DeviceCardState extends ConsumerState<DeviceCard> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    spacing: Spaces.tiny,
                     children: [
                       ConnectionStateIndicator(deviceId: _deviceId),
                       BatteryIcon(deviceId: _deviceId),
