@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_not_supported.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_off.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_list.dart';
 import 'package:traguard/utils/constants.dart';
@@ -20,8 +21,8 @@ enum BluetoothScreenState {
   /// The Bluetooth is turned on and searching for devices.
   searching,
 
-  /// The Bluetooth has an error.
-  error,
+  /// The Bluetooth is not supported by the device.
+  notSupported,
 }
 
 /// A screen that displays a list of Bluetooth devices.
@@ -69,7 +70,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
     if (await FlutterBluePlus.isSupported == false) {
       logger.e('Bluetooth not supported by this device');
       setState(() {
-        _bluetoothScreenState = BluetoothScreenState.error;
+        _bluetoothScreenState = BluetoothScreenState.notSupported;
       });
       return;
     }
@@ -120,9 +121,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
       BluetoothScreenState.bluetoothOff => const BluetoothOff(),
       BluetoothScreenState.initial ||
       BluetoothScreenState.searching => DeviceList(devices: _scanResults),
-      BluetoothScreenState.error => const Center(
-        child: Text('An error occurred.'),
-      ),
+      BluetoothScreenState.notSupported => const BluetoothNotSupported(),
     };
 
     return Scaffold(
