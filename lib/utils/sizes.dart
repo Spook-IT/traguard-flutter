@@ -11,6 +11,9 @@ class Paddings {
   * ---------------
   */
 
+  /// A tiny padding value (4.0).
+  static const tinyValue = 4.0;
+
   /// A small padding value (8.0).
   static const smallValue = 8.0;
 
@@ -28,6 +31,9 @@ class Paddings {
   * ALL PADDING
   * ------------
   */
+
+  /// Padding applied equally to all sides using the tiny value.
+  static final tinyAll = tinyValue.paddingAll;
 
   /// Padding applied equally to all sides using the small value.
   static final smallAll = smallValue.paddingAll;
@@ -47,6 +53,9 @@ class Paddings {
   * -----------------
   */
 
+  /// Padding applied vertically (top and bottom) using the tiny value.
+  static final tinyVertical = tinyValue.paddingVertical;
+
   /// Padding applied vertically (top and bottom) using the small value.
   static final smallVertical = smallValue.paddingVertical;
 
@@ -64,6 +73,9 @@ class Paddings {
   * PADDING HORIZONTAL
   * -------------------
   */
+
+  /// Padding applied horizontally (left and right) using the tiny value.
+  static final tinyHorizontal = tinyValue.paddingHorizontal;
 
   /// Padding applied horizontally (left and right) using the small value.
   static final smallHorizontal = smallValue.paddingHorizontal;
@@ -83,6 +95,9 @@ class Paddings {
   * ------------
   */
 
+  /// Padding applied to the top using the tiny value.
+  static final tinyTop = tinyValue.paddingTop;
+
   /// Padding applied to the top using the small value.
   static final smallTop = smallValue.paddingTop;
 
@@ -100,6 +115,9 @@ class Paddings {
   * PADDING BOTTOM
   * ---------------
   */
+
+  /// Padding applied to the bottom using the tiny value.
+  static final tinyBottom = tinyValue.paddingBottom;
 
   /// Padding applied to the bottom using the small value.
   static final smallBottom = smallValue.paddingBottom;
@@ -119,6 +137,9 @@ class Paddings {
   * -------------
   */
 
+  /// Padding applied to the left using the tiny value.
+  static final tinyLeft = tinyValue.paddingLeft;
+
   /// Padding applied to the left using the small value.
   static final smallLeft = smallValue.paddingLeft;
 
@@ -136,6 +157,9 @@ class Paddings {
   * PADDING RIGHT
   * --------------
   */
+
+  /// Padding applied to the right using the tiny value.
+  static final tinyRight = tinyValue.paddingRight;
 
   /// Padding applied to the right using the small value.
   static final smallRight = smallValue.paddingRight;
@@ -161,6 +185,9 @@ class Spaces {
   * SPACES VALUES
   * --------------
   */
+
+  /// A tiny space value (4.0).
+  static const tiny = 4.0;
 
   /// A small space value (8.0).
   static const small = 8.0;
