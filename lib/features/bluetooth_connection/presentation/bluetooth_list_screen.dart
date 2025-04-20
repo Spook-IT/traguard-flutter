@@ -50,8 +50,7 @@ class _BluetoothListScreenState extends ConsumerState<BluetoothListScreen> {
     super.initState();
 
     FlutterBluePlus.setLogLevel(LogLevel.info, color: false);
-    // optional
-    FlutterBluePlus.logs.listen(logger.d);
+    _logsSubscription = FlutterBluePlus.logs.listen(logger.d);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _turnOnBluetooth();
