@@ -141,3 +141,11 @@ extension SizedBoxExtensionNum on num {
   /// Creates a `SizedBox` with the specified height.
   SizedBox get sizedBoxHeight => SizedBox(height: toDouble());
 }
+
+/// Extension to provide utility methods for creating `RegExp` objects
+/// and validating matches.
+extension RegexExtension on String {
+  /// Creates a `RegExp` to validate an email address.
+  bool get isValidEmail =>
+      RegExp(r'^[\w-\.+]+@([\w-]+\.)+[\w-]{2,6}$').hasMatch(this);
+}
