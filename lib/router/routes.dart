@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
+import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 
 part 'routes.g.dart';
@@ -18,7 +19,8 @@ class SplashRoute extends GoRouteData {
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
-    return const BluetoothListRoute().location;
+    // TODO(dariowskii): Implement a proper authentication check
+    return const LoginRoute().location;
   }
 
   @override
@@ -42,5 +44,20 @@ class BluetoothListRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const BluetoothListScreen();
+  }
+}
+
+/// A route class for the Login screen.
+///
+/// This class extends `GoRouteData` and is responsible for building
+/// the `LoginScreen` widget when the route is accessed.
+@TypedGoRoute<LoginRoute>(path: '/login', name: 'loginRoute')
+class LoginRoute extends GoRouteData {
+  /// Creates a new instance of [LoginRoute].
+  const LoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginScreen();
   }
 }
