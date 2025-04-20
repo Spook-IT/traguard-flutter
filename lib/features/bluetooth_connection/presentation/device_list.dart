@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traguard/features/bluetooth_connection/data/bluetooth_finder.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_card.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/searching_animation.dart';
 import 'package:traguard/providers/connected_devices.dart';
@@ -14,20 +15,18 @@ import 'package:traguard/utils/sizes.dart';
 /// discovered during a Bluetooth scan.
 class DeviceList extends ConsumerWidget {
   /// Creates a new instance of [DeviceList].
-  const DeviceList({required this.devices, super.key});
-
-  /// A list of [ScanResult] objects representing the discovered devices.
-  final List<BluetoothDevice> devices;
+  const DeviceList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final availableDevices = ref.watch(bluetoothFinderProvider).devices;
     final connectedDevices = ref.watch(connectedDevicesProvider);
-    if (devices.isEmpty && connectedDevices.devices.isEmpty) {
+    if (availableDevices.isEmpty && connectedDevices.devices.isEmpty) {
       return const SearchingAnimation();
     }
 
     final notConnectedDevices =
-        devices
+        availableDevices
             .where((device) => !connectedDevices.devices.contains(device))
             .toList();
 
