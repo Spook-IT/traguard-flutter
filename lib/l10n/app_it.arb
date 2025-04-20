@@ -9,6 +9,16 @@
     "@_LOGIN": {},
 
     "loginPageTitle": "Accedi",
+    "loginInstruction": "Inserisci le tue credenziali per accedere all'app",
+    "email": "Email",
+    "emailEmpty": "L'email non può essere vuota",
+    "emailInvalid": "L'email non è valida",
+    "password": "Password",
+    "passwordEmpty": "La password non può essere vuota",
+    "loginButton": "Accedi",
+    "forgotPassword": "Hai dimenticato la password?",
+    "register": "Registrati",
+    "loginError": "Errore durante l'accesso.\nControlla le tue credenziali e riprova.",
 
     "@_BLUETOOTH_CONNECTION": {},
 

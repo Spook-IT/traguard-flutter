@@ -15,6 +15,36 @@ class AppLocalizationsIt extends AppLocalizations {
   String get loginPageTitle => 'Accedi';
 
   @override
+  String get loginInstruction => 'Inserisci le tue credenziali per accedere all\'app';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get emailEmpty => 'L\'email non può essere vuota';
+
+  @override
+  String get emailInvalid => 'L\'email non è valida';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get passwordEmpty => 'La password non può essere vuota';
+
+  @override
+  String get loginButton => 'Accedi';
+
+  @override
+  String get forgotPassword => 'Hai dimenticato la password?';
+
+  @override
+  String get register => 'Registrati';
+
+  @override
+  String get loginError => 'Errore durante l\'accesso.\nControlla le tue credenziali e riprova.';
+
+  @override
   String get bluetoothDeviceList => 'Dispositivi Bluetooth';
 
   @override

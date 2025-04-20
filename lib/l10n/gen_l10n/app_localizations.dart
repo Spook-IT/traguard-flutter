@@ -105,6 +105,66 @@ abstract class AppLocalizations {
   /// **'Accedi'**
   String get loginPageTitle;
 
+  /// No description provided for @loginInstruction.
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci le tue credenziali per accedere all\'app'**
+  String get loginInstruction;
+
+  /// No description provided for @email.
+  ///
+  /// In it, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @emailEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'email non può essere vuota'**
+  String get emailEmpty;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'email non è valida'**
+  String get emailInvalid;
+
+  /// No description provided for @password.
+  ///
+  /// In it, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @passwordEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'La password non può essere vuota'**
+  String get passwordEmpty;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Accedi'**
+  String get loginButton;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai dimenticato la password?'**
+  String get forgotPassword;
+
+  /// No description provided for @register.
+  ///
+  /// In it, this message translates to:
+  /// **'Registrati'**
+  String get register;
+
+  /// No description provided for @loginError.
+  ///
+  /// In it, this message translates to:
+  /// **'Errore durante l\'accesso.\nControlla le tue credenziali e riprova.'**
+  String get loginError;
+
   /// No description provided for @bluetoothDeviceList.
   ///
   /// In it, this message translates to:
