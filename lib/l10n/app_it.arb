@@ -2,6 +2,14 @@
     "@@locale": "it",
     "@@author": "Dario Varriale",
 
+    "@_COMMON": {},
+
+    "appName": "Traguard",
+
+    "@_LOGIN": {},
+
+    "loginPageTitle": "Accedi",
+
     "@_BLUETOOTH_CONNECTION": {},
 
     "bluetoothDeviceList": "Dispositivi Bluetooth",

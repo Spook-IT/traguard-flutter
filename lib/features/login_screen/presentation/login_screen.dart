@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
 /// A screen that displays a login form.
@@ -9,7 +10,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(
+        title: Text(
+          context.l10n.loginPageTitle,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(

@@ -93,6 +93,18 @@ abstract class AppLocalizations {
     Locale('it')
   ];
 
+  /// No description provided for @appName.
+  ///
+  /// In it, this message translates to:
+  /// **'Traguard'**
+  String get appName;
+
+  /// No description provided for @loginPageTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Accedi'**
+  String get loginPageTitle;
+
   /// No description provided for @bluetoothDeviceList.
   ///
   /// In it, this message translates to:

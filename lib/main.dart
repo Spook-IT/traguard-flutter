@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/l10n/gen_l10n/app_localizations.dart';
 import 'package:traguard/providers/connected_devices.dart';
 import 'package:traguard/router/router.dart';
+import 'package:traguard/utils/extensions.dart';
 
 void main() {
   runApp(const ProviderScope(child: TraguarApp()));
@@ -17,10 +18,10 @@ class TraguarApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return _EagerInitialization(
       child: MaterialApp.router(
-        title: 'Traguard',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
+        onGenerateTitle: (context) => context.l10n.appName,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: ref.watch(routerProvider),
