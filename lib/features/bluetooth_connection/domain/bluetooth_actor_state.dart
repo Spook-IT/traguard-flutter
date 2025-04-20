@@ -37,7 +37,7 @@ sealed class BluetoothActorState with _$BluetoothActorState {
     required BluetoothCharacteristic writeCaracteristic,
 
     /// The battery level of the Bluetooth device.
-    @Default(0) double batteryLevel,
+    @Default(-1) double batteryLevel,
 
     /// The GPS state of the Bluetooth device.
     @Default(false) bool gpsActive,
