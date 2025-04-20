@@ -25,7 +25,7 @@ class BatteryIcon extends ConsumerWidget {
     );
 
     final iconData = switch (batteryLevel) {
-      > 100 => Icons.battery_full,
+      > 90 => Icons.battery_full,
       > 80 => Icons.battery_6_bar,
       > 60 => Icons.battery_5_bar,
       > 40 => Icons.battery_4_bar,
