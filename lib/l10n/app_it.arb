@@ -1,0 +1,15 @@
+{
+    "@@locale": "it",
+    "@@author": "Dario Varriale",
+
+    "@_BLUETOOTH_CONNECTION": {},
+
+    "bluetoothDeviceList": "Dispositivi Bluetooth",
+    "bluetoothNotSupportedOnDevice": "Bluetooth non supportato su questo dispositivo",
+    "bluetoothOff": "Bluetooth spento",
+    "pleaseTurnOnBluetooth": "Per favore accendi il Bluetooth per continuare",
+    "connect": "Connetti",
+    "disconnect": "Disconnetti",
+    "availableDevices": "Dispositivi disponibili",
+    "connectedDevices": "Dispositivi connessi"
+}

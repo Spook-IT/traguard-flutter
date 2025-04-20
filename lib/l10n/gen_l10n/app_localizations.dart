@@ -93,6 +93,53 @@ abstract class AppLocalizations {
     Locale('it')
   ];
 
+  /// No description provided for @bluetoothDeviceList.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispositivi Bluetooth'**
+  String get bluetoothDeviceList;
+
+  /// No description provided for @bluetoothNotSupportedOnDevice.
+  ///
+  /// In it, this message translates to:
+  /// **'Bluetooth non supportato su questo dispositivo'**
+  String get bluetoothNotSupportedOnDevice;
+
+  /// No description provided for @bluetoothOff.
+  ///
+  /// In it, this message translates to:
+  /// **'Bluetooth spento'**
+  String get bluetoothOff;
+
+  /// No description provided for @pleaseTurnOnBluetooth.
+  ///
+  /// In it, this message translates to:
+  /// **'Per favore accendi il Bluetooth per continuare'**
+  String get pleaseTurnOnBluetooth;
+
+  /// No description provided for @connect.
+  ///
+  /// In it, this message translates to:
+  /// **'Connetti'**
+  String get connect;
+
+  /// No description provided for @disconnect.
+  ///
+  /// In it, this message translates to:
+  /// **'Disconnetti'**
+  String get disconnect;
+
+  /// No description provided for @availableDevices.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispositivi disponibili'**
+  String get availableDevices;
+
+  /// No description provided for @connectedDevices.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispositivi connessi'**
+  String get connectedDevices;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
