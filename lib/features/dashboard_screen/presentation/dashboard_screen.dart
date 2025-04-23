@@ -52,8 +52,30 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const ListTile(title: Text('Item 1')),
-            const ListTile(title: Text('Item 2')),
+            ListTile(
+              title: Text(
+                '📍 Vai alle mappe',
+                style: context.textTheme.titleLarge,
+              ),
+              onTap: () {
+                // TODO(dariowskii): add functionality
+              },
+            ),
+            ListTile(
+              title: Text(
+                '🎽 Guarda le sessioni',
+                style: context.textTheme.titleLarge,
+              ),
+              onTap: () {
+                // TODO(dariowskii): add functionality
+              },
+            ),
+            ListTile(
+              title: Text('⚽ Giocatori', style: context.textTheme.titleLarge),
+              onTap: () {
+                // TODO(dariowskii): add functionality
+              },
+            ),
           ],
         ),
       ),
