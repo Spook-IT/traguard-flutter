@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/router/routes.dart';
 import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
@@ -74,6 +75,15 @@ class DashboardScreen extends StatelessWidget {
               title: Text('⚽ Giocatori', style: context.textTheme.titleLarge),
               onTap: () {
                 // TODO(dariowskii): add functionality
+              },
+            ),
+            ListTile(
+              title: Text(
+                '📱 Dispositivi',
+                style: context.textTheme.titleLarge,
+              ),
+              onTap: () {
+                const BluetoothListRoute().go(context);
               },
             ),
           ],
