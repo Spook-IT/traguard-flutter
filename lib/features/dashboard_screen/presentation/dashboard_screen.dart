@@ -57,6 +57,18 @@ class DashboardScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // TODO(dariowskii): add functionality
+        },
+        label: const Row(
+          children: [
+            Icon(Icons.add),
+            SizedBox(width: Spaces.tiny),
+            Text('Nuova sessione'),
+          ],
+        ),
+      ),
     );
   }
 }
