@@ -21,6 +21,7 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
       ),
+      drawer: const Drawer(child: Center(child: Text('Drawer'))),
     );
   }
 }
