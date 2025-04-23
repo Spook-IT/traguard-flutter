@@ -30,24 +30,6 @@ class SplashRoute extends GoRouteData {
   }
 }
 
-/// A route class for the Bluetooth List screen.
-///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `BluetoothListScreen` widget when the route is accessed.
-@TypedGoRoute<BluetoothListRoute>(
-  path: '/bluetooth-list',
-  name: 'bluetoothListRoute',
-)
-class BluetoothListRoute extends GoRouteData {
-  /// Creates a new instance of [BluetoothListRoute].
-  const BluetoothListRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const BluetoothListScreen();
-  }
-}
-
 /// A route class for the Login screen.
 ///
 /// This class extends `GoRouteData` and is responsible for building
@@ -67,7 +49,16 @@ class LoginRoute extends GoRouteData {
 ///
 /// This class extends `GoRouteData` and is responsible for building
 /// the `DashboardScreen` widget when the route is accessed.
-@TypedGoRoute<DashboardRoute>(path: '/', name: 'dashboardRoute')
+@TypedGoRoute<DashboardRoute>(
+  path: '/',
+  name: 'dashboardRoute',
+  routes: [
+    TypedGoRoute<BluetoothListRoute>(
+      path: 'bluetooth-list',
+      name: 'bluetoothListRoute',
+    ),
+  ],
+)
 class DashboardRoute extends GoRouteData {
   /// Creates a new instance of [DashboardRoute].
   const DashboardRoute();
@@ -75,5 +66,19 @@ class DashboardRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const DashboardScreen();
+  }
+}
+
+/// A route class for the Bluetooth List screen.
+///
+/// This class extends `GoRouteData` and is responsible for building
+/// the `BluetoothListScreen` widget when the route is accessed.
+class BluetoothListRoute extends GoRouteData {
+  /// Creates a new instance of [BluetoothListRoute].
+  const BluetoothListRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const BluetoothListScreen();
   }
 }
