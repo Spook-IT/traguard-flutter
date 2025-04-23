@@ -16,12 +16,14 @@ class DashboardScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Dashboard')),
-      body: Center(
-        child: Text(
-          'Welcome to the Dashboard!',
-          style: context.textTheme.titleLarge?.copyWith(
-            color: context.colorScheme.primary,
-            fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Center(
+          child: Text(
+            'Welcome to the Dashboard!',
+            style: context.textTheme.titleLarge?.copyWith(
+              color: context.colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
