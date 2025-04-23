@@ -9,6 +9,8 @@ class LoginTextField extends StatefulWidget {
     required this.validator,
     required this.controller,
     this.isPassword = false,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.next,
     super.key,
   });
 
@@ -23,6 +25,12 @@ class LoginTextField extends StatefulWidget {
 
   /// The controller for the text field.
   final TextEditingController controller;
+
+  /// The keyboard type for the text field.
+  final TextInputType keyboardType;
+
+  /// The action to be performed when the text field is submitted.
+  final TextInputAction textInputAction;
 
   @override
   State<LoginTextField> createState() => _LoginTextFieldState();
@@ -39,6 +47,8 @@ class _LoginTextFieldState extends State<LoginTextField> {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: const TextStyle(color: Colors.black),

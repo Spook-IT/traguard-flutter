@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
     ).showSnackBar(const SnackBar(content: Text('Login successful!')));
 
-    const LoginRoute().go(context);
+    const DashboardRoute().go(context);
   }
 
   void _goToRegister() {
@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginTextField(
                         label: context.l10n.email,
                         controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return context.l10n.emailEmpty;
@@ -91,6 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginTextField(
                         label: context.l10n.password,
                         controller: _passwordController,
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
                         isPassword: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
