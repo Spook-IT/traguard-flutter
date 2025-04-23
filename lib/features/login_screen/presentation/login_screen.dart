@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
     ).showSnackBar(const SnackBar(content: Text('Login successful!')));
 
-    const BluetoothListRoute().go(context);
+    const LoginRoute().go(context);
   }
 
   void _goToRegister() {
