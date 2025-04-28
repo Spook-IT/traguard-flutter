@@ -58,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 '📍 Vai alle mappe',
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleMedium,
               ),
               onTap: () {
                 // TODO(dariowskii): add functionality
@@ -67,14 +67,14 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 '🎽 Guarda le sessioni',
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleMedium,
               ),
               onTap: () {
                 // TODO(dariowskii): add functionality
               },
             ),
             ListTile(
-              title: Text('⚽ Giocatori', style: context.textTheme.titleLarge),
+              title: Text('⚽ Giocatori', style: context.textTheme.titleMedium),
               onTap: () {
                 // TODO(dariowskii): add functionality
               },
@@ -82,7 +82,7 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 '📊 Gestione Squadra',
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleMedium,
               ),
               onTap: () {
                 const TeamStatisticsRoute().go(context);
@@ -91,7 +91,7 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 '📱 Dispositivi',
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleMedium,
               ),
               onTap: () {
                 const BluetoothListRoute().go(context);
