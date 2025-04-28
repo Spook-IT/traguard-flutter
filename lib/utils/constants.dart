@@ -20,5 +20,4 @@ final lightTheme = ThemeData(
     foregroundColor: Color(0xFF020817),
     elevation: 0,
   ),
-  typography: Typography(black: Typography.blackCupertino),
 );
