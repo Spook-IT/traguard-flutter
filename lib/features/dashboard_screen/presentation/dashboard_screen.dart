@@ -81,6 +81,15 @@ class DashboardScreen extends StatelessWidget {
             ),
             ListTile(
               title: Text(
+                '📊 Gestione Squadra',
+                style: context.textTheme.titleLarge,
+              ),
+              onTap: () {
+                // TODO(dariowskii): add functionality
+              },
+            ),
+            ListTile(
+              title: Text(
                 '📱 Dispositivi',
                 style: context.textTheme.titleLarge,
               ),
