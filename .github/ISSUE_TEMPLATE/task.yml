@@ -1,0 +1,17 @@
+name: 📝 Task
+description: 💡 Inserisci un nuovo task nel progetto
+title: "[Task]: "
+
+labels: ["enhancement"]
+projects: ["Spook-IT/7"]
+assignees: ["dariowskii"]
+type: "task"
+
+body:
+  - type: textarea
+    id: task-description
+    attributes:
+      label: 📝 **Descrizione**
+      description: 📖 Descrivi il task in modo dettagliato, allegando eventualmente immagini e impostando una checklist
+    validations:
+      required: true
