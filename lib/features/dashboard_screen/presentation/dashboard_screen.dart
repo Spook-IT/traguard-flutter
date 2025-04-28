@@ -85,7 +85,7 @@ class DashboardScreen extends StatelessWidget {
                 style: context.textTheme.titleLarge,
               ),
               onTap: () {
-                // TODO(dariowskii): add functionality
+                const TeamStatisticsRoute().go(context);
               },
             ),
             ListTile(
