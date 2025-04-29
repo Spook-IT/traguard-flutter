@@ -175,7 +175,9 @@ extension FormatExtension on num {
   }
 }
 
+/// Extension to provide utility methods for generating random strings.
 extension RandomString on String {
+  /// Generates a random string of length 21 using alphanumeric characters.
   static String generateRandomString() {
     const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
