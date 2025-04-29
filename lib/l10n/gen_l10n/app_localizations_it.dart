@@ -67,4 +67,38 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get connectedDevices => 'Dispositivi connessi';
+
+  @override
+  String get teamStatisticsTitle => 'Gestione Squadra';
+
+  @override
+  String get teamStatisticsSubtitle => 'Statistiche e analisi di squadra';
+
+  @override
+  String get playersAvailability => 'Disponibilità atleti';
+
+  @override
+  String availabilitySpecs(int nActive, int nInjured, int nResting) {
+    return 'Attivi: $nActive, Infortunati: $nInjured, Riposo: $nResting';
+  }
+
+  @override
+  String availabilityPerc(int nPerc) {
+    return '$nPerc% disponibili';
+  }
+
+  @override
+  String get avarageTeamSpeed => 'Velocità Media Squadra';
+
+  @override
+  String get lastSession => 'Ultima sessione';
+
+  @override
+  String get totalDistance => 'Distanza Totale';
+
+  @override
+  String get performanceIndex => 'Indice Prestazione';
+
+  @override
+  String get avarageTeamFromLastSession => 'Media di squadra per ultima sessione';
 }

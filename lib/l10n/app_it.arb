@@ -29,5 +29,42 @@
     "connect": "Connetti",
     "disconnect": "Disconnetti",
     "availableDevices": "Dispositivi disponibili",
-    "connectedDevices": "Dispositivi connessi"
+    "connectedDevices": "Dispositivi connessi",
+    
+    "@_TEAM_STATISTICS": {},
+
+    "teamStatisticsTitle": "Gestione Squadra",
+    "teamStatisticsSubtitle": "Statistiche e analisi di squadra",
+    "playersAvailability": "Disponibilità atleti",
+    "availabilitySpecs": "Attivi: {nActive}, Infortunati: {nInjured}, Riposo: {nResting}",
+    "@availabilitySpecs": {
+        "placeholders": {
+            "nActive": {
+                "type": "int",
+                "example": "1"
+            },
+            "nInjured": {
+                "type": "int",
+                "example": "1"
+            },
+            "nResting": {
+                "type": "int",
+                "example": "1"
+            }
+        }
+    },
+    "availabilityPerc": "{nPerc}% disponibili",
+    "@availabilityPerc": {
+        "placeholders": {
+            "nPerc": {
+                "type": "int",
+                "example": "1"
+            }
+        }
+    },
+    "avarageTeamSpeed": "Velocità Media Squadra",
+    "lastSession": "Ultima sessione",
+    "totalDistance": "Distanza Totale",
+    "performanceIndex": "Indice Prestazione",
+    "avarageTeamFromLastSession": "Media di squadra per ultima sessione"
 }

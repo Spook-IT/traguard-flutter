@@ -212,6 +212,66 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Dispositivi connessi'**
   String get connectedDevices;
+
+  /// No description provided for @teamStatisticsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Gestione Squadra'**
+  String get teamStatisticsTitle;
+
+  /// No description provided for @teamStatisticsSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Statistiche e analisi di squadra'**
+  String get teamStatisticsSubtitle;
+
+  /// No description provided for @playersAvailability.
+  ///
+  /// In it, this message translates to:
+  /// **'Disponibilità atleti'**
+  String get playersAvailability;
+
+  /// No description provided for @availabilitySpecs.
+  ///
+  /// In it, this message translates to:
+  /// **'Attivi: {nActive}, Infortunati: {nInjured}, Riposo: {nResting}'**
+  String availabilitySpecs(int nActive, int nInjured, int nResting);
+
+  /// No description provided for @availabilityPerc.
+  ///
+  /// In it, this message translates to:
+  /// **'{nPerc}% disponibili'**
+  String availabilityPerc(int nPerc);
+
+  /// No description provided for @avarageTeamSpeed.
+  ///
+  /// In it, this message translates to:
+  /// **'Velocità Media Squadra'**
+  String get avarageTeamSpeed;
+
+  /// No description provided for @lastSession.
+  ///
+  /// In it, this message translates to:
+  /// **'Ultima sessione'**
+  String get lastSession;
+
+  /// No description provided for @totalDistance.
+  ///
+  /// In it, this message translates to:
+  /// **'Distanza Totale'**
+  String get totalDistance;
+
+  /// No description provided for @performanceIndex.
+  ///
+  /// In it, this message translates to:
+  /// **'Indice Prestazione'**
+  String get performanceIndex;
+
+  /// No description provided for @avarageTeamFromLastSession.
+  ///
+  /// In it, this message translates to:
+  /// **'Media di squadra per ultima sessione'**
+  String get avarageTeamFromLastSession;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
