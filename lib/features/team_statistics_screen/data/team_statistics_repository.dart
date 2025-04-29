@@ -32,7 +32,17 @@ class MockTeamStatisticsRepository implements TeamStatisticsRepository {
   MockTeamStatisticsRepository(Dio dio);
   @override
   Future<TeamStatisticsModel> getTeamStatistics({required String teamId}) {
-    // TODO: implement getTeamStatistics
-    throw UnimplementedError();
+    const model = TeamStatisticsModel(
+      playersAvailability: PlayersAvailabilityModel(
+        activePlayers: 4,
+        injuredPlayers: 1,
+        restPlayers: 1,
+        availabilityPercentage: 67,
+      ),
+      averageTeamSpeed: 26.4,
+      totalDistance: 48.8,
+      performanceIndex: 8,
+    );
+    return Future.delayed(const Duration(seconds: 1), () => model);
   }
 }
