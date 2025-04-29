@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/router/routes.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/router/routes.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// The dashboard screen widget.
 /// This widget serves as the main screen of the application,

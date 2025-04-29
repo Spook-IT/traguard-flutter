@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
 import 'package:traguard/features/bluetooth_connection/domain/bluetooth_actor_state.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 /// This widget represents a GPS icon that can be used to indicate the
 /// GPS status of a Bluetooth device.

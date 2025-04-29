@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/login_screen/presentation/login_text_field.dart';
-import 'package:traguard/router/routes.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/router/routes.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A screen that displays a login form.
 class LoginScreen extends StatefulWidget {

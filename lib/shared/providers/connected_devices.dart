@@ -1,6 +1,6 @@
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:traguard/models/connected_devices_state.dart';
+import 'package:traguard/shared/models/connected_devices_state.dart';
 
 part 'connected_devices.g.dart';
 

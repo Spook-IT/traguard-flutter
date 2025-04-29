@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:traguard/features/bluetooth_connection/domain/bluetooth_finder_state.dart';
-import 'package:traguard/utils/constants.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/utils/constants.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 part 'bluetooth_finder.g.dart';
 

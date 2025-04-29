@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
-import 'package:traguard/providers/http_client.dart';
+import 'package:traguard/shared/providers/http_client.dart';
 
 part 'team_statistics_repository.g.dart';
 

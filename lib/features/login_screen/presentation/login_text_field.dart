@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A widget that represents a text field for login.
 class LoginTextField extends StatefulWidget {

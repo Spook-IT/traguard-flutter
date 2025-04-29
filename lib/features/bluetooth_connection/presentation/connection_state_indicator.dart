@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:traguard/providers/connected_devices.dart';
+import 'package:traguard/shared/providers/connected_devices.dart';
 
 /// Widget that displays the connection state of a Bluetooth device.
 class ConnectionStateIndicator extends ConsumerWidget {

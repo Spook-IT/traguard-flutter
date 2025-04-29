@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistics_header.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// This widget is part of the team statistics feature of the application.
 class TeamStatisticsScreen extends StatelessWidget {

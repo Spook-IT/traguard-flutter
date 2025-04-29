@@ -7,9 +7,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:traguard/features/bluetooth_connection/domain/bluetooth_actor_state.dart';
 import 'package:traguard/features/bluetooth_connection/domain/brief_data.dart';
 import 'package:traguard/features/bluetooth_connection/domain/gps_data.dart';
-import 'package:traguard/providers/connected_devices.dart';
-import 'package:traguard/utils/constants.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/providers/connected_devices.dart';
+import 'package:traguard/shared/utils/constants.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 part 'bluetooth_actor.g.dart';
 

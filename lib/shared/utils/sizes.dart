@@ -1,4 +1,4 @@
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 /// This class contains constants for padding values used in the application.
 class Paddings {

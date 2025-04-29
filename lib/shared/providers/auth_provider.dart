@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:traguard/models/user.dart';
+import 'package:traguard/shared/models/user.dart';
 
 part 'auth_provider.g.dart';
 

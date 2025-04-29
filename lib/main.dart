@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/l10n/gen_l10n/app_localizations.dart';
-import 'package:traguard/providers/connected_devices.dart';
-import 'package:traguard/router/router.dart';
-import 'package:traguard/utils/constants.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/providers/connected_devices.dart';
+import 'package:traguard/shared/router/router.dart';
+import 'package:traguard/shared/utils/constants.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 void main() {
   runApp(const ProviderScope(child: TraguarApp()));

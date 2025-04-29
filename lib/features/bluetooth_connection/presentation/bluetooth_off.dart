@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:traguard/utils/assets.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/utils/assets.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A widget that displays a message indicating that Bluetooth is turned off.
 class BluetoothOff extends StatelessWidget {

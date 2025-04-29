@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 /// This widget is part of the team statistics feature of the application.
 class StatisticsHeader extends StatelessWidget {

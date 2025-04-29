@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_actor.dart';
 import 'package:traguard/features/bluetooth_connection/domain/bluetooth_actor_state.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// Widget that displays the battery level of a Bluetooth device.
 class BatteryIcon extends ConsumerWidget {

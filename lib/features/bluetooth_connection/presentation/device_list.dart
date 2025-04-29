@@ -5,9 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/bluetooth_connection/data/bluetooth_finder.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_card.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/searching_animation.dart';
-import 'package:traguard/providers/connected_devices.dart';
-import 'package:traguard/utils/extensions.dart' hide DurationExtensions;
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/providers/connected_devices.dart';
+import 'package:traguard/shared/utils/extensions.dart' hide DurationExtensions;
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A stateless widget that displays a list of Bluetooth devices.
 ///

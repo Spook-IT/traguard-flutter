@@ -8,10 +8,10 @@ import 'package:traguard/features/bluetooth_connection/presentation/battery_icon
 import 'package:traguard/features/bluetooth_connection/presentation/connect_button.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/connection_state_indicator.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/gps_icon.dart';
-import 'package:traguard/utils/assets.dart';
-import 'package:traguard/utils/constants.dart';
-import 'package:traguard/utils/extensions.dart';
-import 'package:traguard/utils/sizes.dart';
+import 'package:traguard/shared/utils/assets.dart';
+import 'package:traguard/shared/utils/constants.dart';
+import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// This widget represents a card that displays
 /// information about a Bluetooth device.

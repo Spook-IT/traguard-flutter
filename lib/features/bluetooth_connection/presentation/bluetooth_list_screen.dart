@@ -5,7 +5,7 @@ import 'package:traguard/features/bluetooth_connection/domain/bluetooth_finder_s
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_not_supported.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_off.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/device_list.dart';
-import 'package:traguard/utils/extensions.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 /// A screen that displays a list of Bluetooth devices.
 class BluetoothListScreen extends ConsumerWidget {
