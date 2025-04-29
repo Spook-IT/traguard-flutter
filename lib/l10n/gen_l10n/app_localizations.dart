@@ -165,6 +165,12 @@ abstract class AppLocalizations {
   /// **'Errore durante l\'accesso.\nControlla le tue credenziali e riprova.'**
   String get loginError;
 
+  /// No description provided for @logout.
+  ///
+  /// In it, this message translates to:
+  /// **'Esci'**
+  String get logout;
+
   /// No description provided for @bluetoothDeviceList.
   ///
   /// In it, this message translates to:

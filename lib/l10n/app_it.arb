@@ -20,6 +20,10 @@
     "register": "Registrati",
     "loginError": "Errore durante l'accesso.\nControlla le tue credenziali e riprova.",
 
+    "@_DASHBOARD": {},
+
+    "logout": "Esci",
+
     "@_BLUETOOTH_CONNECTION": {},
 
     "bluetoothDeviceList": "Dispositivi Bluetooth",

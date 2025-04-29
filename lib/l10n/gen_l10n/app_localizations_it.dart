@@ -45,6 +45,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get loginError => 'Errore durante l\'accesso.\nControlla le tue credenziali e riprova.';
 
   @override
+  String get logout => 'Esci';
+
+  @override
   String get bluetoothDeviceList => 'Dispositivi Bluetooth';
 
   @override
