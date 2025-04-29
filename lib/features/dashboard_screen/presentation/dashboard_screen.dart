@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/features/dashboard_screen/presentation/logout_button.dart';
 import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
@@ -97,6 +98,8 @@ class DashboardScreen extends StatelessWidget {
                 const BluetoothListRoute().go(context);
               },
             ),
+            const Spacer(),
+            const LogoutButton(),
           ],
         ),
       ),
