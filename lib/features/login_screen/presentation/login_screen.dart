@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traguard/features/login_screen/presentation/login_button.dart';
 import 'package:traguard/features/login_screen/presentation/login_text_field.dart';
-import 'package:traguard/shared/router/routes.dart';
+import 'package:traguard/shared/providers/auth_provider.dart';
+import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
 /// A screen that displays a login form.
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   /// Creates a new instance of [LoginScreen].
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   late final _formKey = GlobalKey<FormState>();
 
   late final _emailController = TextEditingController();
@@ -26,17 +29,27 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _tryLogin() {
+  Future<void> _tryLogin() async {
     if (_formKey.currentState?.validate() != true) {
       return;
     }
-    // TODO(dariowskii): Implement login logic
-    // Perform login action
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Login successful!')));
 
-    const DashboardRoute().go(context);
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    if (email.isEmpty || password.isEmpty) {
+      // TODO(dariowskii): Show error message
+      logger.e('Email or password is empty');
+      return;
+    }
+
+    try {
+      await ref
+          .read(authProvider.notifier)
+          .signIn(email: email, password: password);
+    } on Exception catch (e) {
+      logger.e('Login failed', error: e);
+      return;
+    }
   }
 
   void _goToRegister() {
@@ -104,13 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       Spaces.xLarge.sizedBoxHeight,
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: _tryLogin,
-                          child: Text(context.l10n.loginButton),
-                        ),
-                      ),
+                      LoginButton(onPressed: _tryLogin),
                       Spaces.tiny.sizedBoxHeight,
                       SizedBox(
                         width: double.infinity,
