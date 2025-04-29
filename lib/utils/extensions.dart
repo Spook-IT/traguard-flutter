@@ -149,3 +149,26 @@ extension RegexExtension on String {
   bool get isValidEmail =>
       RegExp(r'^[\w-\.+]+@([\w-]+\.)+[\w-]{2,6}$').hasMatch(this);
 }
+
+/// Extension to provide utility methods for formatting numbers
+/// and converting them to strings with specified precision.
+extension FormatExtension on num {
+  /// Parses the number from a string and returns it as a double.
+  double toPrecision(int n) => double.parse(toStringAsFixed(n));
+
+  /// Converts the number to a string with the specified precision.
+  String toFormattedPrecision(int n) {
+    final value = toPrecision(n);
+    final intValue = value.toInt();
+    if (value == intValue) {
+      return intValue.toString();
+    }
+
+    var formattedValue = value.toStringAsFixed(n);
+    while (formattedValue.endsWith('0')) {
+      formattedValue = formattedValue.substring(0, formattedValue.length - 1);
+    }
+
+    return formattedValue;
+  }
+}
