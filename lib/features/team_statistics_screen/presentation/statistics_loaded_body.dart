@@ -15,17 +15,19 @@ class StatisticsLoadedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     final playersAvailability = statistics.playersAvailability;
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: Spaces.large,
       children: [
         StatisticCard(
-          title: 'Disponibilità atleti',
+          title: context.l10n.playersAvailability,
           statisticValue: playersAvailability.totalPlayers.toDouble(),
-          description:
-              'Attivi: ${playersAvailability.activePlayers}, Infortunati: ${playersAvailability.injuredPlayers}, Riposo: ${playersAvailability.restPlayers}',
+          description: context.l10n.availabilitySpecs(
+            playersAvailability.activePlayers,
+            playersAvailability.injuredPlayers,
+            playersAvailability.restPlayers,
+          ),
           bottomChild: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: Spaces.tiny,
@@ -40,7 +42,9 @@ class StatisticsLoadedBody extends StatelessWidget {
                 color: context.textTheme.labelLarge?.color,
               ),
               Text(
-                '${playersAvailability.availabilityPercentage}% disponibili',
+                context.l10n.availabilityPerc(
+                  playersAvailability.availabilityPercentage,
+                ),
                 style: context.textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.normal,
                 ),
@@ -49,21 +53,21 @@ class StatisticsLoadedBody extends StatelessWidget {
           ),
         ),
         StatisticCard(
-          title: 'Velocità Media Squadra',
+          title: context.l10n.avarageTeamSpeed,
           statisticValue: statistics.averageTeamSpeed,
           statisticUnit: 'km/h',
-          description: 'Ultima sessione',
+          description: context.l10n.lastSession,
         ),
         StatisticCard(
-          title: 'Distanza Totale',
+          title: context.l10n.totalDistance,
           statisticValue: statistics.totalDistance,
           statisticUnit: 'km',
-          description: 'Ultima sessione',
+          description: context.l10n.lastSession,
         ),
         StatisticCard(
-          title: 'Indice Prestazione',
+          title: context.l10n.performanceIndex,
           statisticValue: statistics.performanceIndex,
-          description: 'Media di scquadra per ultima sessione',
+          description: context.l10n.avarageTeamFromLastSession,
         ),
       ],
     );
