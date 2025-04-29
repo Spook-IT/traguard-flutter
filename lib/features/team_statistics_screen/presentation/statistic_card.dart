@@ -59,6 +59,12 @@ class _StatisticCardState extends State<StatisticCard>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
           padding: Paddings.largeAll,
