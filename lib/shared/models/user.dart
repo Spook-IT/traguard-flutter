@@ -24,9 +24,11 @@ sealed class User with _$User {
 
   const factory User.signedOut() = SignedOut;
 
+  const factory User.empty() = UserEmpty;
+
   /// A method to check if the user is authenticated.
   bool get isAuth => switch (this) {
     SignedIn() => true,
-    SignedOut() => false,
+    _ => false,
   };
 }
