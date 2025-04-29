@@ -8,6 +8,7 @@ import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
+import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
 
 part 'routes.g.dart';
@@ -25,13 +26,7 @@ class SplashRoute extends GoRouteData {
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
     final container = ProviderScope.containerOf(context);
     final auth = container.read(authProvider);
-    return switch (auth) {
-      AsyncData(:final value) when value.isAuth =>
-        const DashboardRoute().location,
-      AsyncData(:final value) when !value.isAuth => const LoginRoute().location,
-
-      _ => null,
-    };
+    return auth.moveFromSplash();
   }
 
   @override
@@ -53,12 +48,7 @@ class LoginRoute extends GoRouteData {
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
     final container = ProviderScope.containerOf(context);
     final auth = container.read(authProvider);
-    return switch (auth) {
-      AsyncData(:final value) when value.isAuth =>
-        const DashboardRoute().location,
-
-      _ => null,
-    };
+    return auth.redirectToHomeIfNeeded();
   }
 
   @override
@@ -93,11 +83,7 @@ class DashboardRoute extends GoRouteData {
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
     final container = ProviderScope.containerOf(context);
     final auth = container.read(authProvider);
-    return switch (auth) {
-      AsyncData(:final value) when value.isAuth => null,
-
-      _ => const LoginRoute().location,
-    };
+    return auth.redirectToLoginIfNeeded();
   }
 
   @override

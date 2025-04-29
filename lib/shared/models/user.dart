@@ -1,4 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:traguard/shared/router/routes.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -31,4 +33,44 @@ sealed class User with _$User {
     SignedIn() => true,
     _ => false,
   };
+}
+
+/// This extension provides utility methods for the `AsyncValue<User>` type.
+extension AsyncValueUser on AsyncValue<User> {
+  /// This method checks if the user is authenticated.
+  /// It returns [DashboardRoute] if the user is signed in,
+  /// otherwise it returns to [LoginRoute].
+  String? moveFromSplash() {
+    if (value is SignedIn) {
+      return const DashboardRoute().location;
+    }
+
+    if (value is SignedOut) {
+      return const LoginRoute().location;
+    }
+
+    return null;
+  }
+
+  /// This method checks if the user is signed in.
+  /// If the user is signed in, it returns [DashboardRoute],
+  /// otherwise it returns `null`.
+  String? redirectToHomeIfNeeded() {
+    if (value is SignedIn) {
+      return const DashboardRoute().location;
+    }
+
+    return null;
+  }
+
+  /// This method checks if the user is signed out.
+  /// If the user is signed out, it returns [LoginRoute],
+  /// otherwise it returns `null`.
+  String? redirectToLoginIfNeeded() {
+    if (value is SignedIn) {
+      return null;
+    }
+
+    return const LoginRoute().location;
+  }
 }
