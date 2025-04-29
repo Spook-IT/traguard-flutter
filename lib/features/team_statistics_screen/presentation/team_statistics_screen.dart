@@ -18,7 +18,7 @@ class TeamStatisticsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: RefreshIndicator(
+        child: RefreshIndicator.adaptive(
           onRefresh: () async {
             await HapticFeedback.mediumImpact();
             ref.invalidate(fetchStatisticsProvider);
