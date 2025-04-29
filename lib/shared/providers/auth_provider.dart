@@ -5,7 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/utils/constants.dart';
-import 'package:traguard/shared/utils/extensions.dart';
 
 part 'auth_provider.g.dart';
 
@@ -63,7 +62,6 @@ class Auth extends _$Auth {
   */
 
   Future<User> _setupFromSharedPrefs() async {
-    logger.i(RandomString.generateRandomString());
     try {
       final prefs = await SharedPreferencesWithCache.create(
         cacheOptions: const SharedPreferencesWithCacheOptions(),
