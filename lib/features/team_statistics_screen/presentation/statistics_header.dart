@@ -8,18 +8,17 @@ class StatisticsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Gestione Squadra',
+          context.l10n.teamStatisticsTitle,
           style: context.textTheme.headlineMedium?.copyWith(
             color: context.textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const Text('Statistiche e analisi di squadra'),
+        Text(context.l10n.teamStatisticsSubtitle),
       ],
     );
   }
