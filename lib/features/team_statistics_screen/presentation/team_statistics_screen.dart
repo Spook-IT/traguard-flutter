@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/statistics_header.dart';
 import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
@@ -21,19 +22,7 @@ class TeamStatisticsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: Spaces.large,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gestione Squadra',
-                    style: context.textTheme.headlineMedium?.copyWith(
-                      color: context.textTheme.titleLarge?.color,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text('Statistiche e analisi di squadra'),
-                ],
-              ),
+              const StatisticsHeader(),
               StatisticCard(
                 title: 'Disponibilità atleti',
                 statisticValue: '6',
