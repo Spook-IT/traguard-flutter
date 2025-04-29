@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:traguard/l10n/gen_l10n/app_localizations.dart';
 
@@ -170,5 +172,16 @@ extension FormatExtension on num {
     }
 
     return formattedValue;
+  }
+}
+
+extension RandomString on String {
+  static String generateRandomString() {
+    const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    final rnd = Random.secure();
+    return String.fromCharCodes(
+      Iterable.generate(21, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))),
+    );
   }
 }
