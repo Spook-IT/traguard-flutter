@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/l10n/gen_l10n/app_localizations.dart';
+import 'package:traguard/shared/providers/auth_provider.dart';
 import 'package:traguard/shared/providers/connected_devices.dart';
 import 'package:traguard/shared/router/router.dart';
 import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ProviderScope(child: TraguarApp()));
 }
 
@@ -36,7 +38,9 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(connectedDevicesProvider);
+    ref
+      ..watch(authProvider)
+      ..watch(connectedDevicesProvider);
     return child;
   }
 }
