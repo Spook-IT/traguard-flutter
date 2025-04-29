@@ -15,8 +15,8 @@ part 'routes.g.dart';
 
 /// A route class for the Splash screen.
 ///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `SplashScreen` widget when the route is accessed.
+/// This class extends [GoRouteData] and is responsible for building
+/// the [SplashScreen] widget when the route is accessed.
 @TypedGoRoute<SplashRoute>(path: '/splash', name: 'splashRoute')
 class SplashRoute extends GoRouteData {
   /// Creates a new instance of [SplashRoute].
@@ -37,8 +37,8 @@ class SplashRoute extends GoRouteData {
 
 /// A route class for the Login screen.
 ///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `LoginScreen` widget when the route is accessed.
+/// This class extends [GoRouteData] and is responsible for building
+/// the [LoginScreen] widget when the route is accessed.
 @TypedGoRoute<LoginRoute>(path: '/login', name: 'loginRoute')
 class LoginRoute extends GoRouteData {
   /// Creates a new instance of [LoginRoute].
@@ -59,8 +59,8 @@ class LoginRoute extends GoRouteData {
 
 /// A route class for the Dashboard screen.
 ///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `DashboardScreen` widget when the route is accessed.
+/// This class extends [GoRouteData] and is responsible for building
+/// the [DashboardScreen] widget when the route is accessed.
 @TypedGoRoute<DashboardRoute>(
   path: '/',
   name: 'dashboardRoute',
@@ -94,8 +94,8 @@ class DashboardRoute extends GoRouteData {
 
 /// A route class for the Bluetooth List screen.
 ///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `BluetoothListScreen` widget when the route is accessed.
+/// This class extends [GoRouteData] and is responsible for building
+/// the [BluetoothListScreen] widget when the route is accessed.
 class BluetoothListRoute extends GoRouteData {
   /// Creates a new instance of [BluetoothListRoute].
   const BluetoothListRoute();
@@ -108,8 +108,8 @@ class BluetoothListRoute extends GoRouteData {
 
 /// A route class for the Team Statistics screen.
 ///
-/// This class extends `GoRouteData` and is responsible for building
-/// the `TeamStatisticsScreen` widget when the route is accessed.
+/// This class extends [GoRouteData] and is responsible for building
+/// the [TeamStatisticsScreen] widget when the route is accessed.
 class TeamStatisticsRoute extends GoRouteData {
   /// Creates a new instance of [TeamStatisticsRoute].
   const TeamStatisticsRoute();
