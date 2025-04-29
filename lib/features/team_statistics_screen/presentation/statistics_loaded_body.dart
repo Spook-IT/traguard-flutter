@@ -23,6 +23,7 @@ class StatisticsLoadedBody extends StatelessWidget {
         StatisticCard(
           title: context.l10n.playersAvailability,
           statisticValue: playersAvailability.totalPlayers.toDouble(),
+          precision: 0,
           description: context.l10n.availabilitySpecs(
             playersAvailability.activePlayers,
             playersAvailability.injuredPlayers,
@@ -54,20 +55,26 @@ class StatisticsLoadedBody extends StatelessWidget {
         ),
         StatisticCard(
           title: context.l10n.avarageTeamSpeed,
+          precision: 1,
           statisticValue: statistics.averageTeamSpeed,
           statisticUnit: 'km/h',
           description: context.l10n.lastSession,
+          animationDelay: 150.ms,
         ),
         StatisticCard(
           title: context.l10n.totalDistance,
+          precision: 1,
           statisticValue: statistics.totalDistance,
           statisticUnit: 'km',
           description: context.l10n.lastSession,
+          animationDelay: 300.ms,
         ),
         StatisticCard(
           title: context.l10n.performanceIndex,
+          precision: 1,
           statisticValue: statistics.performanceIndex,
           description: context.l10n.avarageTeamFromLastSession,
+          animationDelay: 450.ms,
         ),
       ],
     );
