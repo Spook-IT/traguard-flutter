@@ -15,21 +15,23 @@ class StatisticsLoadedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO(dariowskii): add localization
+    final playersAvailability = statistics.playersAvailability;
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: Spaces.large,
       children: [
         StatisticCard(
           title: 'Disponibilità atleti',
-          statisticValue: 6,
-          precision: 1,
-          description: 'Attivi: 4, Infortunati: 1, Riposo: 1',
+          statisticValue: playersAvailability.totalPlayers.toDouble(),
+          description:
+              'Attivi: ${playersAvailability.activePlayers}, Infortunati: ${playersAvailability.injuredPlayers}, Riposo: ${playersAvailability.restPlayers}',
           bottomChild: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: Spaces.tiny,
             children: [
               LinearProgressIndicator(
-                value: 0.67,
+                value: playersAvailability.availabilityPercentage / 100,
                 minHeight: 8,
                 borderRadius: BorderRadius.circular(8),
                 backgroundColor: context.colorScheme.outline.withValues(
@@ -38,7 +40,7 @@ class StatisticsLoadedBody extends StatelessWidget {
                 color: context.textTheme.labelLarge?.color,
               ),
               Text(
-                '67% disponibili',
+                '${playersAvailability.availabilityPercentage}% disponibili',
                 style: context.textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.normal,
                 ),
@@ -46,21 +48,21 @@ class StatisticsLoadedBody extends StatelessWidget {
             ],
           ),
         ),
-        const StatisticCard(
+        StatisticCard(
           title: 'Velocità Media Squadra',
-          statisticValue: 26.4,
+          statisticValue: statistics.averageTeamSpeed,
           statisticUnit: 'km/h',
           description: 'Ultima sessione',
         ),
-        const StatisticCard(
+        StatisticCard(
           title: 'Distanza Totale',
-          statisticValue: 48.8,
+          statisticValue: statistics.totalDistance,
           statisticUnit: 'km',
           description: 'Ultima sessione',
         ),
-        const StatisticCard(
+        StatisticCard(
           title: 'Indice Prestazione',
-          statisticValue: 8,
+          statisticValue: statistics.performanceIndex,
           description: 'Media di scquadra per ultima sessione',
         ),
       ],
