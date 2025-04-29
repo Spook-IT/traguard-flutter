@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:traguard/features/team_statistics_screen/data/use_cases.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/loading_statistics.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistics_header.dart';
-import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/statistics_loaded_body.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
 /// This widget is part of the team statistics feature of the application.
-class TeamStatisticsScreen extends StatelessWidget {
+class TeamStatisticsScreen extends ConsumerWidget {
   /// Creates a new instance of [TeamStatisticsScreen].
   const TeamStatisticsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
+  Widget build(BuildContext context, WidgetRef ref) {
+    final statisticsAsync = ref.watch(fetchStatisticsProvider);
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -23,50 +25,12 @@ class TeamStatisticsScreen extends StatelessWidget {
             spacing: Spaces.large,
             children: [
               const StatisticsHeader(),
-              StatisticCard(
-                title: 'Disponibilità atleti',
-                statisticValue: 6,
-                precision: 1,
-                description: 'Attivi: 4, Infortunati: 1, Riposo: 1',
-                bottomChild: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: Spaces.tiny,
-                  children: [
-                    LinearProgressIndicator(
-                      value: 0.67,
-                      minHeight: 8,
-                      borderRadius: BorderRadius.circular(8),
-                      backgroundColor: context.colorScheme.outline.withValues(
-                        alpha: .3,
-                      ),
-                      color: context.textTheme.labelLarge?.color,
-                    ),
-                    Text(
-                      '67% disponibili',
-                      style: context.textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ],
+              switch (statisticsAsync) {
+                AsyncData(:final value) => StatisticsLoadedBody(
+                  statistics: value,
                 ),
-              ),
-              const StatisticCard(
-                title: 'Velocità Media Squadra',
-                statisticValue: 26.4,
-                statisticUnit: 'km/h',
-                description: 'Ultima sessione',
-              ),
-              const StatisticCard(
-                title: 'Distanza Totale',
-                statisticValue: 48.8,
-                statisticUnit: 'km',
-                description: 'Ultima sessione',
-              ),
-              const StatisticCard(
-                title: 'Indice Prestazione',
-                statisticValue: 8,
-                description: 'Media di scquadra per ultima sessione',
-              ),
+                _ => const LoadingStatistics(),
+              },
             ],
           ),
         ),
