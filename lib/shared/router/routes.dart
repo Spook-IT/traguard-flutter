@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
 import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen.dart';
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
+import 'package:traguard/shared/providers/auth_provider.dart';
 
 part 'routes.g.dart';
 
@@ -21,8 +23,15 @@ class SplashRoute extends GoRouteData {
 
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
-    // TODO(dariowskii): Implement a proper authentication check
-    return const LoginRoute().location;
+    final container = ProviderScope.containerOf(context);
+    final auth = container.read(authProvider);
+    return switch (auth) {
+      AsyncData(:final value) when value.isAuth =>
+        const DashboardRoute().location,
+      AsyncData(:final value) when !value.isAuth => const LoginRoute().location,
+
+      _ => null,
+    };
   }
 
   @override
@@ -39,6 +48,18 @@ class SplashRoute extends GoRouteData {
 class LoginRoute extends GoRouteData {
   /// Creates a new instance of [LoginRoute].
   const LoginRoute();
+
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
+    final container = ProviderScope.containerOf(context);
+    final auth = container.read(authProvider);
+    return switch (auth) {
+      AsyncData(:final value) when value.isAuth =>
+        const DashboardRoute().location,
+
+      _ => null,
+    };
+  }
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -67,6 +88,17 @@ class LoginRoute extends GoRouteData {
 class DashboardRoute extends GoRouteData {
   /// Creates a new instance of [DashboardRoute].
   const DashboardRoute();
+
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
+    final container = ProviderScope.containerOf(context);
+    final auth = container.read(authProvider);
+    return switch (auth) {
+      AsyncData(:final value) when value.isAuth => null,
+
+      _ => const LoginRoute().location,
+    };
+  }
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
