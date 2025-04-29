@@ -25,7 +25,8 @@ class TeamStatisticsScreen extends StatelessWidget {
               const StatisticsHeader(),
               StatisticCard(
                 title: 'Disponibilità atleti',
-                statisticValue: '6',
+                statisticValue: 6,
+                precision: 1,
                 description: 'Attivi: 4, Infortunati: 1, Riposo: 1',
                 bottomChild: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,19 +52,19 @@ class TeamStatisticsScreen extends StatelessWidget {
               ),
               const StatisticCard(
                 title: 'Velocità Media Squadra',
-                statisticValue: '26.4',
+                statisticValue: 26.4,
                 statisticUnit: 'km/h',
                 description: 'Ultima sessione',
               ),
               const StatisticCard(
                 title: 'Distanza Totale',
-                statisticValue: '48.8',
+                statisticValue: 48.8,
                 statisticUnit: 'km',
                 description: 'Ultima sessione',
               ),
               const StatisticCard(
                 title: 'Indice Prestazione',
-                statisticValue: '8.0',
+                statisticValue: 8,
                 description: 'Media di scquadra per ultima sessione',
               ),
             ],

@@ -9,6 +9,7 @@ class StatisticCard extends StatelessWidget {
     required this.title,
     required this.statisticValue,
     required this.description,
+    this.precision = 2,
     this.statisticUnit,
     this.bottomChild,
     super.key,
@@ -18,7 +19,10 @@ class StatisticCard extends StatelessWidget {
   final String title;
 
   /// The value of the statistic.
-  final String statisticValue;
+  final double statisticValue;
+
+  /// The precision of the statistic value (optional).
+  final int precision;
 
   /// The description of the statistic.
   final String description;
@@ -56,7 +60,7 @@ class StatisticCard extends StatelessWidget {
             textBaseline: TextBaseline.ideographic,
             children: [
               Text(
-                statisticValue,
+                statisticValue.toFormattedPrecision(precision),
                 style: context.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
