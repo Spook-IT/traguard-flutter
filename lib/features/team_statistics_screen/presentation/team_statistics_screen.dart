@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/team_statistics_screen/data/use_cases.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/loading_statistics.dart';
@@ -13,25 +14,31 @@ class TeamStatisticsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final statisticsAsync = ref.watch(fetchStatisticsProvider);
+    final statisticsAsync = ref.watch(fetchStatisticsProvider).unwrapPrevious();
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          clipBehavior: Clip.none,
-          padding: Paddings.mediumAll,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: Spaces.large,
-            children: [
-              const StatisticsHeader(),
-              switch (statisticsAsync) {
-                AsyncData(:final value) => StatisticsLoadedBody(
-                  statistics: value,
-                ),
-                _ => const LoadingStatistics(),
-              },
-            ],
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await HapticFeedback.mediumImpact();
+            ref.invalidate(fetchStatisticsProvider);
+          },
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            padding: Paddings.mediumAll,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: Spaces.large,
+              children: [
+                const StatisticsHeader(),
+                switch (statisticsAsync) {
+                  AsyncData(:final value) => StatisticsLoadedBody(
+                    statistics: value,
+                  ),
+                  _ => const LoadingStatistics(),
+                },
+              ],
+            ),
           ),
         ),
       ),
