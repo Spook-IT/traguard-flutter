@@ -103,7 +103,7 @@ class Auth extends _$Auth {
         case SignedIn():
           await prefs.setString(_sharedPrefsKey, jsonEncode(user.toJson()));
         case SignedOut():
-          await prefs.remove(_sharedPrefsKey);
+          await prefs.clear();
         case UserEmpty():
           break;
       }
