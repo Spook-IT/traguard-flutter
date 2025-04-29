@@ -6,7 +6,7 @@ import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_li
 import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen.dart';
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
-import 'package:traguard/features/team_statistics/presentation/team_statistics.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
 
 part 'routes.g.dart';
 
@@ -91,13 +91,13 @@ class BluetoothListRoute extends GoRouteData {
 /// A route class for the Team Statistics screen.
 ///
 /// This class extends `GoRouteData` and is responsible for building
-/// the `TeamStatisticsPage` widget when the route is accessed.
+/// the `TeamStatisticsScreen` widget when the route is accessed.
 class TeamStatisticsRoute extends GoRouteData {
   /// Creates a new instance of [TeamStatisticsRoute].
   const TeamStatisticsRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const TeamStatisticsPage();
+    return const TeamStatisticsScreen();
   }
 }

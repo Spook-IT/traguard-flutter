@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/features/team_statistics/presentation/statistic_card.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
 import 'package:traguard/utils/extensions.dart';
 import 'package:traguard/utils/sizes.dart';
 
 /// This widget is part of the team statistics feature of the application.
-class TeamStatisticsPage extends StatelessWidget {
-  /// Creates a new instance of [TeamStatisticsPage].
-  const TeamStatisticsPage({super.key});
+class TeamStatisticsScreen extends StatelessWidget {
+  /// Creates a new instance of [TeamStatisticsScreen].
+  const TeamStatisticsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
