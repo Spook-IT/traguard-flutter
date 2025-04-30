@@ -15,6 +15,10 @@ abstract class TeamStatisticsModel with _$TeamStatisticsModel {
     @Default(PlayersAvailabilityModel())
     PlayersAvailabilityModel playersAvailability,
 
+    /// The composition of players' roles in the team.
+    /// This is represented by the [RoleCompositionModel] class.
+    @Default(RoleCompositionModel()) RoleCompositionModel roleComposition,
+
     /// The average speed of the team.
     /// This value is represented in `km/h`.
     @Default(0) double averageTeamSpeed,
@@ -56,4 +60,25 @@ abstract class PlayersAvailabilityModel with _$PlayersAvailabilityModel {
 
   /// Returns the total number of players.
   int get totalPlayers => activePlayers + injuredPlayers + restPlayers;
+}
+
+/// A model class representing the composition of players' roles.
+@freezed
+abstract class RoleCompositionModel with _$RoleCompositionModel {
+  /// Creates a new instance of [RoleCompositionModel].
+  const factory RoleCompositionModel({
+    @Default(0) int goalkeeper,
+    @Default(0) int defender,
+    @Default(0) int midfielder,
+    @Default(0) int forward,
+  }) = _RoleCompositionModel;
+
+  /// Creates a new instance of [RoleCompositionModel] from JSON data.
+  factory RoleCompositionModel.fromJson(Map<String, dynamic> json) =>
+      _$RoleCompositionModelFromJson(json);
+
+  const RoleCompositionModel._();
+
+  /// Returns the total number of players in the team.
+  int get totalPlayers => goalkeeper + defender + midfielder + forward;
 }
