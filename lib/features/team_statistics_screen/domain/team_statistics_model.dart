@@ -19,6 +19,10 @@ abstract class TeamStatisticsModel with _$TeamStatisticsModel {
     /// This is represented by the [RoleCompositionModel] class.
     @Default(RoleCompositionModel()) RoleCompositionModel roleComposition,
 
+    /// The weekly goals of the team.
+    /// This is represented by the [WeeklyGoalsModel] class.
+    @Default(WeeklyGoalsModel()) WeeklyGoalsModel weeklyGoals,
+
     /// The average speed of the team.
     /// This value is represented in `km/h`.
     @Default(0) double averageTeamSpeed,
@@ -81,4 +85,22 @@ abstract class RoleCompositionModel with _$RoleCompositionModel {
 
   /// Returns the total number of players in the team.
   int get totalPlayers => goalkeeper + defender + midfielder + forward;
+}
+
+/// A model class representing weekly goals.
+/// This class contains information about [trainingIntensity],
+/// [distanceTraveled], [precisionSteps], and [qualityRecovery].
+@freezed
+abstract class WeeklyGoalsModel with _$WeeklyGoalsModel {
+  /// Creates a new instance of [WeeklyGoalsModel].
+  const factory WeeklyGoalsModel({
+    @Default(0) int trainingIntensity,
+    @Default(0) int distanceTraveled,
+    @Default(0) int precisionSteps,
+    @Default(0) int qualityRecovery,
+  }) = _WeeklyGoalsModel;
+
+  /// Creates a new instance of [WeeklyGoalsModel] from JSON data.
+  factory WeeklyGoalsModel.fromJson(Map<String, dynamic> json) =>
+      _$WeeklyGoalsModelFromJson(json);
 }
