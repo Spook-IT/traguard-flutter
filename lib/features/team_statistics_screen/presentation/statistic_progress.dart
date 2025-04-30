@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/common_linear_progress.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A widget that displays an statistic progress bar with
 /// a title and a statistic value.
@@ -44,6 +45,7 @@ class _StatisticProgressState extends State<StatisticProgress> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: Spaces.small,
       children: [
         Row(
           children: [
@@ -57,14 +59,7 @@ class _StatisticProgressState extends State<StatisticProgress> {
             ),
           ],
         ),
-        const SizedBox(height: 8),
-        LinearProgressIndicator(
-          value: widget.progressValue,
-          minHeight: 8,
-          borderRadius: BorderRadius.circular(8),
-          backgroundColor: context.colorScheme.outline.withValues(alpha: .3),
-          color: widget.color,
-        ),
+        CommonLinearProgress(value: widget.progressValue, color: widget.color),
       ],
     );
   }

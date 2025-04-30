@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/common_linear_progress.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/role_composition.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/weekly_goals.dart';
@@ -35,13 +36,8 @@ class StatisticsLoadedBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: Spaces.tiny,
             children: [
-              LinearProgressIndicator(
+              CommonLinearProgress(
                 value: playersAvailability.availabilityPercentage / 100,
-                minHeight: 8,
-                borderRadius: BorderRadius.circular(8),
-                backgroundColor: context.colorScheme.outline.withValues(
-                  alpha: .3,
-                ),
                 color: context.textTheme.labelLarge?.color,
               ),
               Text(
