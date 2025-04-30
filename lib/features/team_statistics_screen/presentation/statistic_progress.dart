@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/common_linear_progress.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
 /// A widget that displays an statistic progress bar with
@@ -53,9 +54,9 @@ class _StatisticProgressState extends State<StatisticProgress> {
             const Spacer(),
             Text(
               _formattedValue(widget.statisticValue),
-              style: Theme.of(
-                context,
-              ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+              style: context.textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
