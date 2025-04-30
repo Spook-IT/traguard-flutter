@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/base_statistic_card.dart';
 import 'package:traguard/shared/utils/extensions.dart' hide DurationExtensions;
 import 'package:traguard/shared/utils/sizes.dart';
 
@@ -66,16 +67,8 @@ class _StatisticCardState extends State<StatisticCard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-          padding: Paddings.largeAll,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: context.colorScheme.outline.withValues(alpha: .3),
-            ),
-          ),
-          child: Column(
+    return BaseStatisticCard(
+      child: Column(
             spacing: Spaces.small,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -119,15 +112,15 @@ class _StatisticCardState extends State<StatisticCard>
                 widget.bottomChild!,
               ],
             ],
-          ),
-        )
-        .animate(
-          delay: widget.animationDelay,
-          onComplete: (_) {
-            _controller.forward();
-          },
-        )
-        .fadeIn(duration: 350.ms, curve: Curves.easeIn)
-        .slideY(begin: 0.1, end: 0, duration: 350.ms);
+          )
+          .animate(
+            delay: widget.animationDelay,
+            onComplete: (_) {
+              _controller.forward();
+            },
+          )
+          .fadeIn(duration: 350.ms, curve: Curves.easeIn)
+          .slideY(begin: 0.1, end: 0, duration: 350.ms),
+    );
   }
 }
