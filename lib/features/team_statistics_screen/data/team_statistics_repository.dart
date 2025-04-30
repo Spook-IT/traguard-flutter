@@ -40,6 +40,12 @@ class MockTeamStatisticsRepository implements TeamStatisticsRepository {
         restPlayers: 1,
         availabilityPercentage: 67,
       ),
+      roleComposition: RoleCompositionModel(
+        forward: 1,
+        defender: 2,
+        midfielder: 2,
+        goalkeeper: 1,
+      ),
       averageTeamSpeed: 26.4,
       totalDistance: 48.8,
       performanceIndex: 8,
