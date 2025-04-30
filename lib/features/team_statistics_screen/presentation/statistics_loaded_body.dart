@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/role_composition.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/weekly_goals.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
@@ -78,6 +79,7 @@ class StatisticsLoadedBody extends StatelessWidget {
           animationDelay: 450.ms,
         ),
         RoleComposition(model: statistics.roleComposition),
+        WeeklyGoals(model: statistics.weeklyGoals),
       ],
     );
   }
