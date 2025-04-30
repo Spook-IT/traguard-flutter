@@ -23,6 +23,10 @@ abstract class TeamStatisticsModel with _$TeamStatisticsModel {
     /// This is represented by the [WeeklyGoalsModel] class.
     @Default(WeeklyGoalsModel()) WeeklyGoalsModel weeklyGoals,
 
+    /// The top athletes in the team.
+    /// This is represented by the [TopAthleteModel] class.
+    @Default([]) List<TopAthleteModel> topAthletes,
+
     /// The average speed of the team.
     /// This value is represented in `km/h`.
     @Default(0) double averageTeamSpeed,
@@ -103,4 +107,21 @@ abstract class WeeklyGoalsModel with _$WeeklyGoalsModel {
   /// Creates a new instance of [WeeklyGoalsModel] from JSON data.
   factory WeeklyGoalsModel.fromJson(Map<String, dynamic> json) =>
       _$WeeklyGoalsModelFromJson(json);
+}
+
+/// A model class representing the top athletes.
+/// This class contains information about the [name], [role], and [value]
+/// of the top athlete.
+@freezed
+abstract class TopAthleteModel with _$TopAthleteModel {
+  /// Creates a new instance of [TopAthleteModel].
+  const factory TopAthleteModel({
+    @Default('') String name,
+    @Default('') String role,
+    @Default(0) double value,
+  }) = _TopAthleteModel;
+
+  /// Creates a new instance of [TopAthleteModel] from JSON data.
+  factory TopAthleteModel.fromJson(Map<String, dynamic> json) =>
+      _$TopAthleteModelFromJson(json);
 }
