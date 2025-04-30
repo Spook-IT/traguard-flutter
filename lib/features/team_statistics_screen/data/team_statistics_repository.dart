@@ -46,6 +46,12 @@ class MockTeamStatisticsRepository implements TeamStatisticsRepository {
         midfielder: 2,
         goalkeeper: 1,
       ),
+      weeklyGoals: WeeklyGoalsModel(
+        trainingIntensity: 85,
+        distanceTraveled: 62,
+        precisionSteps: 78,
+        qualityRecovery: 90,
+      ),
       averageTeamSpeed: 26.4,
       totalDistance: 48.8,
       performanceIndex: 8,
