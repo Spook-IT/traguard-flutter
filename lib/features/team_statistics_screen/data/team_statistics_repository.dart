@@ -10,6 +10,7 @@ part 'team_statistics_repository.g.dart';
 /// A repository interface for fetching team statistics data.
 @RestApi(baseUrl: 'team/')
 abstract class TeamStatisticsRepository {
+  /// Creates an instance of [TeamStatisticsRepository].
   factory TeamStatisticsRepository(Dio dio, {String baseUrl}) =
       _TeamStatisticsRepository;
 

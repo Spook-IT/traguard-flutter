@@ -30,6 +30,8 @@ linter:
 # https://dart.dev/guides/language/analysis-options
 
 analyzer:
+  errors:
+    one_member_abstracts: ignore
   exclude:
     - '**.g.dart'
     - '**.freezed.dart'
