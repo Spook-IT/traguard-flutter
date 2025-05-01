@@ -99,6 +99,24 @@ abstract class AppLocalizations {
   /// **'Traguard'**
   String get appName;
 
+  /// No description provided for @genericError.
+  ///
+  /// In it, this message translates to:
+  /// **'Si è verificato un errore'**
+  String get genericError;
+
+  /// No description provided for @retryLater.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova più tardi'**
+  String get retryLater;
+
+  /// No description provided for @retry.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova'**
+  String get retry;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:

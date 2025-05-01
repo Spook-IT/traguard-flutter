@@ -12,6 +12,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get appName => 'Traguard';
 
   @override
+  String get genericError => 'Si è verificato un errore';
+
+  @override
+  String get retryLater => 'Riprova più tardi';
+
+  @override
+  String get retry => 'Riprova';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override
