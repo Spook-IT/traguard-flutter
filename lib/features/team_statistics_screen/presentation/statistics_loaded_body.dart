@@ -20,65 +20,68 @@ class StatisticsLoadedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final playersAvailability = statistics.playersAvailability;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: Spaces.large,
-      children: [
-        StatisticCard(
-          title: context.l10n.playersAvailability,
-          statisticValue: playersAvailability.totalPlayers.toDouble(),
-          precision: 0,
-          description: context.l10n.availabilitySpecs(
-            playersAvailability.activePlayers,
-            playersAvailability.injuredPlayers,
-            playersAvailability.restPlayers,
-          ),
-          bottomChild: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: Spaces.tiny,
-            children: [
-              CommonLinearProgress(
-                value: playersAvailability.availabilityPercentage / 100,
-                color: context.textTheme.labelLarge?.color,
-              ),
-              Text(
-                context.l10n.availabilityPerc(
-                  playersAvailability.availabilityPercentage,
+    return Padding(
+      padding: Paddings.mediumAll,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: Spaces.large,
+        children: [
+          StatisticCard(
+            title: context.l10n.playersAvailability,
+            statisticValue: playersAvailability.totalPlayers.toDouble(),
+            precision: 0,
+            description: context.l10n.availabilitySpecs(
+              playersAvailability.activePlayers,
+              playersAvailability.injuredPlayers,
+              playersAvailability.restPlayers,
+            ),
+            bottomChild: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: Spaces.tiny,
+              children: [
+                CommonLinearProgress(
+                  value: playersAvailability.availabilityPercentage / 100,
+                  color: context.textTheme.labelLarge?.color,
                 ),
-                style: context.textTheme.labelSmall?.copyWith(
-                  fontWeight: FontWeight.normal,
+                Text(
+                  context.l10n.availabilityPerc(
+                    playersAvailability.availabilityPercentage,
+                  ),
+                  style: context.textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        StatisticCard(
-          title: context.l10n.avarageTeamSpeed,
-          precision: 1,
-          statisticValue: statistics.averageTeamSpeed,
-          statisticUnit: 'km/h',
-          description: context.l10n.lastSession,
-          animationDelay: 150.ms,
-        ),
-        StatisticCard(
-          title: context.l10n.totalDistance,
-          precision: 1,
-          statisticValue: statistics.totalDistance,
-          statisticUnit: 'km',
-          description: context.l10n.lastSession,
-          animationDelay: 300.ms,
-        ),
-        StatisticCard(
-          title: context.l10n.performanceIndex,
-          precision: 1,
-          statisticValue: statistics.performanceIndex,
-          description: context.l10n.avarageTeamFromLastSession,
-          animationDelay: 450.ms,
-        ),
-        RoleComposition(model: statistics.roleComposition),
-        WeeklyGoals(model: statistics.weeklyGoals),
-        TopAthletes(athletes: statistics.topAthletes),
-      ],
+          StatisticCard(
+            title: context.l10n.avarageTeamSpeed,
+            precision: 1,
+            statisticValue: statistics.averageTeamSpeed,
+            statisticUnit: 'km/h',
+            description: context.l10n.lastSession,
+            animationDelay: 150.ms,
+          ),
+          StatisticCard(
+            title: context.l10n.totalDistance,
+            precision: 1,
+            statisticValue: statistics.totalDistance,
+            statisticUnit: 'km',
+            description: context.l10n.lastSession,
+            animationDelay: 300.ms,
+          ),
+          StatisticCard(
+            title: context.l10n.performanceIndex,
+            precision: 1,
+            statisticValue: statistics.performanceIndex,
+            description: context.l10n.avarageTeamFromLastSession,
+            animationDelay: 450.ms,
+          ),
+          RoleComposition(model: statistics.roleComposition),
+          WeeklyGoals(model: statistics.weeklyGoals),
+          TopAthletes(athletes: statistics.topAthletes),
+        ],
+      ),
     );
   }
 }

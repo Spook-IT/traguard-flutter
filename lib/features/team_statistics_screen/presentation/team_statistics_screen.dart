@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/team_statistics_screen/data/use_cases.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/loading_statistics.dart';
@@ -16,31 +15,19 @@ class TeamStatisticsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final statisticsAsync = ref.watch(fetchStatisticsProvider).unwrapPrevious();
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: RefreshIndicator.adaptive(
-          onRefresh: () async {
-            await HapticFeedback.mediumImpact();
-            ref.invalidate(fetchStatisticsProvider);
-          },
-          child: SingleChildScrollView(
-            clipBehavior: Clip.none,
-            padding: Paddings.mediumAll,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              spacing: Spaces.large,
-              children: [
-                const StatisticsHeader(),
-                switch (statisticsAsync) {
-                  AsyncData(:final value) => StatisticsLoadedBody(
-                    statistics: value,
-                  ),
-                  _ => const LoadingStatistics(),
-                },
-              ],
-            ),
+      body: CustomScrollView(
+        slivers: [
+          const StatisticsHeader(),
+          SliverToBoxAdapter(
+            child: switch (statisticsAsync) {
+              AsyncData(:final value) => StatisticsLoadedBody(
+                statistics: value,
+              ),
+              _ => const LoadingStatistics(),
+            },
           ),
-        ),
+          SliverPadding(padding: Paddings.largeAll),
+        ],
       ),
     );
   }

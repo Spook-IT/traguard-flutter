@@ -10,16 +10,19 @@ class LoadingStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BaseShimmer(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: Spaces.large,
-        children: [
-          ShimmerContainer(height: 50, width: double.infinity),
-          ShimmerContainer(height: 200, width: double.infinity),
-          ShimmerContainer(height: 200, width: double.infinity),
-        ],
+    return Padding(
+      padding: Paddings.mediumAll,
+      child: const BaseShimmer(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: Spaces.large,
+          children: [
+            ShimmerContainer(height: 50, width: double.infinity),
+            ShimmerContainer(height: 200, width: double.infinity),
+            ShimmerContainer(height: 200, width: double.infinity),
+          ],
+        ),
       ),
     );
   }
