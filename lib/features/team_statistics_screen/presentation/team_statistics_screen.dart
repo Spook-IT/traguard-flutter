@@ -4,7 +4,7 @@ import 'package:traguard/features/team_statistics_screen/data/use_cases.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/loading_statistics.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistics_header.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistics_loaded_body.dart';
-import 'package:traguard/shared/utils/sizes.dart';
+import 'package:traguard/shared/widgets/error_retry.dart';
 
 /// This widget is part of the team statistics feature of the application.
 class TeamStatisticsScreen extends ConsumerWidget {
@@ -18,15 +18,19 @@ class TeamStatisticsScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           const StatisticsHeader(),
-          SliverToBoxAdapter(
-            child: switch (statisticsAsync) {
-              AsyncData(:final value) => StatisticsLoadedBody(
-                statistics: value,
+          switch (statisticsAsync) {
+            AsyncData(:final value) => SliverToBoxAdapter(
+              child: StatisticsLoadedBody(statistics: value),
+            ),
+            AsyncError(:final error) => SliverFillRemaining(
+              hasScrollBody: false,
+              child: ErrorRetry(
+                error: error,
+                onRetry: () => ref.refresh(fetchStatisticsProvider),
               ),
-              _ => const LoadingStatistics(),
-            },
-          ),
-          SliverPadding(padding: Paddings.largeAll),
+            ),
+            _ => const SliverToBoxAdapter(child: LoadingStatistics()),
+          },
         ],
       ),
     );
