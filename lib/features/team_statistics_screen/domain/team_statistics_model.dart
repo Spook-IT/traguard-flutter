@@ -27,6 +27,10 @@ abstract class TeamStatisticsModel with _$TeamStatisticsModel {
     /// This is represented by the [TopAthleteModel] class.
     @Default([]) List<TopAthleteModel> topAthletes,
 
+    /// The session trends of the team.
+    /// It contains a list of [PlayerSessionTrendModel] for each player.
+    @Default([]) List<PlayerSessionTrendModel> playerTrends,
+
     /// The average speed of the team.
     /// This value is represented in `km/h`.
     @Default(0) double averageTeamSpeed,
@@ -124,4 +128,50 @@ abstract class TopAthleteModel with _$TopAthleteModel {
   /// Creates a new instance of [TopAthleteModel] from JSON data.
   factory TopAthleteModel.fromJson(Map<String, dynamic> json) =>
       _$TopAthleteModelFromJson(json);
+}
+
+/// A model class representing session trends.
+/// This class contains information about the [sessionId],
+/// [averageSpeed], [topSpeed], [distanceWalked], [firstHalfPercentagePresence],
+/// [secondHalfPercentagePresence], and [performanceIndex].
+///
+/// - The [sessionId] is a unique identifier for the session.
+/// - The [averageSpeed] and [topSpeed] are represented in `km/h`.
+/// - The [distanceWalked] is represented in `km`.
+/// - The [firstHalfPercentagePresence] and [secondHalfPercentagePresence]
+///   are represented in percentage.
+/// - The [performanceIndex] starts from `0` to `10`.
+@freezed
+abstract class SessionTrendModel with _$SessionTrendModel {
+  /// Creates a new instance of [SessionTrendModel].
+  const factory SessionTrendModel({
+    required String sessionId,
+    @Default(0) double averageSpeed,
+    @Default(0) double topSpeed,
+    @Default(0) double distanceWalked,
+    @Default(0) double firstHalfPercentagePresence,
+    @Default(0) double secondHalfPercentagePresence,
+    @Default(0) double performanceIndex,
+  }) = _SessionTrendModel;
+
+  /// Creates a new instance of [SessionTrendModel] from JSON data.
+  factory SessionTrendModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionTrendModelFromJson(json);
+}
+
+/// A model class representing player session trends.
+/// This class contains information about the [playerId], [playerName],
+/// and a list of [trends].
+@freezed
+abstract class PlayerSessionTrendModel with _$PlayerSessionTrendModel {
+  /// Creates a new instance of [PlayerSessionTrendModel].
+  const factory PlayerSessionTrendModel({
+    required String playerId,
+    required String playerName,
+    @Default([]) List<SessionTrendModel> trends,
+  }) = _PlayerSessionTrendModel;
+
+  /// Creates a new instance of [PlayerSessionTrendModel] from JSON data.
+  factory PlayerSessionTrendModel.fromJson(Map<String, dynamic> json) =>
+      _$PlayerSessionTrendModelFromJson(json);
 }
