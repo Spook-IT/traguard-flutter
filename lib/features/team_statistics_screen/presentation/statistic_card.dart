@@ -51,7 +51,7 @@ class _StatisticCardState extends State<StatisticCard>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: 3.seconds);
+    _controller = AnimationController(vsync: this, duration: 1.seconds);
 
     _animation = CurvedAnimation(
       parent: _controller,
