@@ -52,6 +52,21 @@ class MockTeamStatisticsRepository implements TeamStatisticsRepository {
         precisionSteps: 78,
         qualityRecovery: 90,
       ),
+      topAthletes: [
+        TopAthleteModel(name: 'Mario Rossi', role: 'Attaccante', value: 8.9),
+        TopAthleteModel(
+          name: 'Giuseppe Verdi',
+          role: 'Centrocampista',
+          value: 8.5,
+        ),
+        TopAthleteModel(name: 'Marco Neri', role: 'Portiere', value: 8),
+        TopAthleteModel(
+          name: 'Antonio Blu',
+          role: 'Centrocampista',
+          value: 7.8,
+        ),
+        TopAthleteModel(name: 'Luca Gialli', role: 'Difensore', value: 7.5),
+      ],
       averageTeamSpeed: 26.4,
       totalDistance: 48.8,
       performanceIndex: 8,
