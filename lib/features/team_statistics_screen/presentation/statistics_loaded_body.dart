@@ -3,6 +3,7 @@ import 'package:traguard/features/team_statistics_screen/domain/team_statistics_
 import 'package:traguard/features/team_statistics_screen/presentation/common_linear_progress.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/role_composition.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/top_athlets.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/weekly_goals.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
@@ -76,6 +77,7 @@ class StatisticsLoadedBody extends StatelessWidget {
         ),
         RoleComposition(model: statistics.roleComposition),
         WeeklyGoals(model: statistics.weeklyGoals),
+        TopAthletes(athletes: statistics.topAthletes),
       ],
     );
   }
