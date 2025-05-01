@@ -80,6 +80,7 @@ class StatisticsLoadedBody extends StatelessWidget {
           RoleComposition(model: statistics.roleComposition),
           WeeklyGoals(model: statistics.weeklyGoals),
           TopAthletes(athletes: statistics.topAthletes),
+          Spaces.large.sizedBoxHeight,
         ],
       ),
     );
