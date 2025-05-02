@@ -416,6 +416,36 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Top 5 per indice prestazionale'**
   String get topAthletesSubtitle;
+
+  /// No description provided for @weeklyGoals.
+  ///
+  /// In it, this message translates to:
+  /// **'Obiettivi Settimanali'**
+  String get weeklyGoals;
+
+  /// No description provided for @trainingIntensity.
+  ///
+  /// In it, this message translates to:
+  /// **'Intensità Allenamento'**
+  String get trainingIntensity;
+
+  /// No description provided for @distanceTraveled.
+  ///
+  /// In it, this message translates to:
+  /// **'Distanza Percorsa'**
+  String get distanceTraveled;
+
+  /// No description provided for @precisionSteps.
+  ///
+  /// In it, this message translates to:
+  /// **'Precisione passaggi'**
+  String get precisionSteps;
+
+  /// No description provided for @qualityRecovery.
+  ///
+  /// In it, this message translates to:
+  /// **'Qualità recupero'**
+  String get qualityRecovery;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

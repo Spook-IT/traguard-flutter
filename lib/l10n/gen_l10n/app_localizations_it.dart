@@ -223,4 +223,19 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get topAthletesSubtitle => 'Top 5 per indice prestazionale';
+
+  @override
+  String get weeklyGoals => 'Obiettivi Settimanali';
+
+  @override
+  String get trainingIntensity => 'Intensità Allenamento';
+
+  @override
+  String get distanceTraveled => 'Distanza Percorsa';
+
+  @override
+  String get precisionSteps => 'Precisione passaggi';
+
+  @override
+  String get qualityRecovery => 'Qualità recupero';
 }

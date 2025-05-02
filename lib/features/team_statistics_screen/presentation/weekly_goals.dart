@@ -16,18 +16,17 @@ class WeeklyGoals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     final barColor = context.textTheme.labelLarge?.color ?? Colors.black87;
     return ChartStatisticCard(
-      title: 'Obiettivi Settimanali',
-      description: 'Progresso verso gli obiettivi',
+      title: context.l10n.weeklyGoals,
+      description: context.l10n.progressTowardsGoals,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: Spaces.medium,
         children: [
           StatisticProgress(
             title: Text(
-              'Intensità allenamento',
+              context.l10n.trainingIntensity,
               style: context.textTheme.labelLarge,
             ),
             progressValue: model.trainingIntensity / 100,
@@ -37,7 +36,7 @@ class WeeklyGoals extends StatelessWidget {
           ),
           StatisticProgress(
             title: Text(
-              'Distanza percorsa',
+              context.l10n.distanceTraveled,
               style: context.textTheme.labelLarge,
             ),
             progressValue: model.distanceTraveled / 100,
@@ -47,7 +46,7 @@ class WeeklyGoals extends StatelessWidget {
           ),
           StatisticProgress(
             title: Text(
-              'Precisione passaggi',
+              context.l10n.precisionSteps,
               style: context.textTheme.labelLarge,
             ),
             progressValue: model.precisionSteps / 100,
@@ -57,7 +56,7 @@ class WeeklyGoals extends StatelessWidget {
           ),
           StatisticProgress(
             title: Text(
-              'Qualità recupero',
+              context.l10n.qualityRecovery,
               style: context.textTheme.labelLarge,
             ),
             progressValue: model.qualityRecovery / 100,

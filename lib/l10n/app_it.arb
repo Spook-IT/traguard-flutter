@@ -136,5 +136,10 @@
     "sessionTrendsSubtitle": "Confronto delle prestazioni degli atleti nelle diverse sessioni",
     "metric": "Metrica",
     "topAthletes": "Atleti Più Performanti",
-    "topAthletesSubtitle": "Top 5 per indice prestazionale"
+    "topAthletesSubtitle": "Top 5 per indice prestazionale",
+    "weeklyGoals": "Obiettivi Settimanali",
+    "trainingIntensity": "Intensità Allenamento",
+    "distanceTraveled": "Distanza Percorsa",
+    "precisionSteps": "Precisione passaggi",
+    "qualityRecovery": "Qualità recupero"
 }
