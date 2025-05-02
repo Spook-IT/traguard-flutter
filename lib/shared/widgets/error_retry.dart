@@ -23,6 +23,7 @@ class ErrorRetry extends StatelessWidget {
           frameRate: FrameRate.max,
           width: 80,
           height: 80,
+          repeat: false,
         ),
         Column(
           spacing: Spaces.small,
