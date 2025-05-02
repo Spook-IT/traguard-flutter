@@ -35,6 +35,15 @@ enum ChartFilter {
     secondHalfPercentagePresence => '%',
     _ => null,
   };
+
+  /// Returns the margin value for the filter.
+  /// This value is used to adjust the y-axis of the chart.
+  double get margin => switch (this) {
+    averageSpeed || topSpeed => 3,
+    firstHalfPercentagePresence => 5,
+    secondHalfPercentagePresence => 5,
+    performanceIndex || distanceWalked => 1,
+  };
 }
 
 /// A widget that displays the session trends of players.
@@ -53,8 +62,9 @@ class SessionTrends extends StatefulWidget {
 class _SessionTrendsState extends State<SessionTrends> {
   ChartFilter _selectedFilter = ChartFilter.averageSpeed;
 
-  late List<Color> _colors = _setupColors();
+  late List<({String playerId, Color color})> _colors = _setupColors();
   late List<String> _sessionNames = _setupSessionNames();
+  late List<PlayerSessionTrendModel> _playerTrends = widget.playerTrends;
 
   late double _minValue = double.maxFinite;
   late double _maxValue = double.minPositive;
@@ -78,13 +88,20 @@ class _SessionTrendsState extends State<SessionTrends> {
     };
   }
 
-  List<Color> _setupColors() {
+  List<({String playerId, Color color})> _setupColors() {
     final colors = [...Colors.primaries]..shuffle();
-    return List.generate(widget.playerTrends.length, (index) => colors[index]);
+    return List.generate(widget.playerTrends.length, (index) {
+      final player = widget.playerTrends[index];
+      return (playerId: player.playerId, color: colors[index % colors.length]);
+    });
+  }
+
+  Color _getColor(String playerId) {
+    return _colors.where((e) => e.playerId == playerId).first.color;
   }
 
   List<LineChartBarData> _setupLineBarsData() {
-    return widget.playerTrends.indexed.map((player) {
+    return _playerTrends.indexed.map((player) {
       final yValues = _getYValues(player.$2);
       final sorted = [...yValues]..sort();
       _minValue = math.min(sorted.first, _minValue);
@@ -95,7 +112,7 @@ class _SessionTrendsState extends State<SessionTrends> {
           yValues.length,
           (index) => FlSpot(index.toDouble(), yValues[index]),
         ),
-        color: _colors[player.$1],
+        color: _getColor(player.$2.playerId),
         isCurved: true,
         barWidth: 3,
         isStrokeCapRound: true,
@@ -104,11 +121,61 @@ class _SessionTrendsState extends State<SessionTrends> {
   }
 
   List<String> _setupSessionNames() {
-    return widget.playerTrends.isNotEmpty
-        ? widget.playerTrends.first.trends
-            .map((trend) => trend.sessionName)
-            .toList()
+    return _playerTrends.isNotEmpty
+        ? _playerTrends.first.trends.map((trend) => trend.sessionName).toList()
         : <String>[];
+  }
+
+  List<FilterChip> _buildPlayersFilterChip() {
+    return widget.playerTrends.indexed.map((player) {
+      final playerName = player.$2.playerName;
+      final playerColor = _getColor(player.$2.playerId);
+      final isSelected = _playerTrends.any((p) => p.playerName == playerName);
+      final textColor =
+          playerColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+
+      final playerColorLight = playerColor.withValues(alpha: 0.2);
+
+      return FilterChip(
+        avatar: CircleAvatar(
+          backgroundColor: isSelected ? playerColor : playerColorLight,
+          foregroundColor: isSelected ? textColor : playerColor,
+          child: Text(playerName[0].toUpperCase()),
+        ),
+        elevation: isSelected ? 3 : 0,
+        showCheckmark: false,
+        label: Text(playerName),
+        selected: isSelected,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        selectedColor: playerColor.withValues(alpha: 0.3),
+        backgroundColor: Colors.white,
+        onSelected: (value) {
+          if (_playerTrends.length == 1 && !value) {
+            return;
+          }
+          setState(() {
+            if (value) {
+              _playerTrends = [
+                ..._playerTrends,
+                widget.playerTrends[player.$1],
+              ];
+            } else {
+              _playerTrends =
+                  _playerTrends
+                      .where((p) => p.playerName != playerName)
+                      .toList();
+            }
+          });
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: isSelected ? playerColor : playerColorLight,
+            width: 1.5,
+          ),
+        ),
+      );
+    }).toList();
   }
 
   @override
@@ -116,9 +183,9 @@ class _SessionTrendsState extends State<SessionTrends> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.playerTrends != widget.playerTrends) {
+      _playerTrends = widget.playerTrends;
       _colors = _setupColors();
       _sessionNames = _setupSessionNames();
-      _minValue = double.maxFinite;
     }
   }
 
@@ -168,14 +235,25 @@ class _SessionTrendsState extends State<SessionTrends> {
                     .toList(),
           ),
           Spaces.large.sizedBoxHeight,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Atleti',
+              style: context.textTheme.labelLarge,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Spaces.small.sizedBoxHeight,
+          Wrap(spacing: 8, runSpacing: -5, children: _buildPlayersFilterChip()),
+          Spaces.large.sizedBoxHeight,
           AspectRatio(
             aspectRatio: 3 / 2,
             child: LineChart(
               duration: 500.ms,
               curve: Curves.decelerate,
               LineChartData(
-                minY: _minValue - 3,
-                maxY: _maxValue + 3,
+                minY: _minValue - _selectedFilter.margin,
+                maxY: _maxValue + _selectedFilter.margin,
                 baselineY: 0,
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
@@ -185,8 +263,7 @@ class _SessionTrendsState extends State<SessionTrends> {
                     tooltipBorder: const BorderSide(width: 0.5),
                     getTooltipItems: (touchedSpots) {
                       return touchedSpots.indexed.map((touchedSpot) {
-                        final player =
-                            widget.playerTrends[touchedSpot.$2.barIndex];
+                        final player = _playerTrends[touchedSpot.$2.barIndex];
                         final value = touchedSpot.$2.y;
 
                         final hasUnit = _selectedFilter.unit != null;
@@ -194,7 +271,7 @@ class _SessionTrendsState extends State<SessionTrends> {
                         return LineTooltipItem(
                           player.playerName,
                           TextStyle(
-                            color: _colors[touchedSpot.$1],
+                            color: _getColor(player.playerId),
                             fontSize: 10,
                           ),
                           children: [
@@ -202,7 +279,7 @@ class _SessionTrendsState extends State<SessionTrends> {
                               text: '\n${value.toFormattedPrecision(2)}',
                               style: context.textTheme.bodySmall?.copyWith(
                                 fontSize: 12,
-                                color: _colors[touchedSpot.$1],
+                                color: _getColor(player.playerId),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -211,7 +288,7 @@ class _SessionTrendsState extends State<SessionTrends> {
                                 text: '${_selectedFilter.unit}',
                                 style: context.textTheme.bodySmall?.copyWith(
                                   fontSize: 12,
-                                  color: _colors[touchedSpot.$1],
+                                  color: _getColor(player.playerId),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -272,7 +349,6 @@ class _SessionTrendsState extends State<SessionTrends> {
                     ),
                   ),
                 ),
-
                 lineBarsData: lineBarsData,
               ),
             ),
