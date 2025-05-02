@@ -41,6 +41,7 @@ class Auth extends _$Auth {
         id: '123',
         name: 'John',
         surname: 'Doe',
+        role: 'Coach',
         email: email,
       );
 
