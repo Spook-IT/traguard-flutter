@@ -29,6 +29,54 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String forwards(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Attaccanti',
+      one: 'Attaccante',
+      zero: 'Attaccanti',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String midfielders(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Centrocampisti',
+      one: 'Centrocampista',
+      zero: 'Centrocampisti',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String defenders(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Difensori',
+      one: 'Difensore',
+      zero: 'Difensori',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String goalkeepers(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Portieri',
+      one: 'Portiere',
+      zero: 'Portieri',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override
@@ -136,4 +184,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get secondHalfPercentagePresence => 'Presenza dopo il centro campo';
+
+  @override
+  String get roleComposition => 'Composizione Ruoli';
+
+  @override
+  String get progressTowardsGoals => 'Progresso verso gli obiettivi';
 }

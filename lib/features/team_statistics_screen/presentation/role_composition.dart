@@ -15,10 +15,9 @@ class RoleComposition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     return ChartStatisticCard(
-      title: 'Composizione Ruoli',
-      description: 'Progresso verso gli obiettivi',
+      title: context.l10n.roleComposition,
+      description: context.l10n.progressTowardsGoals,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: Spaces.medium,
@@ -28,7 +27,7 @@ class RoleComposition extends StatelessWidget {
               children: [
                 const Icon(Icons.circle, color: Colors.purple, size: 16),
                 Spaces.tiny.sizedBoxWidth,
-                const Text('Attaccanti'),
+                Text(context.l10n.forwards(2)),
               ],
             ),
             progressValue: model.forward / model.totalPlayers,
@@ -40,7 +39,7 @@ class RoleComposition extends StatelessWidget {
               children: [
                 const Icon(Icons.circle, color: Colors.blue, size: 16),
                 Spaces.tiny.sizedBoxWidth,
-                const Text('Centrocampisti'),
+                Text(context.l10n.midfielders(2)),
               ],
             ),
             progressValue: model.midfielder / model.totalPlayers,
@@ -52,7 +51,7 @@ class RoleComposition extends StatelessWidget {
               children: [
                 const Icon(Icons.circle, color: Colors.green, size: 16),
                 Spaces.tiny.sizedBoxWidth,
-                const Text('Difensori'),
+                Text(context.l10n.defenders(2)),
               ],
             ),
             progressValue: model.defender / model.totalPlayers,
@@ -64,7 +63,7 @@ class RoleComposition extends StatelessWidget {
               children: [
                 const Icon(Icons.circle, color: Colors.orangeAccent, size: 16),
                 Spaces.tiny.sizedBoxWidth,
-                const Text('Portieri'),
+                Text(context.l10n.goalkeepers(2)),
               ],
             ),
             progressValue: model.goalkeeper / model.totalPlayers,

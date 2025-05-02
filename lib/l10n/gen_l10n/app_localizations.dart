@@ -123,6 +123,30 @@ abstract class AppLocalizations {
   /// **'{date}'**
   String longDate(DateTime date);
 
+  /// No description provided for @forwards.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Attaccanti} =1{Attaccante} other{Attaccanti}}'**
+  String forwards(num count);
+
+  /// No description provided for @midfielders.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Centrocampisti} =1{Centrocampista} other{Centrocampisti}}'**
+  String midfielders(num count);
+
+  /// No description provided for @defenders.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Difensori} =1{Difensore} other{Difensori}}'**
+  String defenders(num count);
+
+  /// No description provided for @goalkeepers.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Portieri} =1{Portiere} other{Portieri}}'**
+  String goalkeepers(num count);
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
@@ -332,6 +356,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Presenza dopo il centro campo'**
   String get secondHalfPercentagePresence;
+
+  /// No description provided for @roleComposition.
+  ///
+  /// In it, this message translates to:
+  /// **'Composizione Ruoli'**
+  String get roleComposition;
+
+  /// No description provided for @progressTowardsGoals.
+  ///
+  /// In it, this message translates to:
+  /// **'Progresso verso gli obiettivi'**
+  String get progressTowardsGoals;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
