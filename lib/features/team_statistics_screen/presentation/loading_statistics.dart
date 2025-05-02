@@ -18,9 +18,9 @@ class LoadingStatistics extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: Spaces.large,
           children: [
-            ShimmerContainer(height: 50, width: double.infinity),
             ShimmerContainer(height: 200, width: double.infinity),
-            ShimmerContainer(height: 200, width: double.infinity),
+            ShimmerContainer(height: 130, width: double.infinity),
+            ShimmerContainer(height: 130, width: double.infinity),
           ],
         ),
       ),
