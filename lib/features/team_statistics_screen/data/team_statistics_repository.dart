@@ -20,8 +20,8 @@ abstract class TeamStatisticsRepository {
   Future<TeamSessionListModel> getTeamSessions();
 
   /// Fetches the team statistics.
-  @GET('/statistics')
-  Future<TeamStatisticsModel> getTeamStatistics();
+  @GET('/statistics/{sessionId}')
+  Future<TeamStatisticsModel> getTeamStatistics(@Path() String sessionId);
 }
 
 /// A Riverpod provider for the [TeamStatisticsRepository].
@@ -67,7 +67,7 @@ class MockTeamStatisticsRepository implements TeamStatisticsRepository {
   }
 
   @override
-  Future<TeamStatisticsModel> getTeamStatistics() {
+  Future<TeamStatisticsModel> getTeamStatistics(String sessionId) {
     const model = TeamStatisticsModel(
       playersAvailability: PlayersAvailabilityModel(
         activePlayers: 4,
