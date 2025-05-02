@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/common_linear_progress.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/role_composition.dart';
+import 'package:traguard/features/team_statistics_screen/presentation/session_trends.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/statistic_card.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/top_athlets.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/weekly_goals.dart';
@@ -80,6 +81,7 @@ class StatisticsLoadedBody extends StatelessWidget {
           RoleComposition(model: statistics.roleComposition),
           WeeklyGoals(model: statistics.weeklyGoals),
           TopAthletes(athletes: statistics.topAthletes),
+          SessionTrends(playerTrends: statistics.playerTrends),
           Spaces.large.sizedBoxHeight,
         ],
       ),
