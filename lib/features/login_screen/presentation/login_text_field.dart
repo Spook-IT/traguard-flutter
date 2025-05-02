@@ -11,6 +11,7 @@ class LoginTextField extends StatefulWidget {
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
+    this.enabled = true,
     super.key,
   });
 
@@ -32,6 +33,9 @@ class LoginTextField extends StatefulWidget {
   /// The action to be performed when the text field is submitted.
   final TextInputAction textInputAction;
 
+  /// Indicates whether the text field is enabled.
+  final bool enabled;
+
   @override
   State<LoginTextField> createState() => _LoginTextFieldState();
 }
@@ -49,6 +53,7 @@ class _LoginTextFieldState extends State<LoginTextField> {
         },
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
+        enabled: widget.enabled,
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: const TextStyle(color: Colors.black),
