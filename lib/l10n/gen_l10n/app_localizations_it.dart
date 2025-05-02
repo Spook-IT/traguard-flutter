@@ -100,7 +100,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get avarageTeamSpeed => 'Velocità Media Squadra';
+  String get averageTeamSpeed => 'Velocità Media Squadra';
 
   @override
   String get lastSession => 'Ultima sessione';
@@ -112,5 +112,20 @@ class AppLocalizationsIt extends AppLocalizations {
   String get performanceIndex => 'Indice Prestazione';
 
   @override
-  String get avarageTeamFromLastSession => 'Media di squadra per ultima sessione';
+  String get averageTeamFromLastSession => 'Media di squadra per ultima sessione';
+
+  @override
+  String get averageSpeed => 'Velocità Media';
+
+  @override
+  String get topSpeed => 'Velocità Massima';
+
+  @override
+  String get distanceWalked => 'Distanza Percorsa';
+
+  @override
+  String get firstHalfPercentagePresence => 'Presenza prima del centro campo';
+
+  @override
+  String get secondHalfPercentagePresence => 'Presenza dopo il centro campo';
 }

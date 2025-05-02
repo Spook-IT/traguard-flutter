@@ -69,9 +69,14 @@
             }
         }
     },
-    "avarageTeamSpeed": "Velocità Media Squadra",
+    "averageTeamSpeed": "Velocità Media Squadra",
     "lastSession": "Ultima sessione",
     "totalDistance": "Distanza Totale",
     "performanceIndex": "Indice Prestazione",
-    "avarageTeamFromLastSession": "Media di squadra per ultima sessione"
+    "averageTeamFromLastSession": "Media di squadra per ultima sessione",
+    "averageSpeed": "Velocità Media",
+    "topSpeed": "Velocità Massima",
+    "distanceWalked": "Distanza Percorsa",
+    "firstHalfPercentagePresence": "Presenza prima del centro campo",
+    "secondHalfPercentagePresence": "Presenza dopo il centro campo"
 }

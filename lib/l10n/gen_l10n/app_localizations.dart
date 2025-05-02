@@ -267,11 +267,11 @@ abstract class AppLocalizations {
   /// **'{nPerc}% disponibili'**
   String availabilityPerc(int nPerc);
 
-  /// No description provided for @avarageTeamSpeed.
+  /// No description provided for @averageTeamSpeed.
   ///
   /// In it, this message translates to:
   /// **'Velocità Media Squadra'**
-  String get avarageTeamSpeed;
+  String get averageTeamSpeed;
 
   /// No description provided for @lastSession.
   ///
@@ -291,11 +291,41 @@ abstract class AppLocalizations {
   /// **'Indice Prestazione'**
   String get performanceIndex;
 
-  /// No description provided for @avarageTeamFromLastSession.
+  /// No description provided for @averageTeamFromLastSession.
   ///
   /// In it, this message translates to:
   /// **'Media di squadra per ultima sessione'**
-  String get avarageTeamFromLastSession;
+  String get averageTeamFromLastSession;
+
+  /// No description provided for @averageSpeed.
+  ///
+  /// In it, this message translates to:
+  /// **'Velocità Media'**
+  String get averageSpeed;
+
+  /// No description provided for @topSpeed.
+  ///
+  /// In it, this message translates to:
+  /// **'Velocità Massima'**
+  String get topSpeed;
+
+  /// No description provided for @distanceWalked.
+  ///
+  /// In it, this message translates to:
+  /// **'Distanza Percorsa'**
+  String get distanceWalked;
+
+  /// No description provided for @firstHalfPercentagePresence.
+  ///
+  /// In it, this message translates to:
+  /// **'Presenza prima del centro campo'**
+  String get firstHalfPercentagePresence;
+
+  /// No description provided for @secondHalfPercentagePresence.
+  ///
+  /// In it, this message translates to:
+  /// **'Presenza dopo il centro campo'**
+  String get secondHalfPercentagePresence;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
