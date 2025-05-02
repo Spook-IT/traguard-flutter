@@ -8,6 +8,15 @@
     "genericError": "Si è verificato un errore",
     "retryLater": "Riprova più tardi",
     "retry": "Riprova",
+    "longDate": "{date}",
+    "@longDate": {
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "yMMMMd"
+            }
+        }
+    },
 
     "@_LOGIN": {},
 

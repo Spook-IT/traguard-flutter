@@ -117,6 +117,12 @@ abstract class AppLocalizations {
   /// **'Riprova'**
   String get retry;
 
+  /// No description provided for @longDate.
+  ///
+  /// In it, this message translates to:
+  /// **'{date}'**
+  String longDate(DateTime date);
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
