@@ -22,6 +22,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   late final _emailController = TextEditingController();
   late final _passwordController = TextEditingController();
 
+  var _isLoading = false;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -41,6 +43,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
 
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
       await ref
           .read(authProvider.notifier)
@@ -48,6 +54,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     } on Exception catch (e) {
       logger.e('Login failed', error: e);
       return;
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -87,6 +99,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       LoginTextField(
                         label: context.l10n.email,
                         controller: _emailController,
+                        enabled: !_isLoading,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -104,6 +117,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       LoginTextField(
                         label: context.l10n.password,
                         controller: _passwordController,
+                        enabled: !_isLoading,
                         keyboardType: TextInputType.visiblePassword,
                         textInputAction: TextInputAction.done,
                         isPassword: true,
@@ -116,12 +130,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                       ),
                       Spaces.xLarge.sizedBoxHeight,
-                      LoginButton(onPressed: _tryLogin),
+                      LoginButton(onPressed: _tryLogin, isLoading: _isLoading),
                       Spaces.tiny.sizedBoxHeight,
                       SizedBox(
                         width: double.infinity,
                         child: TextButton(
-                          onPressed: _goToRegister,
+                          onPressed: _isLoading ? null : _goToRegister,
                           child: Text(context.l10n.register),
                         ),
                       ),
