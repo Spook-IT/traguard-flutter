@@ -56,7 +56,7 @@ class StatisticsLoadedBody extends StatelessWidget {
             ),
           ),
           StatisticCard(
-            title: context.l10n.avarageTeamSpeed,
+            title: context.l10n.averageTeamSpeed,
             precision: 1,
             statisticValue: statistics.averageTeamSpeed,
             statisticUnit: 'km/h',
@@ -75,7 +75,7 @@ class StatisticsLoadedBody extends StatelessWidget {
             title: context.l10n.performanceIndex,
             precision: 1,
             statisticValue: statistics.performanceIndex,
-            description: context.l10n.avarageTeamFromLastSession,
+            description: context.l10n.averageTeamFromLastSession,
             animationDelay: 450.ms,
           ),
           RoleComposition(model: statistics.roleComposition),

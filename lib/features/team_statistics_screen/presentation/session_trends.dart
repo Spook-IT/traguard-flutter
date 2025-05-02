@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/chart_statistic_card.dart';
+import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
@@ -44,6 +45,19 @@ enum ChartFilter {
     secondHalfPercentagePresence => 5,
     performanceIndex || distanceWalked => 1,
   };
+
+  String getLabel(BuildContext context) {
+    return switch (this) {
+      averageSpeed => '${context.l10n.averageSpeed} (${unit?.trim()})',
+      topSpeed => '${context.l10n.topSpeed} (${unit?.trim()})',
+      distanceWalked => '${context.l10n.distanceWalked} (${unit?.trim()})',
+      firstHalfPercentagePresence =>
+        '${context.l10n.firstHalfPercentagePresence} (${unit?.trim()})',
+      secondHalfPercentagePresence =>
+        '${context.l10n.secondHalfPercentagePresence} (${unit?.trim()})',
+      performanceIndex => context.l10n.performanceIndex,
+    };
+  }
 }
 
 /// A widget that displays the session trends of players.
@@ -89,10 +103,12 @@ class _SessionTrendsState extends State<SessionTrends> {
   }
 
   List<({String playerId, Color color})> _setupColors() {
-    final colors = [...Colors.primaries]..shuffle();
     return List.generate(widget.playerTrends.length, (index) {
       final player = widget.playerTrends[index];
-      return (playerId: player.playerId, color: colors[index % colors.length]);
+      return (
+        playerId: player.playerId,
+        color: chartColors[index % chartColors.length],
+      );
     });
   }
 
@@ -231,7 +247,12 @@ class _SessionTrendsState extends State<SessionTrends> {
             },
             dropdownMenuEntries:
                 ChartFilter.values
-                    .map((e) => DropdownMenuEntry(value: e, label: e.name))
+                    .map(
+                      (e) => DropdownMenuEntry(
+                        value: e,
+                        label: e.getLabel(context),
+                      ),
+                    )
                     .toList(),
           ),
           Spaces.large.sizedBoxHeight,
