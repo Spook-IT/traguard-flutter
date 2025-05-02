@@ -4,10 +4,15 @@ import 'package:traguard/shared/utils/assets.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
+/// A widget that displays an error message and a retry button.
 class ErrorRetry extends StatelessWidget {
+  /// Creates a new instance of [ErrorRetry].
   const ErrorRetry({super.key, this.error, this.onRetry});
 
+  /// The error message to display.
   final Object? error;
+
+  /// The callback function to call when the retry button is pressed.
   final VoidCallback? onRetry;
 
   @override

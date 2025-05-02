@@ -15,7 +15,6 @@ Future<TeamStatisticsModel> fetchStatistics(
   Ref ref, {
   required String sessionId,
 }) {
-  // TODO(dariowskii): use real teamId
   return ref
       .read(teamStatisticsRepositoryProvider)
       .getTeamStatistics(sessionId);

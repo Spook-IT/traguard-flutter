@@ -6,7 +6,10 @@ import 'package:traguard/shared/utils/sizes.dart';
 import 'package:traguard/shared/widgets/base_shimmer.dart';
 import 'package:traguard/shared/widgets/common_menu.dart';
 
+/// This widget is part of the team statistics feature of the application.
+/// It provides a filter for selecting sessions.
 class SessionFilterWidget extends ConsumerWidget {
+  /// Creates a new instance of [SessionFilterWidget].
   const SessionFilterWidget({super.key});
 
   @override

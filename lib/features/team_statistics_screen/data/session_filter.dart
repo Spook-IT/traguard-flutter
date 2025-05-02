@@ -7,6 +7,9 @@ import 'package:traguard/features/team_statistics_screen/domain/team_session.dar
 part 'session_filter.freezed.dart';
 part 'session_filter.g.dart';
 
+/// This class represents the state of the session filter.
+/// It can be in one of three states: [SessionFilterData], [SessionFilterEmpty],
+/// or [SessionFilterLoading].
 @freezed
 sealed class SessionFilterState with _$SessionFilterState {
   /// Creates a new instance of [SessionFilterState].
