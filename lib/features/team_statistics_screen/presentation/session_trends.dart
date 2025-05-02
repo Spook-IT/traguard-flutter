@@ -46,6 +46,7 @@ enum ChartFilter {
     performanceIndex || distanceWalked => 1,
   };
 
+  /// Returns the label for the filter based on the current context.
   String getLabel(BuildContext context) {
     return switch (this) {
       averageSpeed => '${context.l10n.averageSpeed} (${unit?.trim()})',
