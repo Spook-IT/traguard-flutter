@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traguard/features/dashboard_screen/presentation/logout_button.dart';
+import 'package:traguard/features/dashboard_screen/presentation/user_drawer_section.dart';
 import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
@@ -37,22 +38,29 @@ class DashboardScreen extends StatelessWidget {
                 color: context.colorScheme.primaryFixed,
               ),
               child: Column(
-                spacing: Spaces.small,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    context.l10n.appName,
-                    style: context.textTheme.displaySmall?.copyWith(
-                      color: context.colorScheme.onPrimaryFixed,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Column(
+                    spacing: Spaces.small,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        context.l10n.appName,
+                        style: context.textTheme.displaySmall?.copyWith(
+                          color: context.colorScheme.onPrimaryFixed,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'The tracking app for soccer players',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onPrimaryFixed,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'The tracking app for soccer players',
-                    style: context.textTheme.bodyLarge?.copyWith(
-                      color: context.colorScheme.onPrimaryFixed,
-                    ),
-                  ),
+                  const UserDrawerSection(),
                 ],
               ),
             ),
