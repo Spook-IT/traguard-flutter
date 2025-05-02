@@ -37,7 +37,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
     if (email.isEmpty || password.isEmpty) {
-      // TODO(dariowskii): Show error message
       logger.e('Email or password is empty');
       return;
     }
