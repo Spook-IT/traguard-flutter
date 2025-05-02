@@ -26,7 +26,7 @@ class UserDrawerSection extends ConsumerWidget {
       }),
     );
 
-    final name = user.$1 ?? '';
+    final name = user.$1 ?? 'User';
     final role = user.$2 ?? '';
 
     final letters =
