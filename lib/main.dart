@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/l10n/gen_l10n/app_localizations.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
@@ -7,8 +8,11 @@ import 'package:traguard/shared/router/router.dart';
 import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const ProviderScope(child: TraguarApp()));
 }
 
