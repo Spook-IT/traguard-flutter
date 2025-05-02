@@ -146,6 +146,7 @@ abstract class SessionTrendModel with _$SessionTrendModel {
   /// Creates a new instance of [SessionTrendModel].
   const factory SessionTrendModel({
     required String sessionId,
+    required String sessionName,
     @Default(0) double averageSpeed,
     @Default(0) double topSpeed,
     @Default(0) double distanceWalked,
