@@ -14,10 +14,9 @@ class TopAthletes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     return ChartStatisticCard(
-      title: 'Atleti Più Performanti',
-      description: 'Top 5 per indice prestazionale',
+      title: context.l10n.topAthletes,
+      description: context.l10n.topAthletesSubtitle,
       child: ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -33,7 +32,7 @@ class TopAthletes extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    'Atleta',
+                    context.l10n.athletes(1),
                     style: context.textTheme.labelLarge?.copyWith(
                       color: Colors.grey,
                     ),
@@ -41,7 +40,7 @@ class TopAthletes extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Ruolo',
+                    context.l10n.role,
                     style: context.textTheme.labelLarge?.copyWith(
                       color: Colors.grey,
                     ),
@@ -49,7 +48,7 @@ class TopAthletes extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Indice',
+                    context.l10n.index,
                     style: context.textTheme.labelLarge?.copyWith(
                       color: Colors.grey,
                     ),

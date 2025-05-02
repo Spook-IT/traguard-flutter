@@ -241,7 +241,7 @@ class _SessionTrendsState extends State<SessionTrends> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              context.l10n.athletes,
+              context.l10n.athletes(2),
               style: context.textTheme.labelLarge,
               textAlign: TextAlign.start,
             ),

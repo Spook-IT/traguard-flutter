@@ -49,6 +49,16 @@
             }
         }
     },
+    "athletes": "{count, plural, =0{Atleti} =1{Atleta} other{Atleti}}",
+    "@athletes": {
+        "placeholders": {
+            "count": {
+                "type": "num"
+            }
+        }
+    },
+    "role": "Ruolo",
+    "index": "Indice",
 
     "@_LOGIN": {},
 
@@ -125,5 +135,6 @@
     "sessionTrends": "Trend Sessioni",
     "sessionTrendsSubtitle": "Confronto delle prestazioni degli atleti nelle diverse sessioni",
     "metric": "Metrica",
-    "athletes": "Atleti"
+    "topAthletes": "Atleti Più Performanti",
+    "topAthletesSubtitle": "Top 5 per indice prestazionale"
 }

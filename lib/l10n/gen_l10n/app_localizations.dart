@@ -147,6 +147,24 @@ abstract class AppLocalizations {
   /// **'{count, plural, =0{Portieri} =1{Portiere} other{Portieri}}'**
   String goalkeepers(num count);
 
+  /// No description provided for @athletes.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Atleti} =1{Atleta} other{Atleti}}'**
+  String athletes(num count);
+
+  /// No description provided for @role.
+  ///
+  /// In it, this message translates to:
+  /// **'Ruolo'**
+  String get role;
+
+  /// No description provided for @index.
+  ///
+  /// In it, this message translates to:
+  /// **'Indice'**
+  String get index;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
@@ -387,11 +405,17 @@ abstract class AppLocalizations {
   /// **'Metrica'**
   String get metric;
 
-  /// No description provided for @athletes.
+  /// No description provided for @topAthletes.
   ///
   /// In it, this message translates to:
-  /// **'Atleti'**
-  String get athletes;
+  /// **'Atleti Più Performanti'**
+  String get topAthletes;
+
+  /// No description provided for @topAthletesSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Top 5 per indice prestazionale'**
+  String get topAthletesSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

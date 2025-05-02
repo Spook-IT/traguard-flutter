@@ -77,6 +77,24 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String athletes(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Atleti',
+      one: 'Atleta',
+      zero: 'Atleti',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get role => 'Ruolo';
+
+  @override
+  String get index => 'Indice';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override
@@ -201,5 +219,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get metric => 'Metrica';
 
   @override
-  String get athletes => 'Atleti';
+  String get topAthletes => 'Atleti Più Performanti';
+
+  @override
+  String get topAthletesSubtitle => 'Top 5 per indice prestazionale';
 }
