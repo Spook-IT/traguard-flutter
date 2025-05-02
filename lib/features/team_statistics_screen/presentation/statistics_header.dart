@@ -56,7 +56,10 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
             Align(
               alignment: Alignment(titleX, titleY),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    factor > 0.9
+                        ? CrossAxisAlignment.center
+                        : CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
@@ -67,15 +70,13 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
                       fontSize: 24 - 24 * (factor * 0.15),
                     ),
                   ),
-                  if (factor < 0.3) ...[
-                    Text(
-                      context.l10n.teamStatisticsSubtitle,
-                      style: context.textTheme.labelLarge?.copyWith(
-                        color: context.textTheme.titleLarge?.color,
-                        fontSize: 16 - 16 * (factor * 0.35),
-                      ),
+                  Text(
+                    context.l10n.teamStatisticsSubtitle,
+                    style: context.textTheme.labelLarge?.copyWith(
+                      color: context.textTheme.titleLarge?.color,
+                      fontSize: 16 - 16 * ((factor * factor) * 0.35),
                     ),
-                  ],
+                  ),
                 ],
               ),
             ),
