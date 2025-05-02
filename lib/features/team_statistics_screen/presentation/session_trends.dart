@@ -209,17 +209,14 @@ class _SessionTrendsState extends State<SessionTrends> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
-
     _minValue = double.maxFinite;
     _maxValue = double.minPositive;
 
     final lineBarsData = _setupLineBarsData();
 
     return ChartStatisticCard(
-      title: 'Trend Sessioni',
-      description:
-          'Confronto delle prestazioni degli atleti nelle diverse sessioni',
+      title: context.l10n.sessionTrends,
+      description: context.l10n.sessionTrendsSubtitle,
       child: Column(
         children: [
           CommonMenu(
@@ -238,13 +235,13 @@ class _SessionTrendsState extends State<SessionTrends> {
                       ),
                     )
                     .toList(),
-            label: const Text('Metrica'),
+            label: Text(context.l10n.metric),
           ),
           Spaces.large.sizedBoxHeight,
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Atleti',
+              context.l10n.athletes,
               style: context.textTheme.labelLarge,
               textAlign: TextAlign.start,
             ),

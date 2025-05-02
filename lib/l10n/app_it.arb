@@ -121,5 +121,9 @@
     "firstHalfPercentagePresence": "Presenza prima del centro campo",
     "secondHalfPercentagePresence": "Presenza dopo il centro campo",
     "roleComposition": "Composizione Ruoli",
-    "progressTowardsGoals": "Progresso verso gli obiettivi"
+    "progressTowardsGoals": "Progresso verso gli obiettivi",
+    "sessionTrends": "Trend Sessioni",
+    "sessionTrendsSubtitle": "Confronto delle prestazioni degli atleti nelle diverse sessioni",
+    "metric": "Metrica",
+    "athletes": "Atleti"
 }

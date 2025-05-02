@@ -368,6 +368,30 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Progresso verso gli obiettivi'**
   String get progressTowardsGoals;
+
+  /// No description provided for @sessionTrends.
+  ///
+  /// In it, this message translates to:
+  /// **'Trend Sessioni'**
+  String get sessionTrends;
+
+  /// No description provided for @sessionTrendsSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Confronto delle prestazioni degli atleti nelle diverse sessioni'**
+  String get sessionTrendsSubtitle;
+
+  /// No description provided for @metric.
+  ///
+  /// In it, this message translates to:
+  /// **'Metrica'**
+  String get metric;
+
+  /// No description provided for @athletes.
+  ///
+  /// In it, this message translates to:
+  /// **'Atleti'**
+  String get athletes;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -190,4 +190,16 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get progressTowardsGoals => 'Progresso verso gli obiettivi';
+
+  @override
+  String get sessionTrends => 'Trend Sessioni';
+
+  @override
+  String get sessionTrendsSubtitle => 'Confronto delle prestazioni degli atleti nelle diverse sessioni';
+
+  @override
+  String get metric => 'Metrica';
+
+  @override
+  String get athletes => 'Atleti';
 }
