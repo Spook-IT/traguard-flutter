@@ -7,6 +7,7 @@ import 'package:traguard/features/team_statistics_screen/presentation/chart_stat
 import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
+import 'package:traguard/shared/widgets/common_menu.dart';
 
 /// This enum represents the different filters available for the chart.
 enum ChartFilter {
@@ -221,26 +222,8 @@ class _SessionTrendsState extends State<SessionTrends> {
           'Confronto delle prestazioni degli atleti nelle diverse sessioni',
       child: Column(
         children: [
-          DropdownMenu(
-            menuStyle: const MenuStyle(
-              backgroundColor: WidgetStatePropertyAll(Colors.white),
-              shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                ),
-              ),
-              maximumSize: WidgetStatePropertyAll(Size.fromHeight(200)),
-            ),
-            inputDecorationTheme: const InputDecorationTheme(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            ),
-            label: const Text('Metrica'),
-            enableSearch: false,
+          CommonMenu(
             initialSelection: _selectedFilter,
-            expandedInsets: Paddings.largeTop,
             onSelected: (value) {
               setState(() {
                 _selectedFilter = value ?? ChartFilter.averageSpeed;
@@ -255,6 +238,7 @@ class _SessionTrendsState extends State<SessionTrends> {
                       ),
                     )
                     .toList(),
+            label: const Text('Metrica'),
           ),
           Spaces.large.sizedBoxHeight,
           Align(
