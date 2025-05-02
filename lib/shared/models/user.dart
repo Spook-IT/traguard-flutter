@@ -22,6 +22,7 @@ sealed class User with _$User {
     String? name,
     String? surname,
     String? email,
+    String? role,
   }) = SignedIn;
 
   const factory User.signedOut() = SignedOut;
@@ -32,6 +33,12 @@ sealed class User with _$User {
   bool get isAuth => switch (this) {
     SignedIn() => true,
     _ => false,
+  };
+
+  /// Compose the full name of the user.
+  String get fullName => switch (this) {
+    SignedIn(name: final name, surname: final surname) => '$name $surname',
+    _ => '',
   };
 }
 
