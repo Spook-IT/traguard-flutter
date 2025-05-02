@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:traguard/features/team_statistics_screen/domain/team_session.dart';
 import 'package:traguard/features/team_statistics_screen/domain/team_statistics_model.dart';
 import 'package:traguard/shared/providers/http_client.dart';
 
@@ -14,11 +15,13 @@ abstract class TeamStatisticsRepository {
   factory TeamStatisticsRepository(Dio dio, {String baseUrl}) =
       _TeamStatisticsRepository;
 
-  /// Fetches the team statistics for a given [teamId].
-  @GET('{teamId}/statistics')
-  Future<TeamStatisticsModel> getTeamStatistics({
-    @Path() required String teamId,
-  });
+  /// Fetches the list of team sessions.
+  @GET('/sessions')
+  Future<TeamSessionListModel> getTeamSessions();
+
+  /// Fetches the team statistics.
+  @GET('/statistics')
+  Future<TeamStatisticsModel> getTeamStatistics();
 }
 
 /// A Riverpod provider for the [TeamStatisticsRepository].
@@ -31,8 +34,40 @@ TeamStatisticsRepository teamStatisticsRepository(Ref ref) {
 
 class MockTeamStatisticsRepository implements TeamStatisticsRepository {
   MockTeamStatisticsRepository(Dio dio);
+
   @override
-  Future<TeamStatisticsModel> getTeamStatistics({required String teamId}) {
+  Future<TeamSessionListModel> getTeamSessions() {
+    final model = TeamSessionListModel(
+      sessions: [
+        TeamSessionModel(id: '1', date: DateTime(2023, 10), name: 'Sessione 1'),
+        TeamSessionModel(
+          id: '2',
+          date: DateTime(2023, 10, 2),
+          name: 'Sessione 2',
+        ),
+        TeamSessionModel(
+          id: '3',
+          date: DateTime(2023, 10, 3),
+          name: 'Sessione 3',
+        ),
+        TeamSessionModel(
+          id: '4',
+          date: DateTime(2023, 10, 4),
+          name: 'Sessione 4',
+        ),
+        TeamSessionModel(
+          id: '5',
+          date: DateTime(2023, 10, 5),
+          name: 'Sessione 5',
+        ),
+      ],
+    );
+
+    return Future.delayed(const Duration(seconds: 1), () => model);
+  }
+
+  @override
+  Future<TeamStatisticsModel> getTeamStatistics() {
     const model = TeamStatisticsModel(
       playersAvailability: PlayersAvailabilityModel(
         activePlayers: 4,
