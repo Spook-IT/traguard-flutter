@@ -85,7 +85,7 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text('⚽ Giocatori', style: context.textTheme.titleMedium),
               onTap: () {
-                // TODO(dariowskii): add functionality
+                const PlayerListRoute().go(context);
               },
             ),
             ListTile(
