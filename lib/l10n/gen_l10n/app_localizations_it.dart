@@ -268,4 +268,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get playerListSubtitle => 'Gestione e visualizzazione dati degli atleti';
+
+  @override
+  String get newPlayer => 'Nuovo Atleta';
 }

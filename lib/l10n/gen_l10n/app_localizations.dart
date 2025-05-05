@@ -506,6 +506,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Gestione e visualizzazione dati degli atleti'**
   String get playerListSubtitle;
+
+  /// No description provided for @newPlayer.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuovo Atleta'**
+  String get newPlayer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -27,8 +27,8 @@ class PlayerListScreen extends StatelessWidget {
         onPressed: () {
           // TODO(dariowskii): add localization
         },
-        label: const Text('Add Player'),
-        icon: const Icon(Icons.add),
+        label: Text(context.l10n.newPlayer),
+        icon: const Icon(Icons.person_add_alt),
         backgroundColor: context.colorScheme.primary,
         foregroundColor: context.colorScheme.onPrimary,
       ),

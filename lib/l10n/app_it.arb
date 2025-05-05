@@ -154,5 +154,6 @@
     "@_PLAYER_LIST": {},
 
     "playerListTitle": "Lista Atleti",
-    "playerListSubtitle": "Gestione e visualizzazione dati degli atleti"
+    "playerListSubtitle": "Gestione e visualizzazione dati degli atleti",
+    "newPlayer": "Nuovo Atleta"
 }
