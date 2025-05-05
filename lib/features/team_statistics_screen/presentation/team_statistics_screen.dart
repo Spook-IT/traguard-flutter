@@ -22,6 +22,8 @@ class TeamStatisticsScreen extends ConsumerWidget {
             subtitle: context.l10n.teamStatisticsSubtitle,
             titleX: -0.75,
             titleY: 0.95,
+            titleFactor: 0.15,
+            subtitleFactor: 0.35,
           ),
           const SessionFilterWidget(),
           const StatisticsDynamicBody(),

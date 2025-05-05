@@ -18,6 +18,8 @@ class PlayerListScreen extends StatelessWidget {
             subtitle: context.l10n.playerListSubtitle,
             titleX: -0.45,
             titleY: 0.95,
+            titleFactor: 0.15,
+            subtitleFactor: 0.4,
           ),
         ],
       ),

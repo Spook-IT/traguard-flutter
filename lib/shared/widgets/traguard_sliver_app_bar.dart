@@ -11,6 +11,8 @@ class TraguardSliverAppbar extends StatelessWidget {
     required this.title,
     required this.titleX,
     required this.titleY,
+    required this.titleFactor,
+    this.subtitleFactor,
     super.key,
     this.subtitle,
   });
@@ -27,6 +29,12 @@ class TraguardSliverAppbar extends StatelessWidget {
   /// The max title on Y axis.
   final double titleY;
 
+  /// The factor for the title size.
+  final double titleFactor;
+
+  /// The factor for the subtitle size.
+  final double? subtitleFactor;
+
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
@@ -36,6 +44,8 @@ class TraguardSliverAppbar extends StatelessWidget {
         subtitle: subtitle,
         titleX: titleX,
         titleY: titleY,
+        titleFactor: titleFactor,
+        subtitleFactor: subtitleFactor,
       ),
     );
   }
@@ -48,8 +58,12 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.title,
     required this.titleX,
     required this.titleY,
+    required this.titleFactor,
+    this.subtitleFactor,
     this.subtitle,
   });
+
+  /// The min extent of the app bar.
   late final double _maxExtent = minExtent + 80;
 
   /// The title of the app bar.
@@ -63,6 +77,12 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   /// The max title on Y axis.
   final double titleY;
+
+  /// The factor for the title size.
+  final double titleFactor;
+
+  /// The factor for the subtitle size.
+  final double? subtitleFactor;
 
   @override
   Widget build(
@@ -110,16 +130,17 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
                     style: context.textTheme.headlineMedium?.copyWith(
                       color: context.textTheme.titleLarge?.color,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24 - 24 * (factor * 0.15),
+                      fontSize: 24 - 24 * (factor * titleFactor),
                     ),
                   ),
-                  if (subtitle != null) ...[
+                  if (subtitle != null && subtitleFactor != null) ...[
                     const SizedBox(height: 4),
                     Text(
                       subtitle!,
                       style: context.textTheme.labelLarge?.copyWith(
                         color: context.textTheme.titleLarge?.color,
-                        fontSize: 16 - 16 * ((factor * factor) * 0.35),
+                        fontSize:
+                            16 - 16 * ((factor * factor) * subtitleFactor!),
                       ),
                     ),
                   ],
