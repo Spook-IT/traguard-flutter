@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
 import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen.dart';
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
+import 'package:traguard/features/settings_screen/presentation/settings_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
 import 'package:traguard/shared/models/user.dart';
@@ -73,6 +74,7 @@ class LoginRoute extends GoRouteData {
       path: 'team-statistics',
       name: 'teamStatisticsRoute',
     ),
+    TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settingsRoute'),
   ],
 )
 class DashboardRoute extends GoRouteData {
@@ -117,5 +119,19 @@ class TeamStatisticsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TeamStatisticsScreen();
+  }
+}
+
+/// A route class for the Settings screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [SettingsScreen] widget when the route is accessed.
+class SettingsRoute extends GoRouteData {
+  /// Creates a new instance of [SettingsRoute].
+  const SettingsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SettingsScreen();
   }
 }
