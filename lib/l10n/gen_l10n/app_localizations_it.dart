@@ -95,6 +95,24 @@ class AppLocalizationsIt extends AppLocalizations {
   String get index => 'Indice';
 
   @override
+  String get settings => 'Impostazioni';
+
+  @override
+  String get user => 'Utente';
+
+  @override
+  String get general => 'Generale';
+
+  @override
+  String get notifications => 'Notifiche';
+
+  @override
+  String get security => 'Sicurezza';
+
+  @override
+  String get integrations => 'Integrazioni';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override

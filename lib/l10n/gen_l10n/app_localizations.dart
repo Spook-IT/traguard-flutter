@@ -165,6 +165,42 @@ abstract class AppLocalizations {
   /// **'Indice'**
   String get index;
 
+  /// No description provided for @settings.
+  ///
+  /// In it, this message translates to:
+  /// **'Impostazioni'**
+  String get settings;
+
+  /// No description provided for @user.
+  ///
+  /// In it, this message translates to:
+  /// **'Utente'**
+  String get user;
+
+  /// No description provided for @general.
+  ///
+  /// In it, this message translates to:
+  /// **'Generale'**
+  String get general;
+
+  /// No description provided for @notifications.
+  ///
+  /// In it, this message translates to:
+  /// **'Notifiche'**
+  String get notifications;
+
+  /// No description provided for @security.
+  ///
+  /// In it, this message translates to:
+  /// **'Sicurezza'**
+  String get security;
+
+  /// No description provided for @integrations.
+  ///
+  /// In it, this message translates to:
+  /// **'Integrazioni'**
+  String get integrations;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:

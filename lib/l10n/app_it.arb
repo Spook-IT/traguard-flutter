@@ -59,6 +59,12 @@
     },
     "role": "Ruolo",
     "index": "Indice",
+    "settings": "Impostazioni",
+    "user": "Utente",
+    "general": "Generale",
+    "notifications": "Notifiche",
+    "security": "Sicurezza",
+    "integrations": "Integrazioni",
 
     "@_LOGIN": {},
 
