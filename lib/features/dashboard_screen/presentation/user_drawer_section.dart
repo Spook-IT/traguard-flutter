@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
+import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
@@ -85,7 +86,7 @@ class UserDrawerSection extends ConsumerWidget {
           icon: const Icon(Icons.settings),
           color: context.colorScheme.onPrimaryFixed,
           onPressed: () {
-            // TODO(dariowskii): go to use settings page
+            const SettingsRoute().go(context);
           },
         ),
       ],
