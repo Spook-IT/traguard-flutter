@@ -85,6 +85,7 @@ class DashboardScreen extends StatelessWidget {
             ListTile(
               title: Text('⚽ Giocatori', style: context.textTheme.titleMedium),
               onTap: () {
+                Navigator.pop(context);
                 const PlayerListRoute().go(context);
               },
             ),
@@ -94,6 +95,7 @@ class DashboardScreen extends StatelessWidget {
                 style: context.textTheme.titleMedium,
               ),
               onTap: () {
+                Navigator.pop(context);
                 const TeamStatisticsRoute().go(context);
               },
             ),
@@ -103,6 +105,7 @@ class DashboardScreen extends StatelessWidget {
                 style: context.textTheme.titleMedium,
               ),
               onTap: () {
+                Navigator.pop(context);
                 const BluetoothListRoute().go(context);
               },
             ),
