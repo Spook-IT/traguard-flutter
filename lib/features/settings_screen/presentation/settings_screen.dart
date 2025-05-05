@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
+import 'package:traguard/shared/widgets/base_section_card.dart';
 
 /// A screen that displays the settings of the application.
 /// This screen allows users to customize their preferences and settings.
@@ -53,16 +54,70 @@ class _SettingsScreenState extends State<SettingsScreen>
             ),
           ),
           Expanded(
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              clipBehavior: Clip.none,
-              controller: _tabController,
-              children: [
-                Center(child: Text(context.l10n.general)),
-                Center(child: Text(context.l10n.notifications)),
-                Center(child: Text(context.l10n.security)),
-                Center(child: Text(context.l10n.integrations)),
-              ],
+            child: SafeArea(
+              child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _tabController,
+                viewportFraction: 0.9,
+                children: [
+                  BaseSectionCard(
+                    title: context.l10n.user,
+                    child: Expanded(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                              ),
+                            ),
+                            controller: TextEditingController(),
+                            enabled: true,
+                          ),
+                          Spaces.medium.sizedBoxHeight,
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: context.l10n.email,
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                              ),
+                            ),
+                            controller: TextEditingController(),
+                            enabled: true,
+                          ),
+                          const Spacer(),
+                          SizedBox(
+                            width: double.infinity,
+                            child: FilledButton(
+                              onPressed: () {
+                                // TODO: Implement save functionality
+                              },
+                              child: const Text('Save'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  BaseSectionCard(
+                    title: context.l10n.notifications,
+                    child: Container(),
+                  ),
+                  BaseSectionCard(
+                    title: context.l10n.security,
+                    child: Container(),
+                  ),
+                  BaseSectionCard(
+                    title: context.l10n.integrations,
+                    child: Container(),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
