@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:traguard/features/settings_screen/presentation/user_section.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 import 'package:traguard/shared/widgets/base_section_card.dart';
@@ -20,16 +21,34 @@ class _SettingsScreenState extends State<SettingsScreen>
     length: 4,
     vsync: this,
   );
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController.addListener(_listenPageChange);
+  }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController
+      ..removeListener(_listenPageChange)
+      ..dispose();
     super.dispose();
+  }
+
+  void _listenPageChange() {
+    if (!mounted) return;
+    setState(() {
+      _currentIndex = _tabController.index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: _currentIndex == 0,
       appBar: AppBar(title: Text(context.l10n.settings)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                 2: Text(context.l10n.security),
                 3: Text(context.l10n.integrations),
               },
-              groupValue: _tabController.index,
+              groupValue: _currentIndex,
               onValueChanged: (value) {
                 if (value != null) {
                   setState(() {
@@ -55,68 +74,27 @@ class _SettingsScreenState extends State<SettingsScreen>
           ),
           Expanded(
             child: SafeArea(
-              child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _tabController,
-                viewportFraction: 0.9,
-                children: [
-                  BaseSectionCard(
-                    title: context.l10n.user,
-                    child: Expanded(
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
-                                ),
-                              ),
-                            ),
-                            controller: TextEditingController(),
-                            enabled: true,
-                          ),
-                          Spaces.medium.sizedBoxHeight,
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: context.l10n.email,
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
-                                ),
-                              ),
-                            ),
-                            controller: TextEditingController(),
-                            enabled: true,
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            width: double.infinity,
-                            child: FilledButton(
-                              onPressed: () {
-                                // TODO: Implement save functionality
-                              },
-                              child: const Text('Save'),
-                            ),
-                          ),
-                        ],
-                      ),
+              child: Padding(
+                padding: Paddings.smallBottom,
+                child: TabBarView(
+                  controller: _tabController,
+                  viewportFraction: 0.9,
+                  children: [
+                    const UserSection(),
+                    BaseSectionCard(
+                      title: context.l10n.notifications,
+                      child: Container(),
                     ),
-                  ),
-                  BaseSectionCard(
-                    title: context.l10n.notifications,
-                    child: Container(),
-                  ),
-                  BaseSectionCard(
-                    title: context.l10n.security,
-                    child: Container(),
-                  ),
-                  BaseSectionCard(
-                    title: context.l10n.integrations,
-                    child: Container(),
-                  ),
-                ],
+                    BaseSectionCard(
+                      title: context.l10n.security,
+                      child: Container(),
+                    ),
+                    BaseSectionCard(
+                      title: context.l10n.integrations,
+                      child: Container(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
