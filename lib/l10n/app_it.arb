@@ -149,5 +149,10 @@
     "trainingIntensity": "Intensità Allenamento",
     "distanceTraveled": "Distanza Percorsa",
     "precisionSteps": "Precisione passaggi",
-    "qualityRecovery": "Qualità recupero"
+    "qualityRecovery": "Qualità recupero",
+
+    "@_PLAYER_LIST": {},
+
+    "playerListTitle": "Lista Atleti",
+    "playerListSubtitle": "Gestione e visualizzazione dati degli atleti"
 }

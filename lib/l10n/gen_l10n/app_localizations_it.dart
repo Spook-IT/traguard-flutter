@@ -262,4 +262,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get qualityRecovery => 'Qualità recupero';
+
+  @override
+  String get playerListTitle => 'Lista Atleti';
+
+  @override
+  String get playerListSubtitle => 'Gestione e visualizzazione dati degli atleti';
 }

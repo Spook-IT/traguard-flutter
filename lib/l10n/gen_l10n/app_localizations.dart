@@ -494,6 +494,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Qualità recupero'**
   String get qualityRecovery;
+
+  /// No description provided for @playerListTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Lista Atleti'**
+  String get playerListTitle;
+
+  /// No description provided for @playerListSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Gestione e visualizzazione dati degli atleti'**
+  String get playerListSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
