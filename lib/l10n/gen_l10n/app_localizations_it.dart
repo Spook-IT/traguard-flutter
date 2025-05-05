@@ -113,6 +113,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get integrations => 'Integrazioni';
 
   @override
+  String get name => 'Nome';
+
+  @override
+  String get save => 'Salva';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override

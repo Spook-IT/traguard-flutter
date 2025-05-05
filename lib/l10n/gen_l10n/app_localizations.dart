@@ -201,6 +201,18 @@ abstract class AppLocalizations {
   /// **'Integrazioni'**
   String get integrations;
 
+  /// No description provided for @name.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome'**
+  String get name;
+
+  /// No description provided for @save.
+  ///
+  /// In it, this message translates to:
+  /// **'Salva'**
+  String get save;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
