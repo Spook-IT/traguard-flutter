@@ -20,6 +20,8 @@ class TeamStatisticsScreen extends ConsumerWidget {
           TraguardSliverAppbar(
             title: context.l10n.teamStatisticsTitle,
             subtitle: context.l10n.teamStatisticsSubtitle,
+            titleX: -0.75,
+            titleY: 0.95,
           ),
           const SessionFilterWidget(),
           const StatisticsDynamicBody(),

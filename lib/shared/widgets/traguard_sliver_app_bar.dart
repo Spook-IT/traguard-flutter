@@ -7,7 +7,13 @@ import 'package:traguard/shared/utils/extensions.dart';
 /// This widget is part of the team statistics feature of the application.
 class TraguardSliverAppbar extends StatelessWidget {
   /// Creates a new instance of [TraguardSliverAppbar].
-  const TraguardSliverAppbar({required this.title, super.key, this.subtitle});
+  const TraguardSliverAppbar({
+    required this.title,
+    required this.titleX,
+    required this.titleY,
+    super.key,
+    this.subtitle,
+  });
 
   /// The title of the app bar.
   final String title;
@@ -15,11 +21,22 @@ class TraguardSliverAppbar extends StatelessWidget {
   /// The subtitle of the app bar.
   final String? subtitle;
 
+  /// The max title on X axis.
+  final double titleX;
+
+  /// The max title on Y axis.
+  final double titleY;
+
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: StatisticsHeaderDelegate(title: title, subtitle: subtitle),
+      delegate: StatisticsHeaderDelegate(
+        title: title,
+        subtitle: subtitle,
+        titleX: titleX,
+        titleY: titleY,
+      ),
     );
   }
 }
@@ -27,7 +44,12 @@ class TraguardSliverAppbar extends StatelessWidget {
 /// The actual header delegate for [TraguardSliverAppbar].
 class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
   /// Creates a new instance of [StatisticsHeaderDelegate].
-  StatisticsHeaderDelegate({required this.title, this.subtitle});
+  StatisticsHeaderDelegate({
+    required this.title,
+    required this.titleX,
+    required this.titleY,
+    this.subtitle,
+  });
   late final double _maxExtent = minExtent + 80;
 
   /// The title of the app bar.
@@ -35,6 +57,12 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   /// The subtitle of the app bar.
   final String? subtitle;
+
+  /// The max title on X axis.
+  final double titleX;
+
+  /// The max title on Y axis.
+  final double titleY;
 
   @override
   Widget build(
@@ -44,8 +72,8 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) {
     final factor = shrinkOffset / _maxExtent;
 
-    final titleX = lerpDouble(-.75, 0, factor) ?? 0;
-    final titleY = lerpDouble(.95, 0, factor) ?? 0;
+    final newTitleX = lerpDouble(titleX, 0, factor) ?? 0;
+    final newTitleY = lerpDouble(titleY, 0, factor) ?? 0;
 
     return Container(
       decoration: BoxDecoration(
@@ -69,7 +97,7 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
           children: [
             const Positioned(child: BackButton()),
             Align(
-              alignment: Alignment(titleX, titleY),
+              alignment: Alignment(newTitleX, newTitleY),
               child: Column(
                 crossAxisAlignment:
                     factor > 0.9
