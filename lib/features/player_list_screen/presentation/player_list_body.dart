@@ -26,7 +26,10 @@ class PlayerListBody extends ConsumerWidget {
             itemCount: value.players.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding:
+                Paddings.mediumHorizontal +
+                Paddings.smallVertical +
+                Paddings.xLargeBottom * 3,
             separatorBuilder: (_, _) => Spaces.medium.sizedBoxHeight,
             itemBuilder: (context, index) {
               final player = value.players[index];
