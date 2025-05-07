@@ -18,9 +18,9 @@ class LoadingPlayers extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: Spaces.medium,
           children: [
-            ShimmerContainer(height: 100, width: double.infinity),
-            ShimmerContainer(height: 100, width: double.infinity),
-            ShimmerContainer(height: 100, width: double.infinity),
+            ShimmerContainer(height: 130, width: double.infinity),
+            ShimmerContainer(height: 130, width: double.infinity),
+            ShimmerContainer(height: 130, width: double.infinity),
           ],
         ),
       ),
