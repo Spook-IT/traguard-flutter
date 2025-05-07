@@ -24,6 +24,7 @@ class SearchPlayer extends StatelessWidget {
       padding: Paddings.mediumHorizontal + Paddings.smallVertical,
       child: TextField(
         controller: controller,
+        textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           hintText: context.l10n.searchAthletes,
           prefixIcon: const Icon(Icons.search, size: 20),
