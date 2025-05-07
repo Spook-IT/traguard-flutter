@@ -88,7 +88,7 @@ class MockPlayerRepository implements PlayerRepository {
           if (query == null || query.isEmpty) {
             return true;
           }
-          return player.fullName.contains(query.toLowerCase());
+          return player.fullName.toLowerCase().contains(query.toLowerCase());
         }).toList();
     return Future.delayed(500.milliseconds, () {
       return PlayerListResponse(players: filteredPlayers);
