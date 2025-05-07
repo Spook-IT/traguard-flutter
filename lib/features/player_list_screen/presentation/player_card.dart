@@ -14,8 +14,20 @@ class PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final averageSpeed =
+        player.averageSpeed != null
+            ? player.averageSpeed!.toFormattedPrecision(2)
+            : 'N/A';
+    final averageDistance =
+        player.averageDistance != null
+            ? player.averageDistance!.toFormattedPrecision(2)
+            : 'N/A';
+    final performanceIndex =
+        player.performanceIndex != null
+            ? player.performanceIndex!.toFormattedPrecision(2)
+            : 'N/A';
+
     return Container(
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -23,91 +35,182 @@ class PlayerCard extends StatelessWidget {
           color: context.colorScheme.outline.withValues(alpha: .3),
         ),
       ),
-      child: Row(
-        spacing: Spaces.medium,
+      child: Column(
         children: [
-          Container(
-            height: 40,
-            width: 8,
-            decoration: BoxDecoration(
-              color: Color(player.uiColor ?? 0xFF000000),
-              borderRadius: BorderRadius.circular(8),
+          Padding(
+            padding: Paddings.mediumAll,
+            child: Row(
+              spacing: Spaces.medium,
+              children: [
+                Container(
+                  height: 40,
+                  width: 8,
+                  decoration: BoxDecoration(
+                    color: Color(player.uiColor ?? 0xFF000000),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Color(player.uiColor ?? 0xFF000000),
+                      width: 2,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      player.fullName.initials,
+                      style: context.textTheme.titleMedium,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: Spaces.tiny,
+                  children: [
+                    Row(
+                      spacing: Spaces.small,
+                      children: [
+                        Text(
+                          player.fullName,
+                          style: context.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '#${player.playerNumber}',
+                          style: context.textTheme.labelLarge?.copyWith(
+                            color: context.colorScheme.outline,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      spacing: Spaces.tiny,
+                      children: [
+                        Container(
+                          padding: Paddings.tinyAll + Paddings.tinyHorizontal,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: context.colorScheme.outline.withValues(
+                                alpha: .3,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(99),
+                          ),
+                          child: Text(
+                            player.role.getLabel(context),
+                            style: context.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: Paddings.tinyAll + Paddings.tinyHorizontal,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(99),
+                            color: player.status.bgColor,
+                          ),
+                          child: Text(
+                            player.status.getLabel(context),
+                            style: context.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: player.status.textColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Color(player.uiColor ?? 0xFF000000),
-                width: 2,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                player.fullName.initials,
-                style: context.textTheme.titleMedium,
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: Spaces.tiny,
+          Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
+          Row(
             children: [
-              Row(
-                spacing: Spaces.small,
-                children: [
-                  Text(
-                    player.fullName,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+              Expanded(
+                child: Container(
+                  padding: Paddings.smallAll,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      right: BorderSide(color: Colors.grey.shade200),
                     ),
                   ),
-                  Text(
-                    '#${player.playerNumber}',
-                    style: context.textTheme.labelLarge?.copyWith(
-                      color: context.colorScheme.outline,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                spacing: Spaces.tiny,
-                children: [
-                  Container(
-                    padding: Paddings.tinyAll + Paddings.tinyHorizontal,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: context.colorScheme.outline.withValues(
-                          alpha: .3,
+                  child: Column(
+                    children: [
+                      Text(
+                        context.l10n.velocity,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: context.colorScheme.outline.withValues(
+                            alpha: .5,
+                          ),
                         ),
                       ),
-                      borderRadius: BorderRadius.circular(99),
-                    ),
-                    child: Text(
-                      player.role.getLabel(context),
-                      style: context.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        '$averageSpeed km/h',
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelLarge,
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: Paddings.smallAll,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      right: BorderSide(color: Colors.grey.shade200),
                     ),
                   ),
-                  Container(
-                    padding: Paddings.tinyAll + Paddings.tinyHorizontal,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(99),
-                      color: player.status.bgColor,
-                    ),
-                    child: Text(
-                      player.status.getLabel(context),
-                      style: context.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: player.status.textColor,
+                  child: Column(
+                    children: [
+                      Text(
+                        context.l10n.distance,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: context.colorScheme.outline.withValues(
+                            alpha: .5,
+                          ),
+                        ),
                       ),
-                    ),
+                      Text(
+                        '$averageDistance km',
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelLarge,
+                      ),
+                    ],
                   ),
-                ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: Paddings.smallAll,
+                  child: Column(
+                    children: [
+                      Text(
+                        context.l10n.performance,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: context.colorScheme.outline.withValues(
+                            alpha: .5,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        performanceIndex,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.labelLarge,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
