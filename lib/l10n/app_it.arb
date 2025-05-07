@@ -70,7 +70,7 @@
     "velocity": "Velocità",
     "distance": "Distanza",
     "performance": "Prestazione",
-    
+
     "@_LOGIN": {},
 
     "loginPageTitle": "Accedi",
@@ -161,5 +161,6 @@
     "newPlayer": "Nuovo Atleta",
     "active": "Attivo",
     "inactive": "Non attivo",
-    "injured": "Infortunato"
+    "injured": "Infortunato",
+    "searchAthletes": "Cerca atleti..."
 }

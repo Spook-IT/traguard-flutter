@@ -548,6 +548,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Infortunato'**
   String get injured;
+
+  /// No description provided for @searchAthletes.
+  ///
+  /// In it, this message translates to:
+  /// **'Cerca atleti...'**
+  String get searchAthletes;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

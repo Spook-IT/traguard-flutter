@@ -289,4 +289,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get injured => 'Infortunato';
+
+  @override
+  String get searchAthletes => 'Cerca atleti...';
 }
