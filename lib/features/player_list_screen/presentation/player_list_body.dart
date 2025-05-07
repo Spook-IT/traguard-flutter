@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/player_list_screen/data/use_cases.dart';
+import 'package:traguard/features/player_list_screen/presentation/loading_players.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 
 /// This widget is part of the player list feature of the application.
@@ -27,9 +28,7 @@ class PlayerListBody extends ConsumerWidget {
           child: Text(error.toString(), style: context.textTheme.bodyLarge),
         ),
       ),
-      _ => const SliverToBoxAdapter(
-        child: Center(child: CircularProgressIndicator()),
-      ),
+      _ => const SliverToBoxAdapter(child: LoadingPlayers()),
     };
   }
 }
