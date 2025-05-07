@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:traguard/features/player_list_screen/data/use_cases.dart';
 import 'package:traguard/features/player_list_screen/presentation/loading_players.dart';
+import 'package:traguard/features/player_list_screen/presentation/player_card.dart';
 import 'package:traguard/shared/utils/extensions.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// This widget is part of the player list feature of the application.
 /// It displays a list of players based on the provided query.
@@ -17,11 +19,21 @@ class PlayerListBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final playersAsync = ref.watch(fetchPlayersProvider(query: query));
     return switch (playersAsync) {
-      AsyncData(:final value) => SliverList(
-        delegate: SliverChildBuilderDelegate((context, index) {
-          final player = value.players[index];
-          return ListTile(title: Text(player.name));
-        }, childCount: value.players.length),
+      AsyncData(:final value) => SliverToBoxAdapter(
+        child: SafeArea(
+          top: false,
+          child: ListView.separated(
+            itemCount: value.players.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            separatorBuilder: (_, _) => Spaces.medium.sizedBoxHeight,
+            itemBuilder: (context, index) {
+              final player = value.players[index];
+              return PlayerCard(player: player);
+            },
+          ),
+        ),
       ),
       AsyncError(:final error) => SliverToBoxAdapter(
         child: Center(
