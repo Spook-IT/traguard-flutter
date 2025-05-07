@@ -16,7 +16,7 @@ class LoadingPlayers extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: Spaces.large,
+          spacing: Spaces.medium,
           children: [
             ShimmerContainer(height: 100, width: double.infinity),
             ShimmerContainer(height: 100, width: double.infinity),
