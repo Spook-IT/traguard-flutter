@@ -271,4 +271,13 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get newPlayer => 'Nuovo Atleta';
+
+  @override
+  String get active => 'Attivo';
+
+  @override
+  String get inactive => 'Non attivo';
+
+  @override
+  String get injured => 'Infortunato';
 }

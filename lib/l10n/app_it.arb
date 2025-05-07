@@ -155,5 +155,8 @@
 
     "playerListTitle": "Lista Atleti",
     "playerListSubtitle": "Gestione e visualizzazione dati degli atleti",
-    "newPlayer": "Nuovo Atleta"
+    "newPlayer": "Nuovo Atleta",
+    "active": "Attivo",
+    "inactive": "Non attivo",
+    "injured": "Infortunato"
 }

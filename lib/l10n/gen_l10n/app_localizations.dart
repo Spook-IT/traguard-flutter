@@ -512,6 +512,24 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Nuovo Atleta'**
   String get newPlayer;
+
+  /// No description provided for @active.
+  ///
+  /// In it, this message translates to:
+  /// **'Attivo'**
+  String get active;
+
+  /// No description provided for @inactive.
+  ///
+  /// In it, this message translates to:
+  /// **'Non attivo'**
+  String get inactive;
+
+  /// No description provided for @injured.
+  ///
+  /// In it, this message translates to:
+  /// **'Infortunato'**
+  String get injured;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

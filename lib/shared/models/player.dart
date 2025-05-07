@@ -46,7 +46,26 @@ enum PlayerStatus {
   injured,
 
   /// Unknown status.
-  unknown,
+  unknown;
+
+  /// A method to get the label for the player's status.
+  String getLabel(BuildContext context) => switch (this) {
+    active => context.l10n.active,
+    inactive => context.l10n.inactive,
+    injured => context.l10n.injured,
+    unknown => '',
+  };
+
+  /// A method to get the background color for the player's status.
+  Color get bgColor => switch (this) {
+    injured => Colors.redAccent,
+    _ => Colors.black87,
+  };
+
+  /// A method to get the text color for the player's status.
+  Color get textColor => switch (this) {
+    _ => Colors.white,
+  };
 }
 
 /// A class representing a player in a team.
