@@ -37,7 +37,7 @@ sealed class User with _$User {
 
   /// Compose the full name of the user.
   String get fullName => switch (this) {
-    SignedIn(name: final name, surname: final surname) => '$name $surname',
+    SignedIn(:final name, :final surname) => '$name $surname',
     _ => '',
   };
 }
