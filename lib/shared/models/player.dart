@@ -63,4 +63,9 @@ abstract class Player with _$Player {
 
   /// Creates a new instance of [Player] from JSON data.
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);
+
+  const Player._();
+
+  /// A method to get the full name of the player.
+  String get fullName => '$name $surname';
 }
