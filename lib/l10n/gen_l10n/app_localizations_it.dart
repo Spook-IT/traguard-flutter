@@ -119,6 +119,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get save => 'Salva';
 
   @override
+  String get velocity => 'Velocità';
+
+  @override
+  String get distance => 'Distanza';
+
+  @override
+  String get performance => 'Prestazione';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override

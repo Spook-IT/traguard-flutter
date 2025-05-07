@@ -213,6 +213,24 @@ abstract class AppLocalizations {
   /// **'Salva'**
   String get save;
 
+  /// No description provided for @velocity.
+  ///
+  /// In it, this message translates to:
+  /// **'Velocità'**
+  String get velocity;
+
+  /// No description provided for @distance.
+  ///
+  /// In it, this message translates to:
+  /// **'Distanza'**
+  String get distance;
+
+  /// No description provided for @performance.
+  ///
+  /// In it, this message translates to:
+  /// **'Prestazione'**
+  String get performance;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:

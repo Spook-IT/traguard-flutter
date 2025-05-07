@@ -67,7 +67,10 @@
     "integrations": "Integrazioni",
     "name": "Nome",
     "save": "Salva",
-
+    "velocity": "Velocità",
+    "distance": "Distanza",
+    "performance": "Prestazione",
+    
     "@_LOGIN": {},
 
     "loginPageTitle": "Accedi",
