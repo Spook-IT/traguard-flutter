@@ -1,6 +1,8 @@
 // ignore_for_file: invalid_annotation_target .
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 
 part 'player.freezed.dart';
 part 'player.g.dart';
@@ -20,7 +22,16 @@ enum PlayerRole {
   goalkeeper,
 
   /// Unknown role.
-  unknown,
+  unknown;
+
+  /// A method to get the label for the player's role.
+  String getLabel(BuildContext context) => switch (this) {
+    forward => context.l10n.forwards(1),
+    midfielder => context.l10n.midfielders(1),
+    defender => context.l10n.defenders(1),
+    goalkeeper => context.l10n.goalkeepers(1),
+    unknown => '',
+  };
 }
 
 /// An enum representing the status of a player.
