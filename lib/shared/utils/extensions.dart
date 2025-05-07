@@ -176,7 +176,7 @@ extension FormatExtension on num {
 }
 
 /// Extension to provide utility methods for generating random strings.
-extension RandomString on String {
+extension StringUtils on String {
   /// Generates a random string of length 21 using alphanumeric characters.
   static String generateRandomString() {
     const chars =
@@ -185,5 +185,13 @@ extension RandomString on String {
     return String.fromCharCodes(
       Iterable.generate(21, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))),
     );
+  }
+
+  String get initials {
+    try {
+      return split(' ').map((e) => e[0].toUpperCase()).toList().join();
+    } on Exception catch (_) {
+      return '';
+    }
   }
 }

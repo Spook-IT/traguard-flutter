@@ -30,9 +30,6 @@ class UserDrawerSection extends ConsumerWidget {
     final name = user.$1 ?? 'User';
     final role = user.$2 ?? '';
 
-    final letters =
-        name.split(' ').map((e) => e[0].toUpperCase()).toList().join();
-
     return Row(
       spacing: Spaces.small,
       children: [
@@ -45,7 +42,7 @@ class UserDrawerSection extends ConsumerWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  letters,
+                  name.initials,
                   style: context.textTheme.titleLarge?.copyWith(
                     color: context.colorScheme.primaryFixed,
                     fontWeight: FontWeight.bold,
