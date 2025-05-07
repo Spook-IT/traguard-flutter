@@ -58,6 +58,7 @@ abstract class Player with _$Player {
     double? averageSpeed,
     double? averageDistance,
     double? performanceIndex,
+    int? uiColor,
   }) = _Player;
 
   /// Creates a new instance of [Player] from JSON data.
