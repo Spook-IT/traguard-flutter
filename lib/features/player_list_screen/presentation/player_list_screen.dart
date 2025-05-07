@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/features/player_list_screen/presentation/player_list_body.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/widgets/traguard_sliver_app_bar.dart';
 
@@ -21,6 +22,7 @@ class PlayerListScreen extends StatelessWidget {
             titleFactor: 0.15,
             subtitleFactor: 0.4,
           ),
+          const PlayerListBody(),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
