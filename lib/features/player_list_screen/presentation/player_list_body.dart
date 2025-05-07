@@ -5,6 +5,7 @@ import 'package:traguard/features/player_list_screen/presentation/loading_player
 import 'package:traguard/features/player_list_screen/presentation/player_card.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
+import 'package:traguard/shared/widgets/error_retry.dart';
 
 /// This widget is part of the player list feature of the application.
 /// It displays a list of players based on the provided query.
@@ -17,7 +18,8 @@ class PlayerListBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playersAsync = ref.watch(fetchPlayersProvider(query: query));
+    final playersAsync =
+        ref.watch(fetchPlayersProvider(query: query)).unwrapPrevious();
     return switch (playersAsync) {
       AsyncData(:final value) => SliverToBoxAdapter(
         child: SafeArea(
@@ -38,9 +40,13 @@ class PlayerListBody extends ConsumerWidget {
           ),
         ),
       ),
-      AsyncError(:final error) => SliverToBoxAdapter(
+      AsyncError(:final error) => SliverFillRemaining(
+        hasScrollBody: false,
         child: Center(
-          child: Text(error.toString(), style: context.textTheme.bodyLarge),
+          child: ErrorRetry(
+            error: error,
+            onRetry: () => ref.refresh(fetchPlayersProvider(query: query)),
+          ),
         ),
       ),
       _ => const SliverToBoxAdapter(child: LoadingPlayers()),
