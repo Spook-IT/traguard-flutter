@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:traguard/features/player_list_screen/presentation/player_list_body.dart';
 import 'package:traguard/features/player_list_screen/presentation/search_player.dart';
+import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/widgets/traguard_sliver_app_bar.dart';
 
@@ -63,7 +64,7 @@ class _PlayerListScreenState extends State<PlayerListScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO(dariowskii): add localization
+          const CreatePlayerRoute().go(context);
         },
         label: Text(context.l10n.newPlayer),
         icon: const Icon(Icons.person_add_alt),
