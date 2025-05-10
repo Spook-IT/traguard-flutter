@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
+import 'package:traguard/features/create_player/presentation/create_player_screen.dart';
 import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen.dart';
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/player_list_screen/presentation/player_list_screen.dart';
@@ -76,7 +77,16 @@ class LoginRoute extends GoRouteData {
       name: 'teamStatisticsRoute',
     ),
     TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settingsRoute'),
-    TypedGoRoute<PlayerListRoute>(path: 'player-list', name: 'playerListRoute'),
+    TypedGoRoute<PlayerListRoute>(
+      path: 'player-list',
+      name: 'playerListRoute',
+      routes: [
+        TypedGoRoute<CreatePlayerRoute>(
+          path: 'create',
+          name: 'createPlayerRoute',
+        ),
+      ],
+    ),
   ],
 )
 class DashboardRoute extends GoRouteData {
@@ -149,5 +159,19 @@ class PlayerListRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const PlayerListScreen();
+  }
+}
+
+/// A route class for the Player List screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [PlayerListScreen] widget when the route is accessed.
+class CreatePlayerRoute extends GoRouteData {
+  /// Creates a new instance of [CreatePlayerRoute].
+  const CreatePlayerRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const CreatePlayerScreen();
   }
 }
