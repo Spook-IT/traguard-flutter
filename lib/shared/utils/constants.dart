@@ -36,14 +36,28 @@ final List<Color> chartColors = [
  * ----------------
  */
 
+final _colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF6B5CC9));
+
 /// The light theme for the application.
 final lightTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6B5CC9)),
+  colorScheme: _colorScheme,
   brightness: Brightness.light,
   scaffoldBackgroundColor: const Color(0xFFF9FAFB),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
     foregroundColor: Color(0xFF020817),
     elevation: 0,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.white,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide(color: _colorScheme.outline.withValues(alpha: .3)),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide(color: _colorScheme.outline.withValues(alpha: .1)),
+    ),
   ),
 );
