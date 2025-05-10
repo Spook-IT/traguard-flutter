@@ -33,12 +33,6 @@ class SearchPlayer extends StatelessWidget {
             maxWidth: 40,
           ),
           contentPadding: EdgeInsets.zero,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color: context.colorScheme.outline.withValues(alpha: .3),
-            ),
-          ),
         ),
         onTapOutside: (e) {
           FocusManager.instance.primaryFocus?.unfocus();
