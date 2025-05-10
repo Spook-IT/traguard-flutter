@@ -68,12 +68,7 @@ class _UserSectionState extends ConsumerState<UserSection> {
                 onTapOutside: (_) {
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
-                decoration: InputDecoration(
-                  labelText: context.l10n.name,
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                ),
+                decoration: InputDecoration(labelText: context.l10n.name),
                 controller: _nameController..text = name,
               ),
               Spaces.medium.sizedBoxHeight,
@@ -85,12 +80,7 @@ class _UserSectionState extends ConsumerState<UserSection> {
                 onTapOutside: (_) {
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
-                decoration: InputDecoration(
-                  labelText: context.l10n.email,
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                ),
+                decoration: InputDecoration(labelText: context.l10n.email),
                 controller: _emailController..text = email,
               ),
               const Spacer(),
