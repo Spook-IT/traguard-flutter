@@ -128,6 +128,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get performance => 'Prestazione';
 
   @override
+  String get status => 'Stato';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override

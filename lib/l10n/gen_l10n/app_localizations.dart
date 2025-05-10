@@ -231,6 +231,12 @@ abstract class AppLocalizations {
   /// **'Prestazione'**
   String get performance;
 
+  /// No description provided for @status.
+  ///
+  /// In it, this message translates to:
+  /// **'Stato'**
+  String get status;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
