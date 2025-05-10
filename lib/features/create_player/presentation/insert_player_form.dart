@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:traguard/features/create_player/data/use_cases.dart';
+import 'package:traguard/features/create_player/domain/requests.dart';
 import 'package:traguard/features/create_player/presentation/color_picker_player.dart';
 import 'package:traguard/features/player_list_screen/data/use_cases.dart';
 import 'package:traguard/shared/models/player.dart';
@@ -30,7 +32,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
 
   late final _formKey = GlobalKey<FormState>();
 
-  final bool _isSaving = false;
+  bool _isSaving = false;
 
   bool get _canSave =>
       !_isSaving &&
@@ -59,29 +61,44 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
     super.dispose();
   }
 
-  void _savePlayer() {
+  Future<void> _savePlayer() async {
     if (!_canSave) {
       return;
     }
 
-    final player = Player(
-      id: '',
-      name: _nameController.text.split(' ')[0],
-      surname: _nameController.text.split(' ').sublist(1).join(' '),
-      playerNumber: int.tryParse(_playerNumberController.text) ?? 0,
-      role: _playerRole ?? PlayerRole.unknown,
-      status: _playerStatus ?? PlayerStatus.unknown,
-      uiColor: _playerColorHex,
-    );
-    logger.i('Player created: $player');
+    setState(() {
+      _isSaving = true;
+    });
 
-    // TODO(dariowskii): save player to database
+    try {
+      final request = CreatePlayerModel(
+        fullName: _nameController.text.trim(),
+        playerNumber: int.tryParse(_playerNumberController.text) ?? 0,
+        playerRole: _playerRole ?? PlayerRole.unknown,
+        playerStatus: _playerStatus ?? PlayerStatus.unknown,
+        playerColorHex: _playerColorHex,
+      );
 
-    ref.invalidate(fetchPlayersProvider);
+      await ref.read(createPlayerProvider(player: request).future);
+      if (!mounted) return;
 
-    // TODO(dariowskii): show snackbar
+      ref.invalidate(fetchPlayersProvider);
 
-    context.pop();
+      context.showSuccessSnackbar('Giocatore creato con successo');
+      context.pop();
+    } on Exception catch (e) {
+      if (mounted) {
+        context.showErrorSnackbar(
+          'Errore durante la creazione del giocatore: $e',
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+        });
+      }
+    }
   }
 
   void _listenTextController() {
@@ -114,18 +131,8 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                         AutofillHints.name,
                         AutofillHints.familyName,
                       ],
-                      decoration: InputDecoration(
-                        label: const Text('Nome e Cognome*'),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(
-                            color: context.colorScheme.outline.withValues(
-                              alpha: .3,
-                            ),
-                          ),
-                        ),
+                      decoration: const InputDecoration(
+                        label: Text('Nome e Cognome*'),
                       ),
                       onTapOutside: (e) {
                         FocusManager.instance.primaryFocus?.unfocus();
@@ -144,16 +151,6 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         label: const Text('Numero*'),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(
-                            color: context.colorScheme.outline.withValues(
-                              alpha: .3,
-                            ),
-                          ),
-                        ),
                         prefix: Text('#', style: context.textTheme.labelLarge),
                       ),
                       onTapOutside: (e) {
@@ -169,6 +166,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                     CommonMenu(
                       label: Text('${context.l10n.role}*'),
                       initialSelection: null,
+                      isEnabled: !_isSaving,
                       onSelected: (role) {
                         setState(() {
                           _playerRole = role;
@@ -188,6 +186,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                     CommonMenu(
                       label: Text('${context.l10n.status}*'),
                       initialSelection: null,
+                      isEnabled: !_isSaving,
                       onSelected: (status) {
                         setState(() {
                           _playerStatus = status;
@@ -205,11 +204,14 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                               .toList(),
                     ),
                     ColorPickerPlayer(
-                      onColorChanged: (color) {
-                        setState(() {
-                          _playerColorHex = color.toARGB32();
-                        });
-                      },
+                      onColorChanged:
+                          !_isSaving
+                              ? (color) {
+                                setState(() {
+                                  _playerColorHex = color.toARGB32();
+                                });
+                              }
+                              : null,
                     ),
                   ],
                 ),

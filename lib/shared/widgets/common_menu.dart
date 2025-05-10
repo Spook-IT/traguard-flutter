@@ -11,6 +11,7 @@ class CommonMenu<T> extends StatelessWidget {
     required this.dropdownMenuEntries,
     super.key,
     this.label,
+    this.isEnabled = true,
   });
 
   /// The initial selection of the menu.
@@ -25,27 +26,14 @@ class CommonMenu<T> extends StatelessWidget {
   /// The label to be displayed above the menu.
   final Widget? label;
 
+  /// Indicates whether the menu is enabled or disabled.
+  final bool isEnabled;
+
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
-      menuStyle: const MenuStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.white),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-        ),
-        maximumSize: WidgetStatePropertyAll(Size.fromHeight(200)),
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-        ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      ),
       label: label,
+      enabled: isEnabled,
       enableSearch: false,
       initialSelection: initialSelection,
       expandedInsets: Paddings.largeTop,

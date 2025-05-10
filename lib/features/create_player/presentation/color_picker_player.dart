@@ -4,6 +4,9 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 
+/// A callback function that is called when the color is changed.
+typedef ColorPickerCallback = void Function(Color color);
+
 /// A widget that allows the user to pick a color
 /// and displays the selected color.
 /// It also provides a text field to input the color in hex format.
@@ -12,7 +15,7 @@ class ColorPickerPlayer extends StatefulWidget {
   const ColorPickerPlayer({required this.onColorChanged, super.key});
 
   /// Callback function that is called when the color is changed.
-  final void Function(Color color) onColorChanged;
+  final ColorPickerCallback? onColorChanged;
 
   @override
   State<ColorPickerPlayer> createState() => _ColorPickerPlayerState();
@@ -84,20 +87,23 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
       _selectedColor = newColor;
       _colorController.text = hexColor.toUpperCase();
     });
-    widget.onColorChanged(newColor);
+    widget.onColorChanged?.call(newColor);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isEnabled = widget.onColorChanged != null;
+    final bgColor = isEnabled ? Colors.white : Colors.transparent;
+
     return Row(
       children: [
         GestureDetector(
-          onTap: _pickColor,
+          onTap: isEnabled ? _pickColor : null,
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey),
+              color: bgColor,
+              border: Border.all(color: context.colorScheme.outline),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Container(
@@ -114,15 +120,10 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
         Expanded(
           child: TextField(
             controller: _colorController,
-            onChanged: _setHexColor,
+            enabled: isEnabled,
+            onChanged: isEnabled ? _setHexColor : null,
             decoration: InputDecoration(
               labelText: 'Selected Color',
-              fillColor: Colors.white,
-              filled: true,
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
               prefix: Text(
                 '#',
                 style: context.textTheme.labelLarge?.copyWith(fontSize: 16),
