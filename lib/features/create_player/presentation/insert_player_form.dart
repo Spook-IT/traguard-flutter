@@ -30,7 +30,10 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
 
   late final _formKey = GlobalKey<FormState>();
 
+  final bool _isSaving = false;
+
   bool get _canSave =>
+      !_isSaving &&
       _nameController.text.isNotEmpty &&
       _playerNumberController.text.isNotEmpty &&
       _playerRole != null &&
@@ -105,6 +108,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                   children: [
                     TextFormField(
                       controller: _nameController,
+                      enabled: !_isSaving,
                       textInputAction: TextInputAction.next,
                       autofillHints: const [
                         AutofillHints.name,
@@ -135,12 +139,9 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                     ),
                     TextFormField(
                       controller: _playerNumberController,
+                      enabled: !_isSaving,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
-                      autofillHints: const [
-                        AutofillHints.name,
-                        AutofillHints.familyName,
-                      ],
                       decoration: InputDecoration(
                         label: const Text('Numero*'),
                         fillColor: Colors.white,
