@@ -220,7 +220,25 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                 onPressed: _canSave ? _savePlayer : null,
                 child: Padding(
                   padding: Paddings.largeHorizontal,
-                  child: Text(context.l10n.save),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_isSaving) ...[
+                        const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator.adaptive(
+                            strokeWidth: 3,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        ),
+                        Spaces.medium.sizedBoxWidth,
+                      ],
+                      Text(context.l10n.save),
+                    ],
+                  ),
                 ),
               ),
             ],
