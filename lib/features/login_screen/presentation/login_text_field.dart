@@ -59,7 +59,6 @@ class _LoginTextFieldState extends State<LoginTextField> {
           labelStyle: const TextStyle(color: Colors.black),
           floatingLabelAlignment: FloatingLabelAlignment.start,
           floatingLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(99)),
           contentPadding: Paddings.largeHorizontal,
           suffixIcon:
               widget.isPassword
