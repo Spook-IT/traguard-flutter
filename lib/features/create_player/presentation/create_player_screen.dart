@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/features/create_player/presentation/insert_player_form.dart';
+import 'package:traguard/shared/widgets/traguard_sliver_app_bar.dart';
 
 /// A widget that represents the screen for creating a new player.
 class CreatePlayerScreen extends StatelessWidget {
@@ -7,9 +9,21 @@ class CreatePlayerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Create Player')),
-      body: const Center(child: Text('Create Player Screen')),
+    // TODO(dariowskii): add localizations
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          TraguardSliverAppbar(
+            title: 'Nuovo Atleta',
+            subtitle: "Inserisci i dati dell'atleta da aggiungere",
+            subtitleFactor: 0.4,
+            titleX: -0.55,
+            titleY: 0.95,
+            titleFactor: 0.15,
+          ),
+          InsertPlayerForm(),
+        ],
+      ),
     );
   }
 }
