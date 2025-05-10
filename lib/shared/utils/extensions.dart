@@ -195,3 +195,34 @@ extension StringUtils on String {
     }
   }
 }
+
+/// Extension to show success and error snackbars.
+/// This extension provides methods to show success and error snackbars
+/// using the `ScaffoldMessenger` in a `BuildContext`.
+extension SnackbarContext on BuildContext {
+  /// Shows a success snackbar with the provided message.
+  void showSuccessSnackbar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.green,
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white, fontSize: 16),
+        ),
+      ),
+    );
+  }
+
+  /// Shows an error snackbar with the provided message.
+  void showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white, fontSize: 16),
+        ),
+      ),
+    );
+  }
+}
