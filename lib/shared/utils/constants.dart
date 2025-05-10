@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:traguard/shared/utils/sizes.dart';
 
 /// A logger instance for logging messages.
 final logger = Logger(printer: PrettyPrinter());
@@ -30,6 +31,8 @@ final List<Color> chartColors = [
   const Color(0xFF17BEBB),
 ];
 
+const disabledColor = Color.fromARGB(255, 220, 220, 220);
+
 /* 
  * ----------------
  *      THEME
@@ -58,6 +61,39 @@ final lightTheme = ThemeData(
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(color: _colorScheme.outline.withValues(alpha: .1)),
+    ),
+  ),
+  dropdownMenuTheme: DropdownMenuThemeData(
+    menuStyle: MenuStyle(
+      backgroundColor: WidgetStateProperty.resolveWith((state) {
+        if (state.contains(WidgetState.disabled)) {
+          return disabledColor;
+        }
+        return Colors.white;
+      }),
+      shape: const WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+      ),
+      maximumSize: const WidgetStatePropertyAll(Size.fromHeight(200)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+      contentPadding: Paddings.mediumHorizontal + Paddings.smallVertical,
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        borderSide: BorderSide(
+          color: _colorScheme.outline.withValues(alpha: .3),
+        ),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        borderSide: BorderSide(
+          color: _colorScheme.outline.withValues(alpha: .1),
+        ),
+      ),
     ),
   ),
 );
