@@ -644,6 +644,48 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Rappresentante Legale'**
   String get legalRepresentitive;
+
+  /// No description provided for @errorSavingData.
+  ///
+  /// In it, this message translates to:
+  /// **'Errore durante il salvataggio dei dati: {error}'**
+  String errorSavingData(String error);
+
+  /// No description provided for @legalAddress.
+  ///
+  /// In it, this message translates to:
+  /// **'Indirizzo Legale'**
+  String get legalAddress;
+
+  /// No description provided for @legalAddressEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'indirizzo legale non può essere vuoto'**
+  String get legalAddressEmpty;
+
+  /// No description provided for @teamName.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome Squadra'**
+  String get teamName;
+
+  /// No description provided for @teamNameEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Il nome della squadra non può essere vuoto'**
+  String get teamNameEmpty;
+
+  /// No description provided for @legalEmail.
+  ///
+  /// In it, this message translates to:
+  /// **'Email Legale'**
+  String get legalEmail;
+
+  /// No description provided for @legalEmailEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'email legale non può essere vuota'**
+  String get legalEmailEmpty;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

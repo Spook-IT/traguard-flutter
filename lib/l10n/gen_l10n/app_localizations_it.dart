@@ -339,4 +339,27 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get legalRepresentitive => 'Rappresentante Legale';
+
+  @override
+  String errorSavingData(String error) {
+    return 'Errore durante il salvataggio dei dati: $error';
+  }
+
+  @override
+  String get legalAddress => 'Indirizzo Legale';
+
+  @override
+  String get legalAddressEmpty => 'L\'indirizzo legale non può essere vuoto';
+
+  @override
+  String get teamName => 'Nome Squadra';
+
+  @override
+  String get teamNameEmpty => 'Il nome della squadra non può essere vuoto';
+
+  @override
+  String get legalEmail => 'Email Legale';
+
+  @override
+  String get legalEmailEmpty => 'L\'email legale non può essere vuota';
 }

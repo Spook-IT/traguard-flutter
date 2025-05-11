@@ -189,5 +189,19 @@
 
     "@_FISCAL_DATA": {},
     "fiscalDataTitle": "Dati Fiscali",
-    "legalRepresentitive": "Rappresentante Legale"
+    "legalRepresentitive": "Rappresentante Legale",
+    "errorSavingData": "Errore durante il salvataggio dei dati: {error}",
+    "@errorSavingData": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "legalAddress": "Indirizzo Legale",
+    "legalAddressEmpty": "L'indirizzo legale non può essere vuoto",
+    "teamName": "Nome Squadra",
+    "teamNameEmpty": "Il nome della squadra non può essere vuoto",
+    "legalEmail": "Email Legale",
+    "legalEmailEmpty": "L'email legale non può essere vuota"
 }
