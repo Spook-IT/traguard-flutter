@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:traguard/features/bluetooth_connection/presentation/bluetooth_list_screen.dart';
 import 'package:traguard/features/create_player/presentation/create_player_screen.dart';
 import 'package:traguard/features/dashboard_screen/presentation/dashboard_screen.dart';
+import 'package:traguard/features/fiscal_data/fiscal_data_screen.dart';
 import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/player_list_screen/presentation/player_list_screen.dart';
 import 'package:traguard/features/settings_screen/presentation/settings_screen.dart';
@@ -87,6 +88,7 @@ class LoginRoute extends GoRouteData {
         ),
       ],
     ),
+    TypedGoRoute<FiscalDataRoute>(path: 'fiscal-data', name: 'fiscalDataRoute'),
   ],
 )
 class DashboardRoute extends GoRouteData {
@@ -173,5 +175,19 @@ class CreatePlayerRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const CreatePlayerScreen();
+  }
+}
+
+/// A route class for the Fiscal Data screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [FiscalDataScreen] widget when the route is accessed.
+class FiscalDataRoute extends GoRouteData {
+  /// Creates a new instance of [FiscalDataRoute].
+  const FiscalDataRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FiscalDataScreen();
   }
 }
