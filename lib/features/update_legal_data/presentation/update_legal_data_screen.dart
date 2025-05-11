@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traguard/features/update_legal_data/data/use_cases.dart';
+import 'package:traguard/features/update_legal_data/domain/requests.dart';
 import 'package:traguard/features/update_legal_data/presentation/loading_legal.dart';
 import 'package:traguard/features/update_legal_data/presentation/update_legal_form.dart';
 import 'package:traguard/shared/utils/extensions.dart';
@@ -33,8 +34,6 @@ class _UpdateLegalDataScreenState extends ConsumerState<UpdateLegalDataScreen> {
   @override
   void initState() {
     super.initState();
-
-    // TODO(dariowskii): fetch initial data
 
     _nameController.addListener(_listenTextController);
     _emailController.addListener(_listenTextController);
@@ -73,20 +72,16 @@ class _UpdateLegalDataScreenState extends ConsumerState<UpdateLegalDataScreen> {
     });
 
     try {
-      // final request = CreatePlayerModel(
-      //   fullName: _nameController.text.trim(),
-      //   playerNumber: int.tryParse(_playerNumberController.text) ?? 0,
-      //   playerRole: _playerRole ?? PlayerRole.unknown,
-      //   playerStatus: _playerStatus ?? PlayerStatus.unknown,
-      //   playerColorHex: _playerColorHex,
-      // );
+      final request = LegalDataInfo(
+        fullName: _nameController.text.trim(),
+        email: _emailController.text.trim(),
+        phone: _phoneController.text.trim(),
+      );
 
-      // await ref.read(createPlayerProvider(player: request).future);
-      // if (!mounted) return;
+      await ref.read(updateLegalDataProvider(info: request).future);
+      if (!mounted) return;
 
-      // ref.invalidate(fetchPlayersProvider);
-
-      // context.showSuccessSnackbar(context.l10n.playerCreatedSuccessfully);
+      context.showSuccessSnackbar(context.l10n.dataSavedSuccessfully);
       context.pop();
     } on Exception catch (e) {
       if (mounted) {
