@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:traguard/features/update_legal_data/data/use_cases.dart';
+import 'package:traguard/features/update_legal_data/presentation/loading_legal.dart';
+import 'package:traguard/features/update_legal_data/presentation/update_legal_form.dart';
 import 'package:traguard/shared/utils/extensions.dart';
-import 'package:traguard/shared/utils/sizes.dart';
-import 'package:traguard/shared/widgets/save_button.dart';
+import 'package:traguard/shared/widgets/error_retry.dart';
 
 /// This widget represents the screen for updating legal data.
 class UpdateLegalDataScreen extends ConsumerStatefulWidget {
@@ -105,101 +106,33 @@ class _UpdateLegalDataScreenState extends ConsumerState<UpdateLegalDataScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
+    final asyncData = ref.watch(fetchLegalDataProvider).unwrapPrevious();
+
+    final child = switch (asyncData) {
+      AsyncData(:final value) => UpdateLegalForm(
+        formKey: _formKey,
+        nameController: _nameController..text = value.fullName,
+        emailController: _emailController..text = value.email,
+        phoneController: _phoneController..text = value.phone,
+        isSaving: _isSaving,
+        canSave: _canSave,
+        onSave: _saveData,
+      ),
+      AsyncError() => SliverFillRemaining(
+        hasScrollBody: false,
+        child: ErrorRetry(
+          onRetry: () {
+            ref.invalidate(fetchLegalDataProvider);
+          },
+        ),
+      ),
+      _ => const SliverToBoxAdapter(child: LoadingLegal()),
+    };
+
     return Scaffold(
       appBar: AppBar(title: Text(l10n.legalRepresentitive)),
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: Paddings.mediumAll,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: Spaces.small,
-                  children: [
-                    TextFormField(
-                      controller: _nameController,
-                      keyboardType: TextInputType.name,
-                      autofillHints: const [
-                        AutofillHints.name,
-                        AutofillHints.familyName,
-                      ],
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.nameAndSurnameValidator;
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: '${l10n.nameAndSurname}*',
-                      ),
-                      onTapOutside: (event) {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                    ),
-
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      autofillHints: const [AutofillHints.email],
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return context.l10n.emailEmpty;
-                        }
-
-                        if (!value.isValidEmail) {
-                          return context.l10n.emailInvalid;
-                        }
-
-                        return null;
-                      },
-                      decoration: InputDecoration(labelText: '${l10n.email}*'),
-                      onTapOutside: (event) {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                    ),
-                    TextFormField(
-                      controller: _phoneController,
-                      keyboardType: TextInputType.phone,
-                      autofillHints: const [AutofillHints.telephoneNumber],
-                      textInputAction: TextInputAction.done,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'^\+?[0-9]*$'),
-                          replacementString: _phoneController.text,
-                        ),
-                      ],
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.phoneEmpty;
-                        }
-
-                        return null;
-                      },
-                      decoration: InputDecoration(labelText: '${l10n.phone}*'),
-                      onTapOutside: (event) {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                    ),
-                    const Spacer(),
-                    SafeArea(
-                      child: SaveButton(
-                        isSaving: _isSaving,
-                        canSave: _canSave,
-                        onPressed: _saveData,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: CustomScrollView(slivers: [child]),
     );
   }
 }
