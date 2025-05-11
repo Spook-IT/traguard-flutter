@@ -249,6 +249,30 @@ abstract class AppLocalizations {
   /// **'Squadra'**
   String get team;
 
+  /// No description provided for @phone.
+  ///
+  /// In it, this message translates to:
+  /// **'Telefono'**
+  String get phone;
+
+  /// No description provided for @nameAndSurname.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome e Cognome'**
+  String get nameAndSurname;
+
+  /// No description provided for @nameAndSurnameValidator.
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci il nome e cognome'**
+  String get nameAndSurnameValidator;
+
+  /// No description provided for @phoneEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Il numero di telefono non può essere vuoto'**
+  String get phoneEmpty;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
@@ -596,18 +620,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Errore durante la creazione del giocatore: {error}'**
   String errorCreatingPlayer(String error);
-
-  /// No description provided for @nameAndSurname.
-  ///
-  /// In it, this message translates to:
-  /// **'Nome e Cognome'**
-  String get nameAndSurname;
-
-  /// No description provided for @nameAndSurnameValidator.
-  ///
-  /// In it, this message translates to:
-  /// **'Inserisci il nome e cognome'**
-  String get nameAndSurnameValidator;
 
   /// No description provided for @numberValidator.
   ///

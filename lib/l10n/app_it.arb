@@ -73,6 +73,10 @@
     "status": "Stato",
     "number": "Numero",
     "team": "Squadra",
+    "phone": "Telefono",
+    "nameAndSurname": "Nome e Cognome",
+    "nameAndSurnameValidator": "Inserisci il nome e cognome",
+    "phoneEmpty": "Il numero di telefono non può essere vuoto",
 
     "@_LOGIN": {},
 
@@ -179,8 +183,7 @@
             }
         }
     },
-    "nameAndSurname": "Nome e Cognome",
-    "nameAndSurnameValidator": "Inserisci il nome e cognome",
+    
     "numberValidator": "Inserisci il numero",
 
     "@_FISCAL_DATA": {},

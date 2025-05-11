@@ -137,6 +137,18 @@ class AppLocalizationsIt extends AppLocalizations {
   String get team => 'Squadra';
 
   @override
+  String get phone => 'Telefono';
+
+  @override
+  String get nameAndSurname => 'Nome e Cognome';
+
+  @override
+  String get nameAndSurnameValidator => 'Inserisci il nome e cognome';
+
+  @override
+  String get phoneEmpty => 'Il numero di telefono non può essere vuoto';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override
@@ -315,12 +327,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String errorCreatingPlayer(String error) {
     return 'Errore durante la creazione del giocatore: $error';
   }
-
-  @override
-  String get nameAndSurname => 'Nome e Cognome';
-
-  @override
-  String get nameAndSurnameValidator => 'Inserisci il nome e cognome';
 
   @override
   String get numberValidator => 'Inserisci il numero';
