@@ -64,52 +64,72 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ListTile(
-              title: Text(
-                '📍 Vai alle mappe',
-                style: context.textTheme.titleMedium,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        '📍 Vai alle mappe',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        // TODO(dariowskii): add functionality
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        '🎽 Guarda le sessioni',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        // TODO(dariowskii): add functionality
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        '⚽ Giocatori',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        const PlayerListRoute().go(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        '📊 Gestione Squadra',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        const TeamStatisticsRoute().go(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        '📱 Dispositivi',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        const BluetoothListRoute().go(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        '🖋️ Dati Fiscali',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        const FiscalDataRoute().go(context);
+                      },
+                    ),
+                  ],
+                ),
               ),
-              onTap: () {
-                // TODO(dariowskii): add functionality
-              },
             ),
-            ListTile(
-              title: Text(
-                '🎽 Guarda le sessioni',
-                style: context.textTheme.titleMedium,
-              ),
-              onTap: () {
-                // TODO(dariowskii): add functionality
-              },
-            ),
-            ListTile(
-              title: Text('⚽ Giocatori', style: context.textTheme.titleMedium),
-              onTap: () {
-                Navigator.pop(context);
-                const PlayerListRoute().go(context);
-              },
-            ),
-            ListTile(
-              title: Text(
-                '📊 Gestione Squadra',
-                style: context.textTheme.titleMedium,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                const TeamStatisticsRoute().go(context);
-              },
-            ),
-            ListTile(
-              title: Text(
-                '📱 Dispositivi',
-                style: context.textTheme.titleMedium,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                const BluetoothListRoute().go(context);
-              },
-            ),
-            const Spacer(),
             const LogoutButton(),
           ],
         ),

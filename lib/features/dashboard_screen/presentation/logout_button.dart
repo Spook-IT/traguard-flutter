@@ -12,6 +12,7 @@ class LogoutButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
+      top: false,
       child: Padding(
         padding: Paddings.mediumAll,
         child: OutlinedButton(
