@@ -71,6 +71,7 @@
     "distance": "Distanza",
     "performance": "Prestazione",
     "status": "Stato",
+    "number": "Numero",
 
     "@_LOGIN": {},
 
@@ -167,5 +168,17 @@
 
     "@_CREATE_PLAYER": {},
     "createPlayerTitle": "Nuovo Atleta",
-    "createPlayerSubtitle": "Inserisci i dati dell'atleta da aggiungere"
+    "createPlayerSubtitle": "Inserisci i dati dell'atleta da aggiungere",
+    "playerCreatedSuccessfully": "Giocatore creato con successo",
+    "errorCreatingPlayer": "Errore durante la creazione del giocatore: {error}",
+    "@errorCreatingPlayer": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "nameAndSurname": "Nome e Cognome",
+    "nameAndSurnameValidator": "Inserisci il nome e cognome",
+    "numberValidator": "Inserisci il numero"
 }

@@ -237,6 +237,12 @@ abstract class AppLocalizations {
   /// **'Stato'**
   String get status;
 
+  /// No description provided for @number.
+  ///
+  /// In it, this message translates to:
+  /// **'Numero'**
+  String get number;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
@@ -572,6 +578,36 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Inserisci i dati dell\'atleta da aggiungere'**
   String get createPlayerSubtitle;
+
+  /// No description provided for @playerCreatedSuccessfully.
+  ///
+  /// In it, this message translates to:
+  /// **'Giocatore creato con successo'**
+  String get playerCreatedSuccessfully;
+
+  /// No description provided for @errorCreatingPlayer.
+  ///
+  /// In it, this message translates to:
+  /// **'Errore durante la creazione del giocatore: {error}'**
+  String errorCreatingPlayer(String error);
+
+  /// No description provided for @nameAndSurname.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome e Cognome'**
+  String get nameAndSurname;
+
+  /// No description provided for @nameAndSurnameValidator.
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci il nome e cognome'**
+  String get nameAndSurnameValidator;
+
+  /// No description provided for @numberValidator.
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci il numero'**
+  String get numberValidator;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
