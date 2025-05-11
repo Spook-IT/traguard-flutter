@@ -12,6 +12,7 @@ import 'package:traguard/features/player_list_screen/presentation/player_list_sc
 import 'package:traguard/features/settings_screen/presentation/settings_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
+import 'package:traguard/features/update_legal_data/presentation/update_legal_data_screen.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
 
@@ -88,7 +89,16 @@ class LoginRoute extends GoRouteData {
         ),
       ],
     ),
-    TypedGoRoute<FiscalDataRoute>(path: 'fiscal-data', name: 'fiscalDataRoute'),
+    TypedGoRoute<FiscalDataRoute>(
+      path: 'fiscal-data',
+      name: 'fiscalDataRoute',
+      routes: [
+        TypedGoRoute<UpdateLegalDataRoute>(
+          path: 'update-legal-data',
+          name: 'updateLegalDataRoute',
+        ),
+      ],
+    ),
   ],
 )
 class DashboardRoute extends GoRouteData {
@@ -189,5 +199,19 @@ class FiscalDataRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const FiscalDataScreen();
+  }
+}
+
+/// A route class for the Update Legal Data screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [UpdateLegalDataScreen] widget when the route is accessed.
+class UpdateLegalDataRoute extends GoRouteData {
+  /// Creates a new instance of [UpdateLegalDataRoute].
+  const UpdateLegalDataRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const UpdateLegalDataScreen();
   }
 }
