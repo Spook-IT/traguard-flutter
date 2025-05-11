@@ -92,6 +92,7 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO(dariowskii): add localization
     final isEnabled = widget.onColorChanged != null;
     final bgColor = isEnabled ? Colors.white : Colors.transparent;
 

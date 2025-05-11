@@ -11,6 +11,7 @@ import 'package:traguard/shared/utils/constants.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 import 'package:traguard/shared/widgets/common_menu.dart';
+import 'package:traguard/shared/widgets/save_button.dart';
 
 /// A widget that represents a form for inserting a new player.
 /// It includes fields for the player's name, number, role, status,
@@ -217,30 +218,10 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                   ],
                 ),
               ),
-              FilledButton(
-                onPressed: _canSave ? _savePlayer : null,
-                child: Padding(
-                  padding: Paddings.largeHorizontal,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (_isSaving) ...[
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator.adaptive(
-                            strokeWidth: 3,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white,
-                            ),
-                          ),
-                        ),
-                        Spaces.medium.sizedBoxWidth,
-                      ],
-                      Text(l10n.save),
-                    ],
-                  ),
-                ),
+              SaveButton(
+                onPressed: _savePlayer,
+                canSave: _canSave,
+                isSaving: _isSaving,
               ),
             ],
           ),
