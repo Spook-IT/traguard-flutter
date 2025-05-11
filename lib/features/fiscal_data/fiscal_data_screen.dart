@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 
 /// A widget that represents the screen for displaying fiscal data.
@@ -18,7 +19,9 @@ class FiscalDataScreen extends StatelessWidget {
             title: Text(l10n.legalRepresentitive),
             leading: Icon(Icons.person, color: context.colorScheme.primary),
             trailing: const CupertinoListTileChevron(),
-            onTap: () {},
+            onTap: () {
+              const UpdateLegalDataRoute().go(context);
+            },
           ),
           CupertinoListTile.notched(
             title: Text(l10n.team),
