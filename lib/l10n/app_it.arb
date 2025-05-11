@@ -77,6 +77,7 @@
     "nameAndSurname": "Nome e Cognome",
     "nameAndSurnameValidator": "Inserisci il nome e cognome",
     "phoneEmpty": "Il numero di telefono non può essere vuoto",
+    "dataSavedSuccessfully": "Dati salvati con successo",
 
     "@_LOGIN": {},
 

@@ -149,6 +149,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get phoneEmpty => 'Il numero di telefono non può essere vuoto';
 
   @override
+  String get dataSavedSuccessfully => 'Dati salvati con successo';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override

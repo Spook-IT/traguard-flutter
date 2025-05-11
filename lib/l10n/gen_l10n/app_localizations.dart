@@ -273,6 +273,12 @@ abstract class AppLocalizations {
   /// **'Il numero di telefono non può essere vuoto'**
   String get phoneEmpty;
 
+  /// No description provided for @dataSavedSuccessfully.
+  ///
+  /// In it, this message translates to:
+  /// **'Dati salvati con successo'**
+  String get dataSavedSuccessfully;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
