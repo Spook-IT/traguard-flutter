@@ -72,6 +72,7 @@
     "performance": "Prestazione",
     "status": "Stato",
     "number": "Numero",
+    "team": "Squadra",
 
     "@_LOGIN": {},
 
@@ -180,5 +181,9 @@
     },
     "nameAndSurname": "Nome e Cognome",
     "nameAndSurnameValidator": "Inserisci il nome e cognome",
-    "numberValidator": "Inserisci il numero"
+    "numberValidator": "Inserisci il numero",
+
+    "@_FISCAL_DATA": {},
+    "fiscalDataTitle": "Dati Fiscali",
+    "legalRepresentitive": "Rappresentante Legale"
 }

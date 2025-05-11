@@ -243,6 +243,12 @@ abstract class AppLocalizations {
   /// **'Numero'**
   String get number;
 
+  /// No description provided for @team.
+  ///
+  /// In it, this message translates to:
+  /// **'Squadra'**
+  String get team;
+
   /// No description provided for @loginPageTitle.
   ///
   /// In it, this message translates to:
@@ -608,6 +614,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Inserisci il numero'**
   String get numberValidator;
+
+  /// No description provided for @fiscalDataTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Dati Fiscali'**
+  String get fiscalDataTitle;
+
+  /// No description provided for @legalRepresentitive.
+  ///
+  /// In it, this message translates to:
+  /// **'Rappresentante Legale'**
+  String get legalRepresentitive;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

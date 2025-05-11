@@ -134,6 +134,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get number => 'Numero';
 
   @override
+  String get team => 'Squadra';
+
+  @override
   String get loginPageTitle => 'Accedi';
 
   @override
@@ -321,4 +324,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get numberValidator => 'Inserisci il numero';
+
+  @override
+  String get fiscalDataTitle => 'Dati Fiscali';
+
+  @override
+  String get legalRepresentitive => 'Rappresentante Legale';
 }
