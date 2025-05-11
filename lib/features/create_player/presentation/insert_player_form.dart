@@ -84,12 +84,12 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
 
       ref.invalidate(fetchPlayersProvider);
 
-      context.showSuccessSnackbar('Giocatore creato con successo');
+      context.showSuccessSnackbar(context.l10n.playerCreatedSuccessfully);
       context.pop();
     } on Exception catch (e) {
       if (mounted) {
         context.showErrorSnackbar(
-          'Errore durante la creazione del giocatore: $e',
+          context.l10n.errorCreatingPlayer(e.toString()),
         );
       }
     } finally {
@@ -109,7 +109,8 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localizations
+    final l10n = context.l10n;
+
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
@@ -131,15 +132,15 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                         AutofillHints.name,
                         AutofillHints.familyName,
                       ],
-                      decoration: const InputDecoration(
-                        label: Text('Nome e Cognome*'),
+                      decoration: InputDecoration(
+                        label: Text('${l10n.nameAndSurname}*'),
                       ),
                       onTapOutside: (e) {
                         FocusManager.instance.primaryFocus?.unfocus();
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Inserisci il nome e cognome';
+                          return l10n.nameAndSurnameValidator;
                         }
                         return null;
                       },
@@ -150,7 +151,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        label: const Text('Numero*'),
+                        label: Text('${l10n.number}*'),
                         prefix: Text('#', style: context.textTheme.labelLarge),
                       ),
                       onTapOutside: (e) {
@@ -158,13 +159,13 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Inserisci il numero';
+                          return l10n.numberValidator;
                         }
                         return null;
                       },
                     ),
                     CommonMenu(
-                      label: Text('${context.l10n.role}*'),
+                      label: Text('${l10n.role}*'),
                       initialSelection: null,
                       isEnabled: !_isSaving,
                       onSelected: (role) {
@@ -184,7 +185,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                               .toList(),
                     ),
                     CommonMenu(
-                      label: Text('${context.l10n.status}*'),
+                      label: Text('${l10n.status}*'),
                       initialSelection: null,
                       isEnabled: !_isSaving,
                       onSelected: (status) {
@@ -236,7 +237,7 @@ class _InsertPlayerFormState extends ConsumerState<InsertPlayerForm> {
                         ),
                         Spaces.medium.sizedBoxWidth,
                       ],
-                      Text(context.l10n.save),
+                      Text(l10n.save),
                     ],
                   ),
                 ),
