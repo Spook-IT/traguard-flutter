@@ -163,5 +163,9 @@
     "active": "Attivo",
     "inactive": "Non attivo",
     "injured": "Infortunato",
-    "searchAthletes": "Cerca atleti..."
+    "searchAthletes": "Cerca atleti...",
+
+    "@_CREATE_PLAYER": {},
+    "createPlayerTitle": "Nuovo Atleta",
+    "createPlayerSubtitle": "Inserisci i dati dell'atleta da aggiungere"
 }

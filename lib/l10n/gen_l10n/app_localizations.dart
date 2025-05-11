@@ -560,6 +560,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Cerca atleti...'**
   String get searchAthletes;
+
+  /// No description provided for @createPlayerTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuovo Atleta'**
+  String get createPlayerTitle;
+
+  /// No description provided for @createPlayerSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Inserisci i dati dell\'atleta da aggiungere'**
+  String get createPlayerSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

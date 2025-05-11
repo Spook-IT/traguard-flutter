@@ -295,4 +295,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get searchAthletes => 'Cerca atleti...';
+
+  @override
+  String get createPlayerTitle => 'Nuovo Atleta';
+
+  @override
+  String get createPlayerSubtitle => 'Inserisci i dati dell\'atleta da aggiungere';
 }
