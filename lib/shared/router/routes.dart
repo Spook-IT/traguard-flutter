@@ -13,6 +13,7 @@ import 'package:traguard/features/settings_screen/presentation/settings_screen.d
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
 import 'package:traguard/features/update_legal_data/presentation/update_legal_data_screen.dart';
+import 'package:traguard/features/update_team_data/presentation/update_team_data_screen.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
 
@@ -96,6 +97,10 @@ class LoginRoute extends GoRouteData {
         TypedGoRoute<UpdateLegalDataRoute>(
           path: 'update-legal-data',
           name: 'updateLegalDataRoute',
+        ),
+        TypedGoRoute<UpdateTeamDataRoute>(
+          path: 'update-team-data',
+          name: 'updateTeamDataRoute',
         ),
       ],
     ),
@@ -213,5 +218,19 @@ class UpdateLegalDataRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const UpdateLegalDataScreen();
+  }
+}
+
+/// A route class for the Update Legal Data screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [UpdateTeamDataScreen] widget when the route is accessed.
+class UpdateTeamDataRoute extends GoRouteData {
+  /// Creates a new instance of [UpdateTeamDataRoute].
+  const UpdateTeamDataRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const UpdateTeamDataScreen();
   }
 }

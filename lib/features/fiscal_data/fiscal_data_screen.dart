@@ -30,7 +30,9 @@ class FiscalDataScreen extends StatelessWidget {
               color: context.colorScheme.primary,
             ),
             trailing: const CupertinoListTileChevron(),
-            onTap: () {},
+            onTap: () {
+              const UpdateTeamDataRoute().go(context);
+            },
           ),
         ],
       ),
