@@ -1,5 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
+import 'package:traguard/features/update_team_data/data/use_cases.dart';
+import 'package:traguard/features/update_team_data/domain/requests.dart';
 import 'package:traguard/shared/utils/extensions.dart' hide DurationExtensions;
 import 'package:traguard/shared/utils/sizes.dart';
 import 'package:traguard/shared/widgets/save_button.dart';
@@ -7,39 +11,100 @@ import 'package:traguard/shared/widgets/save_button.dart';
 /// This widget represents a form for updating legal data.
 /// It includes fields for the user's name, email, and phone number.
 /// It also includes a save button that is enabled when all fields are valid.
-class UpdateTeamForm extends StatelessWidget {
+class UpdateTeamForm extends ConsumerStatefulWidget {
   /// Creates a new instance of [UpdateTeamForm].
-  const UpdateTeamForm({
-    required this.formKey,
-    required this.nameController,
-    required this.emailController,
-    required this.addressController,
-    required this.isSaving,
-    required this.canSave,
-    required this.onSave,
-    super.key,
-  });
+  const UpdateTeamForm({required this.initialData, super.key});
 
-  /// The key used to identify the form.
-  final GlobalKey<FormState> formKey;
+  /// The initial data to populate the form fields.
+  final TeamDataInfo initialData;
 
-  /// The controller for the name field.
-  final TextEditingController nameController;
+  @override
+  ConsumerState<UpdateTeamForm> createState() => _UpdateTeamFormState();
+}
 
-  /// The controller for the email field.
-  final TextEditingController emailController;
+class _UpdateTeamFormState extends ConsumerState<UpdateTeamForm> {
+  late final _formKey = GlobalKey<FormState>();
+  late final _nameController = TextEditingController(
+    text: widget.initialData.teamName,
+  );
+  late final _emailController = TextEditingController(
+    text: widget.initialData.teamLegalEmail,
+  );
+  late final _addressController = TextEditingController(
+    text: widget.initialData.teamLegalAddress,
+  );
 
-  /// The controller for the address field.
-  final TextEditingController addressController;
+  bool _isSaving = false;
+  bool get _canSave =>
+      !_isSaving &&
+      _nameController.text.isNotEmpty &&
+      _emailController.text.isNotEmpty &&
+      _addressController.text.isNotEmpty;
 
-  /// The boolean flag that indicates whether the form is currently saving.
-  final bool isSaving;
+  @override
+  void initState() {
+    super.initState();
 
-  /// The boolean flag that indicates whether the form can be saved.
-  final bool canSave;
+    _nameController.addListener(_listenTextController);
+    _emailController.addListener(_listenTextController);
+    _addressController.addListener(_listenTextController);
+  }
 
-  /// The callback function to be executed when the save button is pressed.
-  final VoidCallback onSave;
+  @override
+  void dispose() {
+    _nameController
+      ..removeListener(_listenTextController)
+      ..dispose();
+    _emailController
+      ..removeListener(_listenTextController)
+      ..dispose();
+    _addressController
+      ..removeListener(_listenTextController)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _listenTextController() {
+    setState(() {});
+  }
+
+  Future<void> _saveData() async {
+    if (!_canSave) {
+      return;
+    }
+
+    if (_formKey.currentState?.validate() != true) {
+      return;
+    }
+
+    setState(() {
+      _isSaving = true;
+    });
+
+    try {
+      final request = TeamDataInfo(
+        teamName: _nameController.text.trim(),
+        teamLegalEmail: _emailController.text.trim(),
+        teamLegalAddress: _addressController.text.trim(),
+      );
+
+      await ref.read(updateTeamDataProvider(info: request).future);
+      if (!mounted) return;
+
+      context.showSuccessSnackbar(context.l10n.dataSavedSuccessfully);
+      context.pop();
+    } on Exception catch (e) {
+      if (mounted) {
+        context.showErrorSnackbar(context.l10n.errorSavingData(e.toString()));
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +118,7 @@ class UpdateTeamForm extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Form(
-        key: formKey,
+        key: _formKey,
         child: Padding(
           padding: Paddings.mediumAll,
           child: Column(
@@ -61,7 +126,7 @@ class UpdateTeamForm extends StatelessWidget {
             spacing: Spaces.small,
             children: [
               TextFormField(
-                    controller: nameController,
+                    controller: _nameController,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
@@ -84,7 +149,7 @@ class UpdateTeamForm extends StatelessWidget {
                   )
                   .fadeIn(),
               TextFormField(
-                    controller: emailController,
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     autofillHints: const [AutofillHints.email],
                     textInputAction: TextInputAction.next,
@@ -115,7 +180,7 @@ class UpdateTeamForm extends StatelessWidget {
                   )
                   .fadeIn(),
               TextFormField(
-                    controller: addressController,
+                    controller: _addressController,
                     keyboardType: TextInputType.phone,
                     autofillHints: const [AutofillHints.fullStreetAddress],
                     textInputAction: TextInputAction.done,
@@ -144,9 +209,9 @@ class UpdateTeamForm extends StatelessWidget {
               const Spacer(),
               SafeArea(
                 child: SaveButton(
-                      isSaving: isSaving,
-                      canSave: canSave,
-                      onPressed: onSave,
+                      isSaving: _isSaving,
+                      canSave: _canSave,
+                      onPressed: _saveData,
                     )
                     .animate(delay: delay * 3)
                     .moveY(
