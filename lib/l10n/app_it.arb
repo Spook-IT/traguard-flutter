@@ -186,6 +186,9 @@
     },
     
     "numberValidator": "Inserisci il numero",
+    "pickAColor": "Scegli un colore",
+    "invalidHexColorFormat": "Il formato del colore esadecimale non è valido",
+    "selectedColor": "Colore selezionato",
 
     "@_FISCAL_DATA": {},
     "fiscalDataTitle": "Dati Fiscali",

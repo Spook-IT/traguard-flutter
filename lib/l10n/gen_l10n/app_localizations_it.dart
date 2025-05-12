@@ -335,6 +335,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get numberValidator => 'Inserisci il numero';
 
   @override
+  String get pickAColor => 'Scegli un colore';
+
+  @override
+  String get invalidHexColorFormat => 'Il formato del colore esadecimale non è valido';
+
+  @override
+  String get selectedColor => 'Colore selezionato';
+
+  @override
   String get fiscalDataTitle => 'Dati Fiscali';
 
   @override

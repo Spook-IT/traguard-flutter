@@ -633,6 +633,24 @@ abstract class AppLocalizations {
   /// **'Inserisci il numero'**
   String get numberValidator;
 
+  /// No description provided for @pickAColor.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli un colore'**
+  String get pickAColor;
+
+  /// No description provided for @invalidHexColorFormat.
+  ///
+  /// In it, this message translates to:
+  /// **'Il formato del colore esadecimale non è valido'**
+  String get invalidHexColorFormat;
+
+  /// No description provided for @selectedColor.
+  ///
+  /// In it, this message translates to:
+  /// **'Colore selezionato'**
+  String get selectedColor;
+
   /// No description provided for @fiscalDataTitle.
   ///
   /// In it, this message translates to:

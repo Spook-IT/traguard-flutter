@@ -40,7 +40,7 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
           context: context,
           builder:
               (context) => AlertDialog(
-                title: const Text('Pick a Color'),
+                title: Text(context.l10n.pickAColor),
                 content: SingleChildScrollView(
                   child: BlockPicker(
                     pickerColor: _selectedColor,
@@ -69,7 +69,7 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
       final parsedHex = 'ff${hexColor.toLowerCase()}';
 
       if (!RegExp(r'^[0-9a-f]{2,8}$').hasMatch(parsedHex)) {
-        throw Exception('Invalid hex color format');
+        throw Exception(context.l10n.invalidHexColorFormat);
       }
 
       final color = Color(int.parse(parsedHex, radix: 16));
@@ -92,7 +92,6 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dariowskii): add localization
     final isEnabled = widget.onColorChanged != null;
     final bgColor = isEnabled ? Colors.white : Colors.transparent;
 
@@ -124,7 +123,7 @@ class _ColorPickerPlayerState extends State<ColorPickerPlayer> {
             enabled: isEnabled,
             onChanged: isEnabled ? _setHexColor : null,
             decoration: InputDecoration(
-              labelText: 'Selected Color',
+              labelText: context.l10n.selectedColor,
               prefix: Text(
                 '#',
                 style: context.textTheme.labelLarge?.copyWith(fontSize: 16),
