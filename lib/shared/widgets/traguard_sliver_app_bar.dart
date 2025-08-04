@@ -15,6 +15,8 @@ class TraguardSliverAppbar extends StatelessWidget {
     this.subtitleFactor,
     super.key,
     this.subtitle,
+    this.showBackButton = true,
+    this.actions,
   });
 
   /// The title of the app bar.
@@ -35,6 +37,12 @@ class TraguardSliverAppbar extends StatelessWidget {
   /// The factor for the subtitle size.
   final double? subtitleFactor;
 
+  /// Whether to show the back button.
+  final bool showBackButton;
+
+  /// Optional widgets displayed on the top-right corner.
+  final List<Widget>? actions;
+
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
@@ -46,6 +54,8 @@ class TraguardSliverAppbar extends StatelessWidget {
         titleY: titleY,
         titleFactor: titleFactor,
         subtitleFactor: subtitleFactor,
+        showBackButton: showBackButton,
+        actions: actions,
       ),
     );
   }
@@ -61,6 +71,8 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.titleFactor,
     this.subtitleFactor,
     this.subtitle,
+    this.showBackButton = true,
+    this.actions,
   });
 
   /// The min extent of the app bar.
@@ -83,6 +95,12 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   /// The factor for the subtitle size.
   final double? subtitleFactor;
+
+  /// Whether to show the back button.
+  final bool showBackButton;
+
+  /// Optional widgets displayed on the top-right corner.
+  final List<Widget>? actions;
 
   @override
   Widget build(
@@ -115,7 +133,15 @@ class StatisticsHeaderDelegate extends SliverPersistentHeaderDelegate {
         bottom: false,
         child: Stack(
           children: [
-            const Positioned(child: BackButton()),
+            if (showBackButton) const Positioned(child: BackButton()),
+            if (actions != null)
+              Positioned(
+                right: 0,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: actions!,
+                ),
+              ),
             Align(
               alignment: Alignment(newTitleX, newTitleY),
               child: Column(
