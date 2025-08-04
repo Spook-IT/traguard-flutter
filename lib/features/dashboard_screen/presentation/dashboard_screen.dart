@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:traguard/features/dashboard_screen/presentation/logout_button.dart';
 import 'package:traguard/features/dashboard_screen/presentation/user_drawer_section.dart';
+import 'package:traguard/features/session_management/presentation/session_management_screen.dart';
 import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
@@ -84,7 +86,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.pop(context);
-                        context.goNamed('sessionManagementRoute');
+                        const SessionManagementRoute().go(context);
                       },
                     ),
                     ListTile(
