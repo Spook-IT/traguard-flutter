@@ -107,6 +107,11 @@
     "disconnect": "Disconnetti",
     "availableDevices": "Dispositivi disponibili",
     "connectedDevices": "Dispositivi connessi",
+    "sessionManagement": "Gestione sessione",
+    "noDevicesConnected": "Nessun dispositivo connesso",
+    "stopSession": "Ferma sessione",
+    "recording": "Registrazione in corso",
+    "paused": "In pausa",
     
     "@_TEAM_STATISTICS": {},
 

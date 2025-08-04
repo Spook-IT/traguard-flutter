@@ -7,8 +7,6 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_it.dart';
 
-// ignore_for_file: type=lint
-
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -398,6 +396,36 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Dispositivi connessi'**
   String get connectedDevices;
+
+  /// No description provided for @sessionManagement.
+  ///
+  /// In it, this message translates to:
+  /// **'Gestione sessione'**
+  String get sessionManagement;
+
+  /// No description provided for @noDevicesConnected.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessun dispositivo connesso'**
+  String get noDevicesConnected;
+
+  /// No description provided for @stopSession.
+  ///
+  /// In it, this message translates to:
+  /// **'Ferma sessione'**
+  String get stopSession;
+
+  /// No description provided for @recording.
+  ///
+  /// In it, this message translates to:
+  /// **'Registrazione in corso'**
+  String get recording;
+
+  /// No description provided for @paused.
+  ///
+  /// In it, this message translates to:
+  /// **'In pausa'**
+  String get paused;
 
   /// No description provided for @teamStatisticsTitle.
   ///

@@ -14,6 +14,7 @@ import 'package:traguard/features/splash_screen/presentation/splash_screen.dart'
 import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
 import 'package:traguard/features/update_legal_data/presentation/update_legal_data_screen.dart';
 import 'package:traguard/features/update_team_data/presentation/update_team_data_screen.dart';
+import 'package:traguard/features/session_management/presentation/session_management_screen.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
 
@@ -75,6 +76,11 @@ class LoginRoute extends GoRouteData {
       path: 'bluetooth-list',
       name: 'bluetoothListRoute',
     ),
+    TypedGoRoute<SessionManagementRoute>(
+      path: 'session-management',
+      name: 'sessionManagementRoute',
+    ),
+
     TypedGoRoute<TeamStatisticsRoute>(
       path: 'team-statistics',
       name: 'teamStatisticsRoute',
@@ -134,6 +140,20 @@ class BluetoothListRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const BluetoothListScreen();
+  }
+}
+
+/// A route class for the Session Management screen.
+///
+/// This class extends [GoRouteData] and is responsible for building
+/// the [SessionManagementScreen] widget when the route is accessed.
+class SessionManagementRoute extends GoRouteData {
+  /// Creates a new instance of [SessionManagementRoute].
+  const SessionManagementRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SessionManagementScreen();
   }
 }
 

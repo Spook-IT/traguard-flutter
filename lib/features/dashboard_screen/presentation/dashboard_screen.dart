@@ -83,7 +83,8 @@ class DashboardScreen extends StatelessWidget {
                         style: context.textTheme.titleMedium,
                       ),
                       onTap: () {
-                        // TODO(dariowskii): add functionality
+                        Navigator.pop(context);
+                        context.goNamed('sessionManagementRoute');
                       },
                     ),
                     ListTile(
@@ -136,7 +137,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO(dariowskii): add functionality
+          context.goNamed('sessionManagementRoute');
         },
         label: const Row(
           children: [
