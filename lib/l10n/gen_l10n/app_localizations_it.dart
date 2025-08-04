@@ -1,8 +1,6 @@
-// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-import 'app_localizations.dart';
 
-// ignore_for_file: type=lint
+import 'app_localizations.dart';
 
 /// The translations for Italian (`it`).
 class AppLocalizationsIt extends AppLocalizations {
@@ -210,6 +208,21 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get connectedDevices => 'Dispositivi connessi';
+
+  @override
+  String get sessionManagement => 'Gestione sessione';
+
+  @override
+  String get noDevicesConnected => 'Nessun dispositivo connesso';
+
+  @override
+  String get stopSession => 'Ferma sessione';
+
+  @override
+  String get recording => 'Registrazione in corso';
+
+  @override
+  String get paused => 'In pausa';
 
   @override
   String get teamStatisticsTitle => 'Gestione Squadra';
