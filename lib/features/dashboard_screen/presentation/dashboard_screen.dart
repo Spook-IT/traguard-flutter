@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:traguard/features/dashboard_screen/presentation/logout_button.dart';
-import 'package:traguard/features/dashboard_screen/presentation/user_drawer_section.dart';
-import 'package:traguard/features/session_management/presentation/session_management_screen.dart';
+import 'package:traguard/features/session_management/domain/session_manager.dart';
+import 'package:traguard/shared/providers/auth_provider.dart';
 import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
@@ -10,16 +10,29 @@ import 'package:traguard/shared/utils/sizes.dart';
 /// The dashboard screen widget.
 /// This widget serves as the main screen of the application,
 /// displaying a welcome message to the user.
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends ConsumerWidget {
   /// Creates a new instance of [DashboardScreen].
   const DashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // TODO(dariowskii): add localization
+    final sessionState = ref.watch(sessionManagerProvider);
+    final hasActiveSession =
+        sessionState.players.any((p) => p.isRecording);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
+      appBar: AppBar(
+        title: const Text('Dashboard'),
+        actions: [
+          IconButton(
+            tooltip: context.l10n.logout,
+            onPressed: () =>
+                ref.read(authProvider.notifier).signOut(),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Text(
@@ -31,121 +44,60 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: context.colorScheme.primaryFixed,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    spacing: Spaces.small,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.l10n.appName,
-                        style: context.textTheme.displaySmall?.copyWith(
-                          color: context.colorScheme.onPrimaryFixed,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'The tracking app for soccer players',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onPrimaryFixed,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const UserDrawerSection(),
-                ],
-              ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Stack(
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              const SessionManagementRoute().go(context);
+            },
+            child: Icon(
+              hasActiveSession ? Icons.play_arrow : Icons.add,
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(
-                        '📍 Vai alle mappe',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        // TODO(dariowskii): add functionality
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        '🎽 Guarda le sessioni',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        const SessionManagementRoute().go(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        '⚽ Giocatori',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        const PlayerListRoute().go(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        '📊 Gestione Squadra',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        const TeamStatisticsRoute().go(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        '📱 Dispositivi',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        const BluetoothListRoute().go(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text(
-                        '🖋️ Dati Fiscali',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        const FiscalDataRoute().go(context);
-                      },
-                    ),
-                  ],
+          ),
+          if (hasActiveSession)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.error,
+                  shape: BoxShape.circle,
                 ),
               ),
             ),
-            const LogoutButton(),
-          ],
-        ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.goNamed('sessionManagementRoute');
-        },
-        label: const Row(
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: Spaces.small,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(Icons.add),
-            SizedBox(width: Spaces.tiny),
-            Text('Nuova sessione'),
+            IconButton(
+              tooltip: 'Giocatori',
+              icon: const Icon(Icons.people),
+              onPressed: () => const PlayerListRoute().go(context),
+            ),
+            IconButton(
+              tooltip: 'Dispositivi',
+              icon: const Icon(Icons.devices),
+              onPressed: () => const BluetoothListRoute().go(context),
+            ),
+            const SizedBox(width: 48),
+            IconButton(
+              tooltip: 'Statistiche',
+              icon: const Icon(Icons.bar_chart),
+              onPressed: () => const TeamStatisticsRoute().go(context),
+            ),
+            IconButton(
+              tooltip: 'Dati Fiscali',
+              icon: const Icon(Icons.receipt_long),
+              onPressed: () => const FiscalDataRoute().go(context),
+            ),
           ],
         ),
       ),
