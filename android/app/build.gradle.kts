@@ -8,7 +8,8 @@ plugins {
 android {
     namespace = "com.traguard.app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // Specify the NDK version required by certain plugins
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
