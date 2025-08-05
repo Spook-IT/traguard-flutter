@@ -25,7 +25,9 @@ class TraguarApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return _EagerInitialization(
       child: MaterialApp.router(
-        theme: lightTheme,
+        theme: darkTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.dark,
         onGenerateTitle: (context) => context.l10n.appName,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
