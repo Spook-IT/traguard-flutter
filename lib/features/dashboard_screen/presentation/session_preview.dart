@@ -30,7 +30,7 @@ class SessionPreview {
 
 /// Sample sessions shown on the dashboard. These are placeholders
 /// used to match the design of the provided mockup.
-const List<SessionPreview> sampleSessions = [
+final List<SessionPreview> sampleSessions = [
   SessionPreview(
     name: 'Allenamento Tattico - 4-3-3',
     date: DateTime(2024, 1, 29),
