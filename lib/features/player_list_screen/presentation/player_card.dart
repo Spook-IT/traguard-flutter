@@ -29,7 +29,7 @@ class PlayerCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: context.colorScheme.outline.withValues(alpha: .3),
@@ -54,7 +54,7 @@ class PlayerCard extends StatelessWidget {
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: context.colorScheme.surfaceVariant,
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Color(player.uiColor ?? 0xFF000000),
@@ -130,7 +130,7 @@ class PlayerCard extends StatelessWidget {
               ],
             ),
           ),
-          Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
+          Divider(height: 1, thickness: 1, color: context.colorScheme.surfaceVariant),
           Row(
             children: [
               Expanded(
@@ -138,7 +138,7 @@ class PlayerCard extends StatelessWidget {
                   padding: Paddings.smallAll,
                   decoration: BoxDecoration(
                     border: Border(
-                      right: BorderSide(color: Colors.grey.shade200),
+                      right: BorderSide(color: context.colorScheme.surfaceVariant),
                     ),
                   ),
                   child: Column(
@@ -166,7 +166,7 @@ class PlayerCard extends StatelessWidget {
                   padding: Paddings.smallAll,
                   decoration: BoxDecoration(
                     border: Border(
-                      right: BorderSide(color: Colors.grey.shade200),
+                      right: BorderSide(color: context.colorScheme.surfaceVariant),
                     ),
                   ),
                   child: Column(

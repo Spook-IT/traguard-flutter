@@ -67,7 +67,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         children: [
           FloatingActionButton(
             onPressed: () {
-              const SessionManagementRoute().go(context);
+              const NewSessionRoute().go(context);
             },
             child: Icon(
               hasActiveSession ? Icons.play_arrow : Icons.add,
@@ -106,9 +106,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             ),
             const SizedBox(width: 48),
             IconButton(
-              tooltip: 'Statistiche',
-              icon: const Icon(Icons.bar_chart),
-              onPressed: () => const TeamStatisticsRoute().go(context),
+              tooltip: 'Dashboard',
+              icon: const Icon(Icons.home),
+              onPressed: () => const DashboardRoute().go(context),
             ),
             IconButton(
               tooltip: 'Dati Fiscali',

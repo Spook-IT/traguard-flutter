@@ -11,10 +11,10 @@ import 'package:traguard/features/login_screen/presentation/login_screen.dart';
 import 'package:traguard/features/player_list_screen/presentation/player_list_screen.dart';
 import 'package:traguard/features/settings_screen/presentation/settings_screen.dart';
 import 'package:traguard/features/splash_screen/presentation/splash_screen.dart';
-import 'package:traguard/features/team_statistics_screen/presentation/team_statistics_screen.dart';
 import 'package:traguard/features/update_legal_data/presentation/update_legal_data_screen.dart';
 import 'package:traguard/features/update_team_data/presentation/update_team_data_screen.dart';
 import 'package:traguard/features/session_management/presentation/session_management_screen.dart';
+import 'package:traguard/features/session_management/presentation/new_session_screen.dart';
 import 'package:traguard/shared/models/user.dart';
 import 'package:traguard/shared/providers/auth_provider.dart';
 
@@ -80,11 +80,11 @@ class LoginRoute extends GoRouteData {
       path: 'session-management',
       name: 'sessionManagementRoute',
     ),
-
-    TypedGoRoute<TeamStatisticsRoute>(
-      path: 'team-statistics',
-      name: 'teamStatisticsRoute',
+    TypedGoRoute<NewSessionRoute>(
+      path: 'new-session',
+      name: 'newSessionRoute',
     ),
+
     TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settingsRoute'),
     TypedGoRoute<PlayerListRoute>(
       path: 'player-list',
@@ -157,21 +157,17 @@ class SessionManagementRoute extends GoRouteData {
   }
 }
 
-/// A route class for the Team Statistics screen.
-///
-/// This class extends [GoRouteData] and is responsible for building
-/// the [TeamStatisticsScreen] widget when the route is accessed.
-class TeamStatisticsRoute extends GoRouteData {
-  /// Creates a new instance of [TeamStatisticsRoute].
-  const TeamStatisticsRoute();
+  /// Route for creating a new session.
+  class NewSessionRoute extends GoRouteData {
+    const NewSessionRoute();
 
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const TeamStatisticsScreen();
+    @override
+    Widget build(BuildContext context, GoRouterState state) {
+      return const NewSessionScreen();
+    }
   }
-}
 
-/// A route class for the Settings screen.
+  /// A route class for the Settings screen.
 ///
 /// This class extends [GoRouteData] and is responsible for building
 /// the [SettingsScreen] widget when the route is accessed.
