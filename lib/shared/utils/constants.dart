@@ -97,3 +97,65 @@ final lightTheme = ThemeData(
     ),
   ),
 );
+
+/// The color scheme for the dark theme, using a neon cyan seed color.
+final _darkColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color(0xFF00FFFF),
+  brightness: Brightness.dark,
+);
+
+/// A dark theme with neon cyan accents and soft shadows.
+final darkTheme = ThemeData(
+  colorScheme: _darkColorScheme,
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: const Color(0xFF0C1116),
+  shadowColor: const Color(0x8000FFFF),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF13181F),
+    foregroundColor: Colors.white,
+    elevation: 0,
+    shadowColor: Color(0x8000FFFF),
+  ),
+  cardColor: const Color(0xFF13181F),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: const Color(0xFF13181F),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: const BorderSide(color: Color(0xFF00FFFF)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: const BorderSide(color: Color(0xFF33FFFF)),
+    ),
+  ),
+  dropdownMenuTheme: DropdownMenuThemeData(
+    menuStyle: MenuStyle(
+      backgroundColor: WidgetStateProperty.resolveWith((state) {
+        if (state.contains(WidgetState.disabled)) {
+          return const Color(0xFF1A1F28);
+        }
+        return const Color(0xFF13181F);
+      }),
+      shape: const WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+      ),
+      maximumSize: const WidgetStatePropertyAll(Size.fromHeight(200)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: const Color(0xFF13181F),
+      contentPadding: Paddings.mediumHorizontal + Paddings.smallVertical,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderSide: BorderSide(color: Color(0xFF00FFFF)),
+      ),
+      focusedBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderSide: BorderSide(color: Color(0xFF33FFFF)),
+      ),
+    ),
+  ),
+);
