@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
 
 /// A widget that represents a text field for login.
@@ -56,7 +57,13 @@ class _LoginTextFieldState extends State<LoginTextField> {
         enabled: widget.enabled,
         decoration: InputDecoration(
           labelText: widget.label,
-          labelStyle: const TextStyle(color: Colors.black),
+          labelStyle: TextStyle(
+            color: context.colorScheme.onSurface.withOpacity(.7),
+          ),
+          hintText: widget.label,
+          hintStyle: TextStyle(
+            color: context.colorScheme.onSurface.withOpacity(.5),
+          ),
           floatingLabelAlignment: FloatingLabelAlignment.start,
           floatingLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
           contentPadding: Paddings.largeHorizontal,

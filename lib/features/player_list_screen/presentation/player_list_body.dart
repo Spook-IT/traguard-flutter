@@ -20,36 +20,29 @@ class PlayerListBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final playersAsync =
         ref.watch(fetchPlayersProvider(query: query)).unwrapPrevious();
-    return switch (playersAsync) {
-      AsyncData(:final value) => SliverToBoxAdapter(
-        child: SafeArea(
-          top: false,
-          child: ListView.separated(
-            itemCount: value.players.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding:
-                Paddings.mediumHorizontal +
-                Paddings.smallVertical +
-                Paddings.xLargeBottom * 3,
-            separatorBuilder: (_, _) => Spaces.medium.sizedBoxHeight,
-            itemBuilder: (context, index) {
-              final player = value.players[index];
-              return PlayerCard(player: player);
-            },
-          ),
+
+    return playersAsync.when(
+      data: (value) => SafeArea(
+        top: false,
+        child: ListView.separated(
+          itemCount: value.players.length,
+          padding: Paddings.mediumHorizontal +
+              Paddings.smallVertical +
+              Paddings.xLargeBottom * 3,
+          separatorBuilder: (_, __) => Spaces.medium.sizedBoxHeight,
+          itemBuilder: (context, index) {
+            final player = value.players[index];
+            return PlayerCard(player: player);
+          },
         ),
       ),
-      AsyncError(:final error) => SliverFillRemaining(
-        hasScrollBody: false,
-        child: Center(
-          child: ErrorRetry(
-            error: error,
-            onRetry: () => ref.refresh(fetchPlayersProvider(query: query)),
-          ),
+      error: (error, _) => Center(
+        child: ErrorRetry(
+          error: error,
+          onRetry: () => ref.refresh(fetchPlayersProvider(query: query)),
         ),
       ),
-      _ => const SliverToBoxAdapter(child: LoadingPlayers()),
-    };
+      loading: () => const LoadingPlayers(),
+    );
   }
 }

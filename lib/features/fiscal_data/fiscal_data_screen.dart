@@ -35,7 +35,10 @@ class FiscalDataScreen extends ConsumerWidget {
       body: CupertinoListSection.insetGrouped(
         children: [
           CupertinoListTile.notched(
-            title: Text(l10n.legalRepresentitive),
+            title: Text(
+              l10n.legalRepresentitive,
+              style: TextStyle(color: context.colorScheme.onSurface),
+            ),
             leading: Icon(Icons.person, color: context.colorScheme.primary),
             trailing: const CupertinoListTileChevron(),
             onTap: () {
@@ -43,7 +46,10 @@ class FiscalDataScreen extends ConsumerWidget {
             },
           ),
           CupertinoListTile.notched(
-            title: Text(l10n.team),
+            title: Text(
+              l10n.team,
+              style: TextStyle(color: context.colorScheme.onSurface),
+            ),
             leading: Icon(
               Icons.sports_soccer,
               color: context.colorScheme.primary,
@@ -60,8 +66,7 @@ class FiscalDataScreen extends ConsumerWidget {
       floatingActionButton: Stack(
         children: [
           FloatingActionButton(
-            onPressed: () =>
-                const SessionManagementRoute().go(context),
+            onPressed: () => const NewSessionRoute().go(context),
             child:
                 Icon(hasActiveSession ? Icons.play_arrow : Icons.add),
           ),
@@ -98,9 +103,9 @@ class FiscalDataScreen extends ConsumerWidget {
             ),
             const SizedBox(width: 48),
             IconButton(
-              tooltip: 'Statistiche',
-              icon: const Icon(Icons.bar_chart),
-              onPressed: () => const TeamStatisticsRoute().go(context),
+              tooltip: 'Dashboard',
+              icon: const Icon(Icons.home),
+              onPressed: () => const DashboardRoute().go(context),
             ),
             IconButton(
               tooltip: 'Dati Fiscali',

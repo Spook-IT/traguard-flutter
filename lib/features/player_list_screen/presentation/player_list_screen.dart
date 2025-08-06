@@ -10,7 +10,6 @@ import 'package:traguard/shared/providers/auth_provider.dart';
 import 'package:traguard/shared/router/routes.dart';
 import 'package:traguard/shared/utils/extensions.dart';
 import 'package:traguard/shared/utils/sizes.dart';
-import 'package:traguard/shared/widgets/traguard_sliver_app_bar.dart';
 
 /// This widget is part of the player list feature of the application.
 /// It displays a list of players and their statistics.
@@ -49,40 +48,33 @@ class _PlayerListScreenState extends ConsumerState<PlayerListScreen> {
         sessionState.players.any((p) => p.isRecording);
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          TraguardSliverAppbar(
-            title: context.l10n.playerListTitle,
-            subtitle: context.l10n.playerListSubtitle,
-            titleX: -0.45,
-            titleY: 0.95,
-            titleFactor: 0.15,
-            subtitleFactor: 0.4,
-            showBackButton: false,
-            actions: [
-              IconButton(
-                tooltip: context.l10n.newPlayer,
-                onPressed: () => const CreatePlayerRoute().go(context),
-                icon: const Icon(Icons.person_add_alt),
-              ),
-              IconButton(
-                tooltip: context.l10n.logout,
-                onPressed: () =>
-                    ref.read(authProvider.notifier).signOut(),
-                icon: const Icon(Icons.logout),
-              ),
-            ],
+      appBar: AppBar(
+        title: Text(context.l10n.playerListTitle),
+        actions: [
+          IconButton(
+            tooltip: context.l10n.newPlayer,
+            onPressed: () => const CreatePlayerRoute().go(context),
+            icon: const Icon(Icons.person_add_alt),
           ),
-          SliverToBoxAdapter(
-            child: SearchPlayer(
-              controller: _textController,
-              onSendValue: _onSearchChanged,
+          IconButton(
+            tooltip: context.l10n.logout,
+            onPressed: () => ref.read(authProvider.notifier).signOut(),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          SearchPlayer(
+            controller: _textController,
+            onSendValue: _onSearchChanged,
+          ),
+          Expanded(
+            child: PlayerListBody(
+              query: _textController.text.isNotEmpty
+                  ? _textController.text
+                  : null,
             ),
-          ),
-          PlayerListBody(
-            query: _textController.text.isNotEmpty
-                ? _textController.text
-                : null,
           ),
         ],
       ),
@@ -91,8 +83,7 @@ class _PlayerListScreenState extends ConsumerState<PlayerListScreen> {
       floatingActionButton: Stack(
         children: [
           FloatingActionButton(
-            onPressed: () =>
-                const SessionManagementRoute().go(context),
+            onPressed: () => const NewSessionRoute().go(context),
             child:
                 Icon(hasActiveSession ? Icons.play_arrow : Icons.add),
           ),
@@ -129,9 +120,9 @@ class _PlayerListScreenState extends ConsumerState<PlayerListScreen> {
             ),
             const SizedBox(width: 48),
             IconButton(
-              tooltip: 'Statistiche',
-              icon: const Icon(Icons.bar_chart),
-              onPressed: () => const TeamStatisticsRoute().go(context),
+              tooltip: 'Dashboard',
+              icon: const Icon(Icons.home),
+              onPressed: () => const DashboardRoute().go(context),
             ),
             IconButton(
               tooltip: 'Dati Fiscali',

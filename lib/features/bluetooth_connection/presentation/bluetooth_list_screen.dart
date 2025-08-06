@@ -49,8 +49,7 @@ class BluetoothListScreen extends ConsumerWidget {
       floatingActionButton: Stack(
         children: [
           FloatingActionButton(
-            onPressed: () =>
-                const SessionManagementRoute().go(context),
+            onPressed: () => const NewSessionRoute().go(context),
             child:
                 Icon(hasActiveSession ? Icons.play_arrow : Icons.add),
           ),
@@ -87,9 +86,9 @@ class BluetoothListScreen extends ConsumerWidget {
             ),
             const SizedBox(width: 48),
             IconButton(
-              tooltip: 'Statistiche',
-              icon: const Icon(Icons.bar_chart),
-              onPressed: () => const TeamStatisticsRoute().go(context),
+              tooltip: 'Dashboard',
+              icon: const Icon(Icons.home),
+              onPressed: () => const DashboardRoute().go(context),
             ),
             IconButton(
               tooltip: 'Dati Fiscali',
